@@ -1,6 +1,6 @@
 # Portfolio architecture — Wanja Ntalindwa
 
-Site statique en français, conçu pour GitHub Pages. Aucun service externe ni installation ne sont nécessaires.
+Site statique en français, au style sombre et contemporain, conçu pour GitHub Pages. Aucun service externe ni installation ne sont nécessaires.
 
 ## Utilisation
 
