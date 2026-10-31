@@ -1,0 +1,2095 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Honoraire sur mesure</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Une colonne façon téléphone : bandeau bleu noir comme l'en-tête de la note, total collant, cartes de choix ; notes en italique à empattement comme dans les documents. */
+:root {
+  --bg: #EEF1F7; --card: #FFFFFF; --ink: #111318; --muted: #5A6170; --line: #D8DDE8;
+  --accent: #1E40AF; --on-accent: #FFFFFF; --accent-soft: #DBE4FA; --accent-pale: #F0F4FD;
+  --band: #111318; --on-band: #F2F4F8; --band-muted: #A3AABA; --band-accent: #7DA0F5; --band-line: #2A2F3A; --band-chip: #1D2A4D; --wa: #1E8E4E; --on-wa: #FFFFFF;
+  --good: #1F7A47; --good-soft: #DCF1E4; --warn: #9A5B00; --warn-soft: #FCEFD6; --alert: #B42318; --alert-soft: #FBE3E0;
+  --doux: #FFF6EC; --doux2: #FFE4CC; --doux3: #FDEFD6; --doux-line: #F6DCC2; --chaud: #9A3412; --gagne: #15803D; --gagne2: #22A75A; --on-gagne: #FFFFFF; --gagne-soft: #E3F7EA; --sms: #1E40AF; --mail: #5B3FA8; --on-btn: #FFFFFF;
+  --display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  --body: "Barlow", "Segoe UI", Arial, sans-serif;
+  --note: "Spectral", "Times New Roman", Times, serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #15171C; --card: #22252D; --ink: #E9EBF0; --muted: #A2A8B5; --line: #353A45;
+  --accent: #7DA0F5; --on-accent: #0D1530; --accent-soft: #263760; --accent-pale: #1C2333;
+  --band: #0B0C10; --on-band: #F2F4F8; --band-muted: #959CAB; --band-accent: #7DA0F5; --band-line: #262A33; --band-chip: #1D2A4D; --wa: #2FA866; --on-wa: #08130C;
+  --good: #62C98F; --good-soft: #1C3A2A; --warn: #F0B455; --warn-soft: #3D2F16; --alert: #FF8A7E; --alert-soft: #42201D;
+  --doux: #2B211A; --doux2: #3A2717; --doux3: #2F2414; --doux-line: #4A3526; --chaud: #F8C08F; --gagne: #157A3C; --gagne2: #1E9B50; --gagne-soft: #17331F; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #15171C; --card: #22252D; --ink: #E9EBF0; --muted: #A2A8B5; --line: #353A45;
+  --accent: #7DA0F5; --on-accent: #0D1530; --accent-soft: #263760; --accent-pale: #1C2333;
+  --band: #0B0C10; --on-band: #F2F4F8; --band-muted: #959CAB; --band-accent: #7DA0F5; --band-line: #262A33; --band-chip: #1D2A4D; --wa: #2FA866; --on-wa: #08130C;
+  --good: #62C98F; --good-soft: #1C3A2A; --warn: #F0B455; --warn-soft: #3D2F16; --alert: #FF8A7E; --alert-soft: #42201D;
+  --doux: #2B211A; --doux2: #3A2717; --doux3: #2F2414; --doux-line: #4A3526; --chaud: #F8C08F; --gagne: #157A3C; --gagne2: #1E9B50; --gagne-soft: #17331F; color-scheme: dark }
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.45; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--band); }
+.wrap { max-width: 560px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.num { font-variant-numeric: tabular-nums; }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+header.band { background: var(--band); color: var(--on-band); }
+header.band .wrap { padding-block: 18px 14px; display: grid; gap: 2px; }
+.ident { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; border-bottom: 1px solid var(--band-line); padding-bottom: 10px; margin-bottom: 10px; }
+.ident .nom { font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: .06em; text-transform: uppercase; }
+.ident .titre { font-size: 12.5px; color: var(--band-muted); }
+.eyebrow { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--band-accent); font-weight: 600; }
+h1 { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1.08; margin: 0; text-wrap: balance; }
+.sub { color: var(--band-muted); font-size: 14px; }
+
+.total { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--band); color: var(--on-band); border-top: 1px solid var(--band-line); box-shadow: 0 6px 14px -10px rgba(0,0,0,.5); }
+.total .wrap { padding-block: 10px 12px; display: flex; align-items: flex-end; justify-content: space-between; gap: 8px 12px; flex-wrap: wrap; }
+.total .lbl { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--band-muted); }
+.total .big { font-family: var(--display); font-weight: 700; font-size: 40px; line-height: 1; }
+.total .info { text-align: right; font-size: 13px; color: var(--band-muted); display: grid; gap: 4px; justify-items: end; }
+.chip { font-size: 13px; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.total .chip { background: var(--band-chip); color: var(--band-accent); }
+
+main .wrap { padding-block: 16px 28px; display: grid; gap: 14px; }
+section.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 14px 12px; display: grid; gap: 10px; min-width: 0; }
+h2 { font-family: var(--display); font-weight: 600; font-size: 22px; margin: 0; line-height: 1.15; text-wrap: balance; display: flex; gap: 10px; align-items: baseline; }
+h2 { align-items: center; }
+h2 .n { flex: none; display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-family: var(--body); font-size: 13px; font-weight: 700; }
+.hint { color: var(--muted); font-size: 13.5px; margin: 0; }
+.note { font-family: var(--note); font-style: italic; color: var(--muted); font-size: 14px; margin: 0; }
+/* remerciement : fond doux, écriture chaleureuse */
+.merci { position: relative; overflow: hidden; background: linear-gradient(120deg, var(--doux), var(--doux2), var(--doux3), var(--doux2), var(--doux)); background-size: 300% 300%; animation: vague 14s ease-in-out infinite;
+  border: 1px solid var(--doux-line); border-left: 4px solid var(--chaud); border-radius: 12px; padding: 14px 16px; display: grid; gap: 6px; }
+/* fond dynamique : dégradé qui ondule et deux halos lumineux qui flottent */
+.merci::before, .merci::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; filter: blur(18px); opacity: .55; }
+.merci::before { width: 140px; height: 140px; background: var(--doux2); top: -50px; right: -30px; animation: flotte 9s ease-in-out infinite alternate; }
+.merci::after { width: 110px; height: 110px; background: var(--doux-line); bottom: -55px; left: 20%; animation: flotte 11s ease-in-out infinite alternate-reverse; }
+.merci > * { position: relative; z-index: 1; }
+@keyframes vague { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes flotte { from { transform: translate(0, 0) scale(1); } to { transform: translate(-40px, 18px) scale(1.25); } }
+.merci p { margin: 0; font-family: var(--note); font-style: italic; font-size: 17.5px; line-height: 1.42; color: var(--chaud); }
+/* écriture lettre par lettre : le texte fantôme réserve la place, le texte écrit se superpose */
+.merci p .fantome { visibility: hidden; }
+.merci p .ecrit { position: absolute; inset: 0; }
+.merci p .ecrit.tape::after { content: ""; display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; vertical-align: -0.15em; background: var(--chaud); animation: curseur .8s steps(1) infinite; }
+@keyframes curseur { 50% { opacity: 0; } }
+.merci .sign { font-size: 13px; color: var(--chaud); font-weight: 600; opacity: .85; transition: opacity .6s; }
+.merci .sign.cache { opacity: 0; }
+
+.champs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; }
+.champs .large { grid-column: 1 / -1; }
+.champ { display: grid; gap: 4px; min-width: 0; }
+.champ label { font-size: 12.5px; color: var(--muted); font-weight: 500; }
+.champ input, .champ select { width: 100%; min-width: 0; padding: 9px 10px; border: 1px solid var(--line); border-radius: 7px; background: var(--accent-pale); }
+.champ input:disabled, .champ select:disabled { opacity: .75; }
+@media (max-width: 420px) { .champs { grid-template-columns: 1fr; } }
+
+.seg { display: flex; gap: 0; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { flex: 1; padding: 8px 6px; border: 0; border-left: 1px solid var(--line); background: var(--card); cursor: pointer; font-weight: 600; font-size: 14px; color: var(--muted); }
+.seg button:first-child { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+
+.calcul { background: var(--accent-pale); border-radius: 8px; padding: 9px 11px; font-size: 14px; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.calcul b { font-weight: 600; }
+
+.phase { border-top: 1px solid var(--line); padding: 10px 0 8px; display: grid; gap: 6px; }
+.phase:first-of-type { border-top: 0; }
+.phase .tete { display: grid; grid-template-columns: auto 1fr auto; gap: 2px 12px; align-items: center; }
+.phase .lib { font-weight: 600; min-width: 0; }
+.phase .meta { grid-column: 2; color: var(--muted); font-size: 13px; }
+.phase .mt { text-align: right; font-weight: 600; grid-row: 1 / span 2; grid-column: 3; }
+.phase.off .lib, .phase.off .mt { color: var(--muted); font-weight: 500; }
+.phase.fixe .mt { color: var(--ink); }
+.voir { background: none; border: 0; padding: 0; color: var(--accent); font-size: 13px; font-weight: 600; cursor: pointer; }
+.voir .chev { margin-left: 3px; font-size: 11px; }
+.pieces { display: grid; gap: 0; margin: 2px 0 2px 36px; border-left: 2px solid var(--accent-soft); padding-left: 10px; }
+.piece { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; padding: 4px 0; font-size: 14px; }
+.piece .pm { color: var(--muted); font-size: 13px; }
+.piece.retire .pl { text-decoration: line-through; color: var(--muted); }
+.piece .tag { font-size: 11.5px; padding: 1px 7px; border-radius: 999px; background: var(--warn-soft); color: var(--warn); white-space: nowrap; font-weight: 600; }
+.piece .pl { min-width: 0; }
+.piece input { width: 17px; height: 17px; accent-color: var(--accent); margin: 0; }
+.piece .vide { width: 17px; }
+
+.switch { position: relative; width: 44px; height: 26px; flex: none; }
+.switch input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; z-index: 1; }
+.switch span { position: absolute; inset: 0; border-radius: 999px; background: var(--line); transition: background .15s; }
+.switch span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--card); box-shadow: 0 1px 2px rgba(0,0,0,.3); transition: transform .15s; }
+.switch input:checked + span { background: var(--accent); }
+.switch input:checked + span::after { transform: translateX(18px); }
+.switch input:disabled { cursor: default; }
+.switch input:disabled + span { opacity: .55; }
+.switch input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.lignes { display: grid; }
+.ligne { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 7px 0; border-top: 1px solid var(--line); }
+.ligne:first-child { border-top: 0; }
+.ligne .d { grid-column: 1; color: var(--muted); font-size: 13px; }
+.ligne .mt { text-align: right; font-weight: 600; }
+.ligne.tot { border-top: 2px solid var(--ink); font-weight: 700; padding-top: 9px; }
+.ligne.tot .mt { font-family: var(--display); font-size: 22px; }
+
+.ech { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.ech .p { background: var(--accent-pale); border-radius: 8px; padding: 9px 10px; display: grid; gap: 2px; min-width: 0; }
+.ech .k { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+.ech .v { font-family: var(--display); font-weight: 700; font-size: 21px; }
+.ech .q { font-size: 12.5px; color: var(--muted); }
+@media (max-width: 420px) { .ech { grid-template-columns: 1fr; } }
+
+.offre { display: flex; gap: 8px; flex-wrap: wrap; }
+.offre input { flex: 1 1 140px; min-width: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--accent-pale); font-size: 17px; font-weight: 600; }
+.btn { padding: 10px 14px; border-radius: 7px; border: 1px solid var(--accent); background: var(--accent); color: var(--on-accent); font-weight: 600; cursor: pointer; }
+.btn.sec { background: transparent; color: var(--accent); }
+.btn.wa { background: var(--wa); border-color: var(--wa); color: var(--on-wa); text-decoration: none; text-align: center; }
+.envoi { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.envoi .btn { text-decoration: none; text-align: center; padding: 11px 6px; }
+.btn.sms { background: var(--sms); border-color: var(--sms); color: var(--on-btn); }
+.btn.mail { background: var(--mail); border-color: var(--mail); color: var(--on-btn); }
+.ligne.fpc { grid-template-columns: auto 1fr auto; align-items: center; }
+.ligne.fpc .d { grid-column: 2; }
+.ligne.fpc.off .mt { color: var(--muted); font-weight: 500; }
+.seg button:disabled { opacity: .45; cursor: default; }
+.rangee { display: flex; gap: 8px; flex-wrap: wrap; }
+.rangee > * { flex: 1 1 180px; }
+.verdict { border-radius: 8px; padding: 10px 12px; display: grid; gap: 6px; font-size: 14.5px; }
+.verdict.ok { background: var(--good-soft); color: var(--good); }
+.verdict.nego { background: var(--warn-soft); color: var(--warn); }
+.verdict.bas { background: var(--alert-soft); color: var(--alert); }
+.verdict b { font-weight: 700; }
+.verdict ul { margin: 0; padding-left: 18px; color: var(--ink); font-size: 13.5px; }
+.verdict .btn { justify-self: start; }
+.desc-aju { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; background: var(--warn-soft); color: var(--warn); border-radius: 8px; padding: 8px 10px; font-size: 13.5px; }
+.cote { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px; }
+.cote .verdict { align-content: start; font-size: 13.5px; }
+.cote .verdict .btn { margin-top: auto; padding: 6px 10px; font-size: 13.5px; }
+/* offre de paiement à la signature : petit encadré discret, dans son coin */
+.verdict.mini { justify-self: end; max-width: 300px; padding: 8px 10px; gap: 6px; font-size: 13.5px; }
+.verdict.mini b { font-family: inherit; font-size: 14px; font-weight: 700; line-height: 1.3; }
+.verdict.mini .rangee { display: flex; gap: 6px; flex-wrap: wrap; }
+.verdict.mini .btn { padding: 5px 10px; font-size: 13px; min-height: 0; }
+.sortie { display: grid; gap: 8px; margin-top: -2px; padding: 10px; border-radius: 10px; background: var(--accent-pale); border: 1px solid var(--accent-soft); animation: sort .25s ease-out; }
+#e-msg.flash { animation: flash 1.2s ease-out; }
+@keyframes flash { from { box-shadow: 0 0 0 3px var(--gagne); } to { box-shadow: 0 0 0 0 transparent; } }
+@keyframes sort { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.choix.deux2 { grid-template-columns: 1fr 1fr; }
+.choix.deux2 button { grid-template-columns: 1fr; padding: 9px 10px; align-content: start; gap: 3px; }
+.choix.deux2 button .ic { grid-row: auto; width: 28px; height: 28px; font-size: 15px; }
+.choix.deux2 button b { font-size: 17px; }
+.choix.deux2 button span.d { font-size: 12.5px; }
+#c-rep .bloc-choix { border-top: 0; padding-top: 0; }
+/* style « 23 » (nom donné par Wanja) : les appels (offres qui font gagner le client), comme la carte « Confiez-nous aussi la construction » */
+.s23 { background: linear-gradient(135deg, var(--gagne), var(--gagne2)); color: var(--on-gagne); border-radius: 12px; padding: 12px 14px; box-shadow: 0 10px 22px -14px var(--gagne); }
+.s23 .t23, .verdict.s23 > b { font-family: var(--display); font-weight: 700; font-size: 20px; line-height: 1.15; }
+.s23 small, .s23 span { color: var(--on-gagne); }
+.s23 small { opacity: .92; font-size: 13.5px; font-weight: 600; }
+.fin.s23, .verdict.s23 { background: linear-gradient(135deg, var(--gagne), var(--gagne2)); color: var(--on-gagne); border-radius: 12px; padding: 12px 14px; }
+.fin.s23 label small { font-weight: 600; font-size: 12.5px; }
+.fin.s23 { justify-self: end; max-width: 272px; padding: 8px 11px; border-radius: 10px; gap: 2px; box-shadow: none; }
+.fin.s23 .t23 { font-size: 16.5px; }
+.fin.s23 small { font-size: 12.5px; }
+.fin.s23 label { grid-template-columns: 20px 1fr; }
+.fin.s23 label input { accent-color: var(--on-gagne); width: 20px; height: 20px; }
+.s23 .btn { background: var(--on-gagne); color: var(--gagne); border-color: var(--on-gagne); }
+.s23 .btn.sec { background: transparent; color: var(--on-gagne); border-color: rgba(255,255,255,.6); }
+.verdict.s23.mini { padding: 8px 10px; justify-self: end; max-width: 290px; }
+.verdict.s23.mini > b { font-family: inherit; font-size: 14px; line-height: 1.3; }
+.verdict.mini .rangee > * { flex: 0 0 auto; }
+/* les trois missions toutes faites : cartes de choix avec une courte explication et leur prix ; les dossiers sont dans « Voir plus » */
+#m-pack { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+#m-pack button { grid-template-columns: 1fr; align-content: start; gap: 4px; padding: 10px; height: 100%; }
+#m-pack button .ic { grid-row: auto; width: 28px; height: 28px; font-size: 15px; }
+#m-pack button b { font-size: 17px; }
+#m-pack button .px { font-family: var(--display); font-weight: 700; font-size: 17px; white-space: nowrap; }
+#m-pack button .d { font-size: 12.5px; line-height: 1.35; }
+@media (max-width: 480px) { #m-pack button { padding: 8px 7px; } #m-pack button b, #m-pack button .px { font-size: 15px; } #m-pack button .d { font-size: 11.5px; } }
+.m-det2 { display: grid; gap: 6px; padding-top: 10px; border-top: 1px solid var(--line); }
+.valide { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-top: 4px; }
+.valide .hint { margin: 0; }
+#aju-ok[aria-pressed="true"] { background: var(--accent-pale); color: var(--accent-ink); border-color: var(--accent); }
+.pret { margin: 0; font-size: 14px; color: var(--ink); }
+.pret.flash { animation: flash 1.2s ease-out; }
+#m-det > summary { padding: 2px 0; }
+/* « Faites des économies » dans le bandeau du total : deux options de construction confiée, en style 23 */
+.total .chip.eco { border: 0; cursor: pointer; background: var(--gagne2); color: var(--on-gagne); font: inherit; font-size: 13px; font-weight: 700; }
+.total .chip.eco[aria-expanded="true"] { box-shadow: 0 0 0 2px var(--on-gagne); }
+.eco-pan { flex-basis: 100%; display: grid; gap: 6px; padding-top: 4px; animation: sort .2s ease-out; }
+/* options aux couleurs de la pastille « % du coût des travaux » ; condition en texte normal sur le bandeau noir */
+.eco-pan .eco-g { display: grid; gap: 4px; }
+.eco-opt { display: grid; gap: 2px; text-align: left; cursor: pointer; width: 100%; font: inherit; background: var(--band-chip); color: var(--band-accent); border: 1px solid color-mix(in srgb, var(--band-accent) 45%, transparent); border-radius: 10px; padding: 8px 12px; }
+.eco-opt b { font-family: var(--display); font-weight: 700; font-size: 17px; line-height: 1.2; }
+.eco-opt small { font-size: 13px; font-weight: 600; }
+.eco-opt[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--band-accent); }
+.eco-pan .cond-eco { margin: 0; padding: 0 2px; color: var(--on-band); font-size: 13.5px; line-height: 1.45; font-style: normal; }
+.c23box { display: grid; grid-template-columns: 20px 1fr; gap: 8px; align-items: start; padding: 2px 0; cursor: pointer; font-size: 14px; }
+#m-constr-bloc.court #av-liste, #m-constr-bloc.court.c100 .av-etudes { display: none; }
+/* conditions lisibles : texte droit, taille normale */
+#m-constr-bloc .cond { display: grid; gap: 2px; font-size: 14px; line-height: 1.45; }
+#m-constr-bloc .cond b { font-size: 13px; letter-spacing: .02em; }
+#m-constr-bloc .cond p { margin: 0; font-style: normal; font-family: inherit; }
+#m-constr-bloc .cond p:empty, #m-constr-bloc .cond:has(p:empty) { display: none; }
+/* carte confiée : plus de fond vert, le vert reste sur les boutons (Wanja) ; placé après .avantage par la spécificité de l'id */
+#m-constr-bloc.court { background: var(--card); color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+#m-constr-bloc.court .av-titre, #m-constr-bloc.court .av-gain b { color: var(--good); }
+#m-constr-bloc.court .av-gain span { background: var(--good-soft); color: var(--good); }
+#m-constr-bloc.court .cond { background: var(--bg); border-radius: 8px; padding: 8px 10px; color: var(--ink); }
+#m-constr-bloc.court .seg { background: var(--card); border-color: var(--line); }
+#m-constr-bloc.court .seg button { color: var(--ink); border-color: var(--line); }
+#m-constr-bloc.court .seg button[aria-pressed="true"] { background: linear-gradient(135deg, var(--gagne), var(--gagne2)); color: var(--on-gagne); }
+#m-constr-bloc.court .c23box input { accent-color: var(--gagne); }
+#m-constr-bloc.court .c23dev .btn { background: linear-gradient(135deg, var(--gagne), var(--gagne2)); color: var(--on-gagne); border-color: transparent; }
+#m-constr-bloc.court .c23dev .btn.sec, #m-constr-bloc.court .c23dev .btn[aria-pressed="true"] { background: transparent; color: var(--good); border-color: var(--good); }
+/* rappel avant l'envoi, aux couleurs de la pastille du bandeau */
+.encore { display: grid; gap: 8px; justify-items: start; background: var(--band-chip); color: var(--band-accent); border-radius: 10px; padding: 10px 12px; font-weight: 600; font-size: 14px; }
+.encore .btn { background: var(--band-accent); color: var(--band-chip); border-color: var(--band-accent); }
+.c23dev { display: grid; gap: 4px; justify-items: start; }
+.c23dev .btn { background: var(--on-gagne); color: var(--gagne); border-color: var(--on-gagne); }
+.c23dev .btn[aria-pressed="true"] { background: transparent; color: var(--on-gagne); border-color: rgba(255,255,255,.7); }
+.c23dev .btn.sec { background: transparent; color: var(--on-gagne); border-color: rgba(255,255,255,.7); }
+.dev-conf { display: grid; gap: 6px; font-size: 13px; font-weight: 600; animation: sort .2s ease-out; }
+.dev-conf .duo { display: flex; gap: 8px; flex-wrap: wrap; }
+.c23dev small { font-size: 12.5px; font-weight: 600; opacity: .92; }
+.c23box input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--on-gagne); }
+.c23box small { display: block; font-size: 12.5px; opacity: .92; font-weight: 600; }
+.mrow { display: grid; grid-template-columns: 1fr 40px; gap: 8px; align-items: stretch; }
+.plusb { border: 1.5px solid var(--line); border-radius: 10px; background: var(--card); color: var(--accent-ink); font-size: 24px; font-weight: 700; line-height: 1; cursor: pointer; }
+.plusb[aria-expanded="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.mdet { grid-column: 1 / -1; background: var(--accent-pale); border-radius: 9px; padding: 4px 12px; font-size: 14px; animation: sort .2s ease-out; }
+.mesure { font-size: 13px; font-weight: 600; color: var(--warn); }
+.m-liste { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--ink); }
+.verdict.aju { background: var(--accent-pale); color: var(--accent-ink); border: 1px solid var(--accent-soft); }
+
+.message { background: var(--accent-pale); border: 1px dashed var(--line); border-radius: 8px; padding: 10px 12px; font-size: 13.5px; white-space: pre-wrap; overflow-wrap: anywhere; max-height: 220px; overflow: auto; }
+.ok-copie { color: var(--good); font-size: 13px; }
+
+footer { padding-block: 4px 30px; }
+footer .wrap { display: grid; gap: 10px; justify-items: center; text-align: center; }
+.pied { border-top: 1.5px solid var(--accent-soft); padding-top: 8px; font-size: 12px; color: var(--muted); width: 100%; }
+.pied b { font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+/* projet : terrain L × l, étages en − / +, choix en boutons, maison dessinée qui suit les choix */
+.duo { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; }
+.duo input { width: 100%; min-width: 0; padding: 9px 10px; border: 1px solid var(--line); border-radius: 7px; background: var(--accent-pale); text-align: center; font-weight: 600; }
+.duo .fois { color: var(--muted); font-weight: 600; }
+.champs.deux { grid-template-columns: 1fr 1fr; }
+.pas { display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.pas button { flex: none; width: 42px; border: 0; background: var(--card); color: var(--accent); font-size: 20px; font-weight: 600; cursor: pointer; }
+.champ .pas input { border: 0; border-radius: 0; text-align: center; font-weight: 600; -moz-appearance: textfield; }
+.pas input::-webkit-inner-spin-button, .pas input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.seg.petit button { font-size: 13.5px; padding: 8px 2px; }
+.seg.ico button { display: flex; align-items: center; justify-content: center; gap: 6px; }
+.seg.ico svg { width: 18px; height: 18px; flex: none; }
+.maison { display: grid; grid-template-columns: 92px 1fr; gap: 12px; align-items: center; background: var(--accent-pale); border-radius: 10px; padding: 10px 12px; font-size: 14px; }
+.maison svg { width: 92px; height: auto; display: block; }
+.maison .txt { display: grid; gap: 4px; min-width: 0; }
+.maison b { font-family: var(--display); font-size: 22px; font-weight: 700; }
+.m-mur { fill: var(--card); stroke: var(--accent); stroke-width: 2; }
+.m-toit { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.m-fen { fill: var(--accent-soft); }
+.m-porte { fill: var(--accent); }
+.m-sol { stroke: var(--muted); stroke-width: 2; stroke-linecap: round; }
+.m-ss { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 3 2; }
+.m-parc { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 3 3; }
+details.plus { border-top: 1px solid var(--line); padding-top: 8px; }
+details.plus summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: 14px; list-style: none; }
+details.plus summary::-webkit-details-marker { display: none; }
+details.plus summary::before { content: "+"; display: inline-block; width: 18px; font-weight: 700; }
+details.plus[open] summary::before { content: "−"; }
+details.plus .champs { margin-top: 10px; }
+.total .big.bump { animation: bump .4s ease; }
+@keyframes bump { 40% { transform: scale(1.05); color: var(--band-accent); } }
+.offert { font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: var(--good-soft); color: var(--good); white-space: nowrap; }
+.phase .mt s, .ligne .mt s { display: block; color: var(--muted); font-weight: 500; font-size: 12.5px; }
+.lbl-seg { font-size: 12.5px; color: var(--muted); font-weight: 500; }
+/* construction confiée : carte vert gagnant avec ce que le client gagne */
+.avantage { background: linear-gradient(135deg, var(--gagne), var(--gagne2)); color: var(--on-gagne); border-radius: 12px; padding: 12px 14px; display: grid; gap: 8px; box-shadow: 0 10px 22px -14px var(--gagne); }
+.avantage .av-titre { font-family: var(--display); font-weight: 700; font-size: 21px; line-height: 1.15; }
+.avantage .av-gain { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.avantage .av-gain b { font-family: var(--display); font-size: 30px; font-weight: 700; line-height: 1; }
+.avantage .av-etudes { margin: 0; font-size: 14px; font-weight: 600; }
+.avantage .av-etudes:empty { display: none; }
+.avantage .av-gain span { font-weight: 600; background: rgba(255,255,255,.18); padding: 2px 9px; border-radius: 999px; font-size: 13.5px; }
+.avantage ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 14px; }
+.avantage li { display: flex; justify-content: space-between; gap: 10px; }
+.avantage li::before { content: "✓"; font-weight: 700; margin-right: 6px; }
+.avantage li span:first-child { flex: 1; }
+.avantage .note { color: var(--on-gagne); opacity: .9; font-size: 13px; }
+.avantage .seg { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.45); }
+.avantage .seg button { background: transparent; color: var(--on-gagne); border-color: rgba(255,255,255,.45); }
+.avantage .seg button[aria-pressed="true"] { background: var(--on-gagne); color: var(--gagne); }
+.verdict.ok { background: var(--gagne-soft); color: var(--gagne); }
+.gain { font-weight: 700; color: var(--gagne); }
+.total .chip.gagne { background: var(--gagne2); color: var(--on-gagne); }
+#feu { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
+.champ textarea { width: 100%; min-width: 0; padding: 9px 10px; border: 1px solid var(--line); border-radius: 7px; background: var(--accent-pale); font: inherit; color: inherit; resize: vertical; min-height: 70px; }
+.resume { margin: 0; font-size: 15px; }
+
+/* design du devis à la carte : paiement en deux choix avec pastilles de gain, trois réponses, sous-sections repliables, échéancier à points */
+:root { --accent-ink: #1E40AF; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent-ink: #9DB8F8; } }
+:root[data-theme="dark"] { --accent-ink: #9DB8F8; }
+.choix { display: grid; gap: 8px; }
+.choix button { display: grid; grid-template-columns: 34px 1fr; gap: 2px 10px; align-items: center; text-align: left; padding: 11px 12px; border: 1.5px solid var(--line); border-radius: 10px; background: var(--card); cursor: pointer; }
+.choix button .ic { grid-row: 1 / span 2; display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; font-size: 17px; }
+.choix button b { font-family: var(--display); font-weight: 600; font-size: 19px; line-height: 1.1; }
+.choix button span.d { color: var(--muted); font-size: 13px; }
+.choix button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-pale); box-shadow: 0 0 0 2px var(--accent-soft); }
+.choix button[aria-pressed="true"] .ic { background: var(--accent); color: var(--on-accent); }
+.choix button:disabled { opacity: .45; cursor: not-allowed; }
+@media (min-width: 560px) { .choix.deux { grid-template-columns: 1fr 1fr; } }
+/* Boutons « Votre réponse » (design Wanja 2026-10-31) */
+:root { --rep-ok: #16A34A; --on-rep-ok: #FFFFFF; --rep-of: #7DA0F5; --on-rep-of: #0D1530; }
+#choix-rep { grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 479px) { #choix-rep { grid-template-columns: 1fr; } }
+#choix-rep button { position: relative; display: flex; align-items: center; gap: 0; min-height: 64px; padding: 10px 14px 10px 10px; border: 0; border-radius: 10px; text-align: left; box-shadow: 0 8px 18px -12px rgba(0,0,0,.55); transition: transform .12s, box-shadow .12s, opacity .12s; }
+#choix-rep #c-acc { background: var(--rep-ok); color: var(--on-rep-ok); }
+#choix-rep #c-offre { background: var(--rep-of); color: var(--on-rep-of); }
+#choix-rep button .ic { flex: none; width: 44px; height: 44px; font-size: 22px; font-weight: 800; border-radius: 50%; display: inline-grid; place-items: center; }
+#choix-rep #c-acc .ic { background: #FFFFFF; color: var(--rep-ok); }
+#choix-rep #c-offre .ic { background: rgba(255,255,255,.32); color: var(--on-rep-of); }
+#choix-rep button b { flex: 1; min-width: 0; margin-left: 12px; padding-left: 14px; border-left: 1.5px solid currentColor; border-left-color: color-mix(in srgb, currentColor 35%, transparent); font-family: var(--display); font-weight: 700; font-size: 21px; line-height: 1.1; }
+#choix-rep button span.d { display: none; }
+#choix-rep .chev { flex: none; width: 11px; height: 11px; margin-left: 10px; border-top: 3px solid currentColor; border-right: 3px solid currentColor; transform: rotate(45deg); border-radius: 1px; }
+#choix-rep button:hover { transform: translateY(-1px); }
+#choix-rep button[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--card), 0 0 0 5px currentColor; }
+#choix-rep #c-acc[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--card), 0 0 0 5px var(--rep-ok); }
+#choix-rep #c-offre[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--card), 0 0 0 5px var(--rep-of); }
+#choix-rep #c-acc[aria-pressed="true"] .ic, #choix-rep #c-offre[aria-pressed="true"] .ic { background: #FFFFFF; }
+#choix-rep #c-offre[aria-pressed="true"] .ic { color: var(--on-rep-of); }
+#choix-rep #c-acc[aria-pressed="true"] .chev, #choix-rep #c-offre[aria-pressed="true"] .chev { transform: rotate(135deg); }
+#choix-rep:has(button[aria-pressed="true"]) button[aria-pressed="false"] { opacity: .55; }
+.hint.attente { color: var(--alert); font-weight: 600; }
+.bloc-choix { display: grid; gap: 10px; border-top: 1px dashed var(--line); padding-top: 12px; }
+.ok-box { border-radius: 8px; padding: 10px 12px; background: var(--gagne-soft); color: var(--gagne); font-weight: 600; }
+details.sous { border: 1px solid var(--line); border-radius: 9px; background: var(--card); }
+details.sous + details.sous { margin-top: 8px; }
+details.sous > summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: center; padding: 10px 12px; }
+details.sous > summary::-webkit-details-marker { display: none; }
+details.sous > summary .n { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-ink); font-size: 12.5px; font-weight: 700; }
+details.sous[open] > summary .n { background: var(--accent); color: var(--on-accent); }
+details.sous > summary .t { font-weight: 600; min-width: 0; }
+details.sous > summary .g { font-size: 13px; font-weight: 700; color: var(--gagne); white-space: nowrap; }
+details.sous > summary .g.neutre { color: var(--muted); font-weight: 500; }
+details.sous > .corps { padding: 0 12px 12px; display: grid; gap: 8px; }
+.lot { border-top: 1px solid var(--line); padding-top: 9px; display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; align-items: baseline; }
+.lot:first-child { border-top: 0; padding-top: 0; }
+.lot .lib { font-weight: 600; min-width: 0; }
+.lot .mt { font-weight: 600; white-space: nowrap; }
+.lot .info { grid-column: 1 / -1; font-size: 12.5px; color: var(--muted); }
+.lot .seg, .lot .rubs { grid-column: 1 / -1; }
+.lot .lbl-seg { grid-column: 1 / -1; margin-bottom: -2px; }
+.rubs { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.rubp { border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px; padding: 5px 11px; font-size: 12.5px; font-weight: 600; cursor: pointer; text-align: left; }
+.rubp .num { color: var(--muted); font-weight: 500; margin-left: 2px; }
+.rubp[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-ink); text-decoration: line-through; }
+.rubp:disabled { cursor: not-allowed; opacity: .6; }
+.perso { display: inline-block; font-family: var(--body); font-size: 11.5px; font-weight: 700; padding: 1px 8px; border-radius: 999px; background: var(--warn-soft); color: var(--warn); margin-left: 6px; white-space: nowrap; vertical-align: 1px; letter-spacing: 0; }
+.echeance { display: grid; }
+.echeance .e { display: grid; grid-template-columns: 18px 1fr auto; gap: 2px 10px; padding: 7px 0; border-top: 1px solid var(--line); align-items: baseline; }
+.echeance .e:first-child { border-top: 0; }
+.echeance .e .pt { width: 11px; height: 11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); align-self: center; }
+.echeance .e .mt { font-weight: 700; white-space: nowrap; }
+.echeance .e .d { grid-column: 2 / -1; font-size: 12.5px; color: var(--muted); }
+.echeance .e + .e .pt { background: var(--card); box-shadow: inset 0 0 0 2px var(--accent); }
+.bonus { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; }
+.pil { font: inherit; font-size: 13px; font-weight: 600; padding: 3px 10px; border-radius: 999px; border: 0; background: var(--gagne2); color: var(--on-gagne); white-space: nowrap; cursor: pointer; }
+.pil.off { opacity: .5; }
+.bonus .sur { font-size: 12.5px; font-weight: 600; color: var(--gagne); }
+.fin { border-radius: 9px; padding: 10px 12px; background: var(--gagne-soft); color: var(--gagne); display: grid; gap: 6px; font-size: 13.5px; }
+.fin b { font-size: 14.5px; }
+.fin label { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; cursor: pointer; font-weight: 600; }
+.fin label input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--gagne); }
+.fin label small { display: block; font-weight: 400; font-size: 12.5px; }
+.fin.attente { background: var(--accent-pale); color: inherit; }
+.alerte { border-radius: 8px; padding: 9px 12px; background: var(--alert-soft); color: var(--alert); font-size: 13.5px; font-weight: 600; }
+.envoi a[aria-disabled="true"] { opacity: .45; pointer-events: none; }
+.btn.lien { justify-self: start; }
+.opt { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; }
+.opt .lib { font-weight: 600; }
+.opt .meta { grid-column: 1 / -1; font-size: 13px; color: var(--muted); }
+/* fond animé du remerciement : une façade qui se dessine trait par trait, sa cote, puis le crayon repart */
+.merci > svg.plan { position: absolute; z-index: 0; right: 4px; bottom: 2px; width: 100px; height: auto; opacity: .3; pointer-events: none; }
+/* accueil en style 23 : lisible sur le vert, texte blanc en police des titres */
+.merci { background: linear-gradient(135deg, var(--gagne), var(--gagne2)); border: 0; border-radius: 12px; box-shadow: 0 10px 22px -14px var(--gagne); animation: none; padding: 14px 16px 12px; }
+.merci::before, .merci::after { display: none; }
+.merci p { font-family: var(--display); font-style: normal; font-weight: 600; font-size: 21px; line-height: 1.22; color: var(--on-gagne); }
+.merci p .ecrit.tape::after { background: var(--on-gagne); }
+.merci .sign { color: var(--on-gagne); opacity: .9; padding-right: 100px; }
+.merci .plan .p-trait { stroke: var(--on-gagne); }
+.merci .plan .p-txt, .merci .plan .p-crayon { fill: var(--on-gagne); }
+.plan .p-trait { fill: none; stroke: var(--chaud); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 100; stroke-dashoffset: 0; animation: trace 12s ease-in-out infinite both; }
+.plan .p-fin { stroke-width: 1; }
+.plan .p-txt { fill: var(--chaud); font: 600 7px var(--body); animation: apparait 12s ease-in-out infinite both; }
+.plan .t2 { animation-delay: .8s; } .plan .t3 { animation-delay: 1.8s; } .plan .t4 { animation-delay: 2.6s; } .plan .t5 { animation-delay: 3.4s; } .plan .t6 { animation-delay: 4.2s; }
+@keyframes trace { 0% { stroke-dashoffset: 100; opacity: 1; } 22% { stroke-dashoffset: 0; } 86% { stroke-dashoffset: 0; opacity: 1; } 96%, 100% { stroke-dashoffset: 0; opacity: 0; } }
+@keyframes apparait { 0%, 40% { opacity: 0; } 50%, 86% { opacity: 1; } 96%, 100% { opacity: 0; } }
+.plan .p-crayon { fill: var(--chaud); animation: crayon 12s ease-in-out infinite both; }
+@keyframes crayon { 0% { transform: translate(0, 0); } 20% { transform: translate(-70px, 0); } 40% { transform: translate(-70px, -40px); } 60% { transform: translate(-20px, -60px); } 86% { transform: translate(0, 0); } 100% { transform: translate(0, 0); } }
+.chrome { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; overflow: auto; background: var(--bg); padding-block: max(24px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.chrome-in { max-width: 420px; display: grid; gap: 12px; justify-items: center; text-align: center; color: var(--ink); }
+.chrome-in h2 { margin: 0; font-family: var(--display); font-size: 24px; line-height: 1.15; text-wrap: balance; }
+.chrome-in p { margin: 0; font-size: 15px; line-height: 1.5; }
+.chrome-etapes { margin: 0; padding: 12px 14px 12px 34px; text-align: left; font-size: 15px; line-height: 1.5; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+.chrome-etapes:empty { display: none; }
+.chrome-in .btn { min-width: 220px; text-align: center; text-decoration: none; }
+/* version sans calcul, écrite par Excel : la proposition, trois boutons « j'accepte et je paie… » et « je propose un prix », tous des liens WhatsApp */
+.st { max-width: 560px; margin: 0 auto; display: grid; gap: 12px; padding-block: 20px 32px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); color: var(--ink); }
+.st-eyebrow { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-ink); }
+.st-h1 { margin: 0; font-family: var(--display); font-size: 28px; line-height: 1.1; }
+.st-sub { margin: 0; color: var(--muted); font-size: 14px; }
+.st-card { display: grid; gap: 8px; padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+.st-card h2 { margin: 0 0 2px; font-family: var(--display); font-size: 19px; }
+.st-l { display: flex; justify-content: space-between; gap: 12px; font-size: 14.5px; padding: 4px 0; border-bottom: 1px dashed var(--line); }
+.st-l b { white-space: nowrap; }
+.st-tot { border-bottom: 0; font-size: 17px; font-weight: 700; padding-top: 6px; }
+.st-hint { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+.st-btn { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 10px; background: var(--accent); color: var(--on-accent); text-decoration: none; }
+.st-btn span { display: grid; gap: 2px; }
+.st-btn small { font-size: 12.5px; opacity: .9; }
+.st-btn.sec { background: transparent; color: var(--accent-ink); border: 1.5px solid var(--accent); }
+.st-px { font-family: var(--display); font-size: 18px; white-space: nowrap; }
+/* les deux réponses : boutons colorés, explication en dessous ; « J'accepte » s'ouvre sans calcul (details) sur les trois modes de paiement */
+.st-rep { display: grid; gap: 6px; }
+.st-rep > summary, .st-cta { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 10px 14px; border-radius: 10px; font-family: var(--display); font-size: 19px; font-weight: 700; text-decoration: none; cursor: pointer; list-style: none; }
+.st-rep > summary::-webkit-details-marker { display: none; }
+.st-rep > summary { background: var(--gagne2); color: var(--on-gagne); }
+.st-cta { background: var(--accent); color: var(--on-accent); }
+.st-ic { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,.22); font-size: 15px; }
+.st-d { margin: 0; text-align: center; font-size: 13px; color: var(--muted); line-height: 1.4; }
+.st-rep[open] > summary { box-shadow: 0 0 0 3px var(--card), 0 0 0 5px var(--gagne2); }
+.st-pay { display: grid; gap: 8px; padding-top: 6px; }
+.st-rep:has(> details[open]) > .st-d { display: none; }
+.st-pay .st-btn { background: var(--gagne-soft); color: var(--ink); border: 1.5px solid var(--gagne2); }
+.st-pay .st-btn small { color: var(--muted); opacity: 1; }
+.st-sign { margin: 4px 0 0; text-align: right; color: var(--muted); font-style: italic; }
+.sans-js { background: var(--warn-soft); color: var(--warn); padding: 12px max(16px, env(safe-area-inset-right, 0px)) 12px max(16px, env(safe-area-inset-left, 0px)); font-size: 15px; font-weight: 600; text-align: center; }
+
+/* ===== Design final (Wanja, 2026-10-31) ===== */
+:root { --page-glow: rgba(56, 102, 220, .10); --card-edge: #D3DAE8; --pill-bg: #F3F6FC; --band: #0F1A31; --band-line: #263759; --band-chip: #1A2B52; --band-card: #13203B; --glow: rgba(96, 140, 245, .35); --vert-vif: #22C55E; --win: #F5C46B; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #0A1120; --card: #111A2E; --line: #22304D; --card-edge: #2A3A5E; --pill-bg: #0E1628; --page-glow: rgba(70, 120, 240, .16); --band: #0F1A31; --band-card: #13203B; --muted: #A3ADC2; } }
+:root[data-theme="dark"] { --bg: #0A1120; --card: #111A2E; --line: #22304D; --card-edge: #2A3A5E; --pill-bg: #0E1628; --page-glow: rgba(70, 120, 240, .16); --band: #0F1A31; --band-card: #13203B; --muted: #A3ADC2; }
+body { background: radial-gradient(900px 500px at 85% -10%, var(--page-glow), transparent 70%), radial-gradient(700px 600px at -10% 40%, var(--page-glow), transparent 70%), var(--bg); background-attachment: fixed; }
+body::before { background: var(--bg); }
+/* en-tête */
+header.band { background: transparent; color: var(--on-band); }
+header.band .wrap { padding-block: 14px 10px; gap: 12px; }
+.ident { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; border: 1px solid var(--band-line); border-radius: 14px; padding: 10px 14px; margin: 0; background: linear-gradient(180deg, var(--band-card), var(--band)); box-shadow: 0 10px 26px -18px rgba(0,0,0,.7); }
+.ident .logo { flex: none; width: 40px; height: 40px; border-radius: 10px; background: var(--band-chip); color: var(--band-accent); display: grid; place-items: center; }
+.ident .logo svg { width: 24px; height: 24px; }
+.ident .nom { font-size: 19px; font-weight: 700; letter-spacing: .04em; }
+.ident .titre { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; }
+.ident .titre::after { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--vert-vif); box-shadow: 0 0 8px var(--vert-vif); }
+.pcard { position: relative; overflow: hidden; display: grid; gap: 4px; border: 1px solid var(--band-line); border-radius: 14px; padding: 14px 16px 16px; background: linear-gradient(120deg, var(--band) 30%, var(--band-card)); box-shadow: 0 10px 26px -18px rgba(0,0,0,.7); }
+.pcard > * { position: relative; z-index: 1; }
+.pcard .villa { position: absolute; z-index: 0; right: 0; bottom: 0; width: 62%; height: 100%; opacity: .55; pointer-events: none; -webkit-mask-image: linear-gradient(to right, transparent, #000 45%); mask-image: linear-gradient(to right, transparent, #000 45%); }
+.villa path { fill: none; stroke: var(--band-accent); stroke-width: 1.2; opacity: .55; }
+.villa .v-mur { fill: rgba(255,255,255,.05); }
+.villa .v-fen { fill: var(--win); fill-opacity: .35; stroke: var(--win); stroke-opacity: .5; }
+.villa .v-dalle { stroke-width: 3; opacity: .7; }
+.villa .v-palm path { stroke: #2C4A7A; stroke-width: 3; opacity: .9; }
+.pc-ey { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.pc-ic { flex: none; width: 34px; height: 34px; border-radius: 9px; background: var(--band-chip); color: var(--band-accent); display: grid; place-items: center; }
+.pc-ic svg { width: 20px; height: 20px; }
+.pcard .eyebrow { font-size: 12.5px; letter-spacing: .1em; font-weight: 700; }
+.pcard h1 { font-size: 34px; }
+.pcard .sub { font-size: 15px; color: #C9D2E3; }
+/* total */
+.total { background: var(--bg); border-top: 0; box-shadow: none; }
+.total .wrap { display: block; padding-block: 2px 8px; }
+.t-card { display: flex; align-items: center; justify-content: space-between; gap: 10px 16px; flex-wrap: wrap; border: 1px solid color-mix(in srgb, var(--band-accent) 45%, var(--band-line)); border-radius: 16px; padding: 14px 16px; background: linear-gradient(135deg, var(--band-card), var(--band)); box-shadow: 0 0 0 1px rgba(125,160,245,.08), 0 12px 30px -16px var(--glow); }
+.t-g { display: flex; align-items: center; gap: 12px; }
+.t-ic { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid color-mix(in srgb, var(--band-accent) 50%, transparent); background: var(--band-chip); color: var(--band-accent); font-family: var(--display); font-size: 26px; font-weight: 700; }
+.total .lbl { font-weight: 600; letter-spacing: .12em; }
+.total .big { font-size: 44px; text-shadow: 0 2px 18px rgba(125,160,245,.25); }
+.total .info { text-align: left; justify-items: start; gap: 7px; padding-left: 16px; border-left: 1px solid var(--band-line); color: #C9D2E3; font-size: 13.5px; }
+.total .chip { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; font-size: 13.5px; font-weight: 700; }
+#t-pct { background: color-mix(in srgb, var(--band-accent) 18%, transparent); border: 1px solid color-mix(in srgb, var(--band-accent) 60%, transparent); color: var(--band-accent); }
+#t-pct::before { content: "%"; font-size: 16px; }
+.total .chip.eco { background: linear-gradient(135deg, var(--gagne), var(--gagne2)); border: 1px solid var(--vert-vif); box-shadow: 0 0 14px -4px var(--vert-vif); }
+.total .chip.eco::before, #t-cout::before, #t-delai::before, .total .chip.eco::after { content: ""; flex: none; width: 17px; height: 17px; background: currentColor; -webkit-mask: var(--mk) center / contain no-repeat; mask: var(--mk) center / contain no-repeat; }
+.total .chip.eco::before { --mk: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M6%2019v-5M12%2019V9M18%2019V4%22%20stroke-width%3D%223.4%22/%3E%3C/svg%3E"); }
+.total .chip.eco::after { --mk: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M7%209l5%205%205-5%22%20stroke-width%3D%222.6%22/%3E%3C/svg%3E"); width: 14px; height: 14px; transition: transform .2s; }
+.total .chip.eco[aria-expanded="true"]::after { transform: rotate(180deg); }
+#t-cout, #t-delai { display: inline-flex; align-items: center; gap: 10px; }
+#t-cout:empty, #t-delai:empty { display: none; }
+#t-cout::before { --mk: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cellipse%20cx%3D%2212%22%20cy%3D%226%22%20rx%3D%227%22%20ry%3D%223%22/%3E%3Cpath%20d%3D%22M5%206v6c0%201.7%203.1%203%207%203s7-1.3%207-3V6M5%2012v6c0%201.7%203.1%203%207%203s7-1.3%207-3v-6%22/%3E%3C/svg%3E"); width: 19px; height: 19px; color: var(--band-accent); }
+#t-delai::before { --mk: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%224%22%20y%3D%225%22%20width%3D%2216%22%20height%3D%2215%22%20rx%3D%222%22/%3E%3Cpath%20d%3D%22M4%2010h16M8%203v4M16%203v4%22/%3E%3C/svg%3E"); width: 19px; height: 19px; color: var(--band-accent); }
+@media (max-width: 459px) { .t-ic { display: none; } .total .big { font-size: 36px; } .total .info { padding-left: 12px; } .t-card { padding: 12px; } }
+/* cartes */
+main .wrap { padding-block: 8px 28px; }
+section.card { border-radius: 16px; border-color: var(--card-edge); padding: 16px 16px 14px; gap: 12px; background: linear-gradient(180deg, color-mix(in srgb, var(--card) 92%, var(--accent)), var(--card) 60%); box-shadow: 0 12px 30px -22px rgba(0,0,0,.6); }
+h2 { font-size: 25px; font-weight: 700; gap: 12px; }
+h2 .n { width: 34px; height: 34px; font-size: 15px; background: var(--accent); color: var(--on-accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent); }
+h2 .h-ic { margin-left: auto; flex: none; width: 40px; height: 40px; border-radius: 11px; border: 1px solid var(--card-edge); background: var(--pill-bg); color: var(--accent-ink); display: grid; place-items: center; }
+h2 .h-ic svg { width: 21px; height: 21px; }
+.hint { font-size: 14.5px; }
+.calcul { align-items: center; flex-wrap: nowrap; gap: 12px; padding: 10px 14px; border: 1px solid var(--card-edge); border-radius: 12px; background: var(--pill-bg); font-size: 15px; }
+.calcul::before { content: ""; flex: none; width: 34px; height: 34px; border-radius: 9px; background: var(--accent-soft) url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%237DA0F5%22%20stroke-width%3D%221.8%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%224%22%20y%3D%224%22%20width%3D%2216%22%20height%3D%2216%22%20rx%3D%222%22%2F%3E%3Cpath%20d%3D%22M8.5%2015.5l7-7M8.5%2011.5v4h4M15.5%2012.5v-4h-4%22%2F%3E%3C%2Fsvg%3E") center / 20px no-repeat; }
+.calcul > span { flex: 1; min-width: 0; }
+.calcul b { padding-left: 14px; border-left: 1px solid var(--card-edge); font-family: var(--display); font-size: 21px; font-weight: 700; white-space: nowrap; }
+/* dossiers */
+.m-det2.dossiers { display: grid; grid-template-columns: 36px 1fr; gap: 8px 12px; align-items: start; border: 1px solid var(--card-edge); border-radius: 12px; padding: 12px; background: var(--pill-bg); }
+.dossiers .d-ic { grid-row: 1 / span 2; width: 36px; height: 36px; border-radius: 9px; background: var(--accent-soft); color: var(--accent-ink); display: grid; place-items: center; }
+.dossiers .d-ic svg { width: 21px; height: 21px; }
+.dossiers .lbl-seg { font-size: 14px; color: var(--ink); opacity: .85; }
+.m-liste { display: flex; flex-wrap: wrap; gap: 8px; }
+.m-liste .sep { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.m-liste .dpil { display: inline-flex; align-items: center; gap: 9px; padding: 5px 13px; border: 1px solid var(--card-edge); border-radius: 999px; background: var(--card); font-size: 14px; line-height: 1.3; }
+.m-liste .dpil::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+/* votre réponse */
+#c-paie { border-top: 0; padding-top: 0; gap: 12px; }
+#choix-rep button { min-height: 60px; border-radius: 12px; }
+#choix-rep #c-acc { background: linear-gradient(135deg, #16A34A, #22C55E); box-shadow: 0 0 18px -6px rgba(34,197,94,.7); }
+#choix-rep #c-offre { background: linear-gradient(135deg, #6E95F7, #8FB0FA); box-shadow: 0 0 18px -6px rgba(125,160,245,.7); }
+#choix-rep button b { font-size: 20px; }
+@media (max-width: 479px) { #choix-rep { grid-template-columns: 1fr 1fr; gap: 8px; } #choix-rep button { padding: 8px 10px 8px 8px; } #choix-rep button .ic { width: 34px; height: 34px; font-size: 17px; } #choix-rep button b { font-size: 16.5px; margin-left: 8px; padding-left: 9px; } #choix-rep .chev { margin-left: 6px; width: 9px; height: 9px; } }
+@media (max-width: 359px) { #choix-rep { grid-template-columns: 1fr; } }
+/* merci */
+.merci { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 0 16px; border: 1px solid var(--vert-vif); border-radius: 16px; padding: 16px 18px; background: linear-gradient(120deg, #0E7A3A, #16A34A 55%, #1FB457); box-shadow: 0 0 26px -8px rgba(34,197,94,.65); }
+.merci .m-ic { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.14); border: 1.5px solid rgba(255,255,255,.45); color: #fff; }
+.merci .m-ic svg { width: 32px; height: 32px; }
+.merci .m-txt { display: grid; gap: 6px; padding-left: 16px; border-left: 1.5px solid rgba(255,255,255,.35); min-width: 0; }
+.merci p { font-family: var(--body); font-weight: 400; font-size: 16px; line-height: 1.45; color: #fff; }
+.merci p .mt { display: block; font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1.15; margin-bottom: 4px; }
+.merci p .mb { display: block; padding-right: 70px; }
+.merci p .ecrit.tape::after { display: none; }
+.merci p .ecrit.tape .cur::after { content: ""; display: inline-block; width: 2px; height: 1.05em; margin-left: 2px; vertical-align: -0.15em; background: #fff; animation: curseur .8s steps(1) infinite; }
+.merci .sign { padding-right: 0; color: #E3F7EA; font-size: 13px; letter-spacing: .02em; }
+.merci > svg.plan { width: 120px; right: 10px; bottom: 8px; opacity: .35; }
+@media (max-width: 459px) { .merci { grid-template-columns: 1fr; } .merci .m-ic { width: 44px; height: 44px; margin-bottom: 10px; } .merci .m-ic svg { width: 24px; height: 24px; } .merci .m-txt { padding-left: 0; border-left: 0; } .merci p .mb { padding-right: 40px; } }
+
+/* ajustements du design final */
+.ident { display: grid; grid-template-columns: auto 1fr auto; align-items: center; justify-content: stretch; }
+.ident .nom { min-width: 0; }
+@media (max-width: 539px) { .ident { grid-template-columns: auto 1fr; row-gap: 2px; } .ident .logo { grid-row: 1 / span 2; } .ident .titre { grid-column: 2; margin-left: 0; font-size: 12.5px; } .ident .nom { font-size: 17px; } }
+.pcard .villa { width: 56%; opacity: .42; }
+.m-liste .dpil { font-weight: 400; font-size: 13.5px; padding: 4px 12px; }
+.t-card { flex-wrap: nowrap; }
+@media (max-width: 519px) { .t-card { flex-wrap: wrap; padding: 12px 14px; gap: 8px; } .t-ic { display: none; } .total .big { font-size: 36px; } .total .info { flex-basis: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; padding-left: 0; border-left: 0; font-size: 13px; } .total .chip { font-size: 12.5px; padding: 4px 10px; } }
+.m-liste .dpil { color: var(--ink); }
+.merci p { position: relative; }
+.total { background: transparent; }
+.pcard .villa { opacity: .5; }
+.villa .v-fen { fill-opacity: .55; }
+/* panneau des économies : pleine largeur sous le total */
+.t-card { display: grid; grid-template-columns: auto auto; justify-content: space-between; align-items: center; }
+.total .big { white-space: nowrap; }
+.t-card .eco-pan { grid-column: 1 / -1; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px 10px; padding-top: 10px; border-top: 1px solid var(--band-line); }
+.t-card .eco-pan .eco-g { align-content: start; }
+.t-card .eco-pan .cond-eco { font-size: 12.5px; color: #C9D2E3; }
+@media (max-width: 519px) { .t-card { grid-template-columns: 1fr; justify-content: stretch; } }
+#t-cout, #t-delai { white-space: nowrap; }
+/* case d'accueil en tête de page */
+.accueil .wrap { padding-block: 14px 0; }
+.accueil .merci { margin: 0; }
+/* villa en perspective (fond de la carte proposition) */
+.pcard .villa { width: 70%; max-width: 360px; height: 100%; opacity: .6; -webkit-mask-image: linear-gradient(to right, transparent, #000 35%); mask-image: linear-gradient(to right, transparent, #000 35%); }
+.villa path, .villa ellipse { fill: none; stroke: var(--band-accent); stroke-width: 1; stroke-opacity: .5; opacity: 1; }
+.villa .v-f1 { fill: rgba(255,255,255,.03); } .villa .v-f2 { fill: rgba(255,255,255,.07); } .villa .v-f1b { fill: rgba(255,255,255,.05); } .villa .v-f2b { fill: rgba(255,255,255,.1); }
+.villa .v-vit, .villa .v-vit2 { fill: url(#vg-vitre); fill-opacity: 1; stroke: #FFD58A; stroke-opacity: .55; }
+.villa .v-mont { stroke: var(--band); stroke-width: 1.6; stroke-opacity: .9; }
+.villa .v-dal { stroke-width: 2.6; stroke-opacity: .85; }
+.villa .v-eau { fill: url(#vg-eau); stroke: none; }
+.villa .v-ar { fill: rgba(125,160,245,.1); } .villa .v-tr { stroke-width: 1.6; } .villa .v-pal { stroke-width: 1.8; }
+.pcard .sub { padding-right: 30%; }
+@media (max-width: 459px) { .pcard .villa { width: 85%; opacity: .45; } .pcard .sub { padding-right: 0; } }
+/* less is more : cases sobres */
+body { background: var(--bg); }
+.ident, .pcard, .t-card { background: var(--band); box-shadow: none; }
+.t-card { border-color: var(--band-line); }
+.t-ic { border: 0; }
+.total .big { text-shadow: none; }
+.ident .titre::after { box-shadow: none; }
+.total .chip.eco { background: var(--gagne); border: 0; box-shadow: none; }
+section.card { background: var(--card); border-color: var(--line); box-shadow: none; }
+h2 .n { box-shadow: none; }
+h2 .h-ic { border: 0; background: transparent; color: var(--muted); width: 28px; height: 28px; }
+.calcul { background: transparent; border-color: var(--line); }
+.calcul::before { background-color: transparent; }
+.m-det2.dossiers { background: transparent; border: 0; padding: 0; }
+.dossiers .d-ic { background: transparent; color: var(--muted); }
+.m-liste .dpil { background: transparent; border-color: var(--line); }
+.m-liste .dpil::before { box-shadow: none; width: 6px; height: 6px; }
+#choix-rep #c-acc { background: #16A34A; box-shadow: none; }
+#choix-rep #c-offre { background: #7DA0F5; box-shadow: none; }
+.merci { background: #15803D; border: 0; box-shadow: none; }
+.merci .m-ic { background: transparent; }
+.pcard { min-height: 190px; align-content: start; }
+.pcard .villa { top: auto; height: auto; width: 62%; max-width: 380px; aspect-ratio: 320 / 170; opacity: .7; }
+.pcard .sub, .pcard h1 { padding-right: 0; max-width: 58%; }
+@media (max-width: 559px) { .pcard { padding-bottom: 110px; } .pcard .villa { width: 92%; opacity: .6; -webkit-mask-image: linear-gradient(to right, transparent, #000 25%), linear-gradient(to bottom, transparent, #000 30%); mask-image: linear-gradient(to right, transparent, #000 25%); } .pcard .sub, .pcard h1 { max-width: none; } }
+/* bloc d'en-tête unique : annonce défilante + identité + proposition */
+.tete { border: 1px solid var(--band-line); border-radius: 16px; overflow: hidden; background: var(--band); }
+.tete .ident, .tete .pcard { border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.tete .ident { padding: 12px 16px; border-bottom: 1px solid var(--band-line); }
+.tete .pcard { min-height: 170px; }
+.annonce { position: relative; height: 44px; overflow: hidden; background: #132448; border-bottom: 1px solid var(--band-line); }
+.annonce .planche { position: absolute; inset: 0; width: 100%; height: 100%; }
+.planche .pl-g1 { stroke: var(--band-accent); stroke-opacity: .10; stroke-width: .5; }
+.planche .pl-g2 { stroke: var(--band-accent); stroke-opacity: .22; stroke-width: .8; }
+.planche .plan { opacity: .55; }
+.planche .plan .p-trait { stroke: var(--band-accent); stroke-width: 2; }
+.planche .plan .p-txt, .planche .plan .p-crayon { fill: #FFD58A; }
+.annonce .defile { position: relative; height: 100%; display: flex; align-items: center; -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent); }
+.annonce .piste { display: flex; width: max-content; white-space: nowrap; animation: defile var(--dur, 30s) linear infinite; }
+.annonce:hover .piste, .annonce:active .piste { animation-play-state: paused; }
+.annonce .a-u { display: inline-flex; align-items: center; gap: 8px; padding-right: 28px; color: #F2F4F8; font-size: 14.5px; }
+.annonce .a-u b { font-family: var(--display); font-size: 18px; font-weight: 700; color: #FFFFFF; }
+.annonce .a-u i { font-style: normal; font-size: 12.5px; font-weight: 600; color: #FFD58A; letter-spacing: .02em; }
+.annonce .a-sep { width: 7px; height: 7px; margin-left: 20px; border-radius: 50%; background: var(--vert-vif); }
+@keyframes defile { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .annonce { height: auto; } .annonce .piste { animation: none; width: auto; white-space: normal; padding: 10px 16px; } .annonce .a-u[aria-hidden] { display: none; } .annonce .defile { -webkit-mask-image: none; mask-image: none; } }
+.tete .ident { padding: 10px 14px; }
+.tete .ident .nom { font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tete .ident .logo { width: 34px; height: 34px; } .tete .ident .logo svg { width: 20px; height: 20px; }
+.tete .pcard { min-height: 140px; padding: 12px 14px 14px; gap: 2px; }
+.tete .pcard h1 { font-size: 30px; }
+.tete .pcard .sub { font-size: 14px; }
+.tete .pc-ey { margin-bottom: 2px; } .tete .pc-ic { width: 28px; height: 28px; } .tete .pc-ic svg { width: 17px; height: 17px; }
+.tete .pcard .villa { width: 52%; max-width: 320px; }
+@media (max-width: 559px) { .tete .pcard { padding-bottom: 72px; } .tete .pcard .villa { width: 66%; } .tete .pcard h1 { font-size: 27px; } }
+/* rappel du choix et envoi */
+.rappel { display: grid; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); animation: sort .25s ease-out; }
+.rappel .rp-t { display: grid; gap: 3px; font-size: 14px; }
+.rappel .rp-t b { font-family: var(--display); font-size: 19px; font-weight: 700; }
+.rappel .rp-t span { color: var(--muted); }
+.rappel .rp-t .num { color: var(--ink); font-weight: 600; }
+.rappel .rp-b { justify-self: stretch; padding: 13px 16px; font-size: 16px; font-weight: 700; background: #16A34A; border-color: #16A34A; color: #fff; border-radius: 10px; }
+
+/* ===== DESIGN « ARDOISE » (Wanja, 2026-10-31) : sombre mat, cartes sobres, vert du style 23 pour les boutons ===== */
+:root { --bg: #161618; --card: #212124; --ink: #E9E9EC; --muted: #95959C; --line: #303034; --accent: #E9E9EC; --on-accent: #161618; --accent-soft: #2C2C30; --accent-pale: #29292C; --accent-ink: #E9E9EC; --band: #212124; --on-band: #E9E9EC; --band-muted: #95959C; --band-accent: #E9E9EC; --band-line: #303034; --band-chip: #2C2C30; --band-card: #212124; --card-edge: #303034; --pill-bg: #29292C; --good: #4ADE80; --good-soft: #1B2E22; --gagne: #1E7A43; --gagne2: #23894C; --on-gagne: #FFFFFF; --gagne-soft: #1B2E22; --warn: #E9B45A; --warn-soft: #33291A; --alert: #F28B80; --alert-soft: #3A2220; --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --note: var(--body); color-scheme: dark; --chip: #2C2C30; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #161618; --card: #212124; --ink: #E9E9EC; --muted: #95959C; --line: #303034; --accent: #E9E9EC; --on-accent: #161618; --accent-soft: #2C2C30; --accent-pale: #29292C; --accent-ink: #E9E9EC; --band: #212124; --on-band: #E9E9EC; --band-muted: #95959C; --band-accent: #E9E9EC; --band-line: #303034; --band-chip: #2C2C30; --band-card: #212124; --card-edge: #303034; --pill-bg: #29292C; --good: #4ADE80; --good-soft: #1B2E22; --gagne: #1E7A43; --gagne2: #23894C; --on-gagne: #FFFFFF; --gagne-soft: #1B2E22; --warn: #E9B45A; --warn-soft: #33291A; --alert: #F28B80; --alert-soft: #3A2220; --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --note: var(--body); color-scheme: dark; --chip: #2C2C30; } }
+:root[data-theme="dark"] { --bg: #161618; --card: #212124; --ink: #E9E9EC; --muted: #95959C; --line: #303034; --accent: #E9E9EC; --on-accent: #161618; --accent-soft: #2C2C30; --accent-pale: #29292C; --accent-ink: #E9E9EC; --band: #212124; --on-band: #E9E9EC; --band-muted: #95959C; --band-accent: #E9E9EC; --band-line: #303034; --band-chip: #2C2C30; --band-card: #212124; --card-edge: #303034; --pill-bg: #29292C; --good: #4ADE80; --good-soft: #1B2E22; --gagne: #1E7A43; --gagne2: #23894C; --on-gagne: #FFFFFF; --gagne-soft: #1B2E22; --warn: #E9B45A; --warn-soft: #33291A; --alert: #F28B80; --alert-soft: #3A2220; --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --body: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; --note: var(--body); color-scheme: dark; --chip: #2C2C30; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); -webkit-font-smoothing: antialiased; letter-spacing: -.005em; }
+h1, h2, .total .big { letter-spacing: -.02em; }
+/* en-tête */
+header.band .wrap { padding-block: 18px 6px; }
+.tete { display: grid; gap: 16px; border: 0; border-radius: 0; background: transparent; overflow: visible; }
+.salut { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.s-txt { display: grid; gap: 1px; min-width: 0; }
+.s-h { font-size: 21px; font-weight: 500; color: var(--muted); }
+.s-n { font-size: 22px; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.tete .ident { display: block; padding: 0; border: 0; margin-top: 4px; font-size: 12.5px; color: var(--muted); }
+.tete .ident .nom { display: inline; font-family: var(--body); font-size: 12.5px; font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--ink); white-space: normal; }
+.tete .ident .nom::after { content: " · "; color: var(--muted); font-weight: 400; }
+.tete .ident .titre { display: inline; margin: 0; font-size: 12.5px; }
+.tete .ident .titre::after { display: none; }
+.avatar { flex: none; width: 52px !important; height: 52px !important; border-radius: 50% !important; background: #E9E9EC !important; color: #161618 !important; display: grid; place-items: center; }
+.avatar svg { width: 26px !important; height: 26px !important; }
+/* carte noire : proposition + annonce (comme la bannière de la référence) */
+.noir { border-radius: 22px; overflow: hidden; background: #0E0E0F; border: 1px solid #2A2A2E; color: #FFFFFF; }
+.noir .pcard { min-height: 150px; padding: 18px 18px 14px; background: transparent; border: 0; border-radius: 0; gap: 3px; }
+.noir .pc-ic { background: rgba(255,255,255,.1); color: #FFFFFF; border-radius: 50%; }
+.noir .eyebrow { color: #A1A1A8; letter-spacing: .06em; font-size: 11.5px; }
+.noir h1 { font-family: var(--display); font-weight: 700; font-size: 26px; color: #FFFFFF; }
+.noir .sub { color: #A1A1A8 !important; font-size: 13.5px; }
+.noir .villa path, .noir .villa ellipse { stroke: #FFFFFF; stroke-opacity: .45; }
+.noir .villa .v-f1 { fill: rgba(255,255,255,.04); } .noir .villa .v-f2 { fill: rgba(255,255,255,.09); } .noir .villa .v-f1b { fill: rgba(255,255,255,.06); } .noir .villa .v-f2b { fill: rgba(255,255,255,.12); }
+.noir .villa .v-mont { stroke: #0B0B0C; } .noir .villa .v-tr, .noir .villa .v-pal { stroke: #8B8B91; } .noir .villa .v-ar { fill: rgba(255,255,255,.06); }
+.noir .villa .v-vit, .noir .villa .v-vit2 { stroke: #FFD58A; }
+.noir .annonce { height: 40px; margin: 0 14px 14px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: #141416; }
+.noir .planche .pl-g1 { stroke: #FFFFFF; stroke-opacity: .06; } .noir .planche .pl-g2 { stroke: #FFFFFF; stroke-opacity: .12; }
+.noir .planche .plan .p-trait { stroke: #FFFFFF; } .noir .planche .plan { opacity: .4; }
+.noir .annonce .a-u { color: #D4D4D8; font-size: 13.5px; }
+.noir .annonce .a-u b { font-family: var(--display); font-size: 15px; color: #FFFFFF; }
+.noir .annonce .a-u i { color: #FFD58A; }
+.noir .annonce .a-sep { background: #22C55E; }
+/* total : comme « Total balance » */
+.total { background: var(--bg); }
+.total .wrap { padding-block: 6px 6px; }
+.t-card { background: var(--bg) !important; border: 0 !important; border-radius: 0; padding: 4px 0 8px !important; box-shadow: none; }
+.t-ic { display: none; }
+.total .lbl { font-size: 14px; letter-spacing: 0; text-transform: none; font-weight: 500; color: var(--muted); }
+.total .big { font-family: var(--display); font-size: 40px; font-weight: 700; color: var(--ink); }
+.total .info { border-left: 0 !important; padding-left: 0 !important; color: var(--muted); font-size: 13px; gap: 8px; }
+.total .chip { border-radius: 999px; }
+.total .chip.eco { background: var(--chip); color: var(--ink); border: 0; box-shadow: none; padding: 9px 16px; font-size: 14px; font-weight: 600; }
+.total .chip.eco::before { color: #16A34A; }
+#t-pct { background: var(--chip); border: 0; color: var(--ink); box-shadow: 0 6px 16px -10px rgba(0,0,0,.25); padding: 9px 16px; font-size: 13.5px; font-weight: 600; }
+#t-pct::before { color: var(--muted); }
+.total .chip.gagne { background: transparent; color: #16A34A; padding: 0; box-shadow: none; }
+.total .chip.gagne::before { content: "▲"; font-size: 10px; margin-right: 4px; }
+#t-cout::before, #t-delai::before { color: var(--muted); }
+.eco-opt { background: var(--chip); color: var(--ink); border: 1px solid var(--line); }
+.eco-opt small { color: #16A34A; }
+.t-card .eco-pan { border-top-color: var(--line); }
+.t-card .eco-pan .cond-eco { color: var(--muted); }
+/* cartes blanches arrondies */
+main .wrap { gap: 14px; }
+section.card { background: var(--card); border: 0; border-radius: 22px; padding: 18px; box-shadow: none; }
+h2 { font-family: var(--display); font-size: 20px; font-weight: 700; }
+h2 .n { width: 30px; height: 30px; font-size: 14px; background: var(--accent-soft); color: var(--ink); box-shadow: none; }
+h2 .h-ic { color: var(--muted); }
+.hint { color: var(--muted); }
+.calcul { background: var(--accent-pale); border: 0; border-radius: 16px; }
+.calcul::before { background: var(--chip) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238B8B91' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='4' width='16' height='16' rx='2'/%3E%3Cpath d='M8.5 15.5l7-7M8.5 11.5v4h4M15.5 12.5v-4h-4'/%3E%3C/svg%3E") center / 20px no-repeat; border-radius: 50%; }
+.calcul b { font-family: var(--display); border-left-color: var(--line); }
+.dossiers .d-ic { background: var(--accent-pale); border-radius: 50%; color: var(--muted); }
+.dossiers .lbl-seg { color: var(--muted); opacity: 1; }
+.m-liste .dpil { background: var(--accent-pale); border: 0; padding: 6px 12px; }
+.m-liste .dpil::before { background: var(--ink); width: 5px; height: 5px; }
+/* boutons en pilule */
+.btn { border-radius: 999px; padding: 11px 18px; }
+.btn.sec { background: var(--chip); color: var(--ink); border-color: var(--line); }
+.seg { border: 0; background: var(--accent-pale); border-radius: 999px; padding: 3px; gap: 3px; }
+.seg button { border: 0 !important; border-radius: 999px; background: transparent; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.choix button { border: 1px solid var(--line); border-radius: 18px; background: var(--card); }
+.choix button[aria-pressed="true"] { border-color: var(--ink); background: var(--card); box-shadow: 0 0 0 1px var(--ink); }
+.choix button .ic { background: var(--accent-pale); color: var(--ink); }
+.choix button[aria-pressed="true"] .ic { background: var(--ink); color: var(--bg); }
+.choix button b { font-family: var(--display); font-weight: 650; }
+#choix-rep button { border: 0; border-radius: 999px; min-height: 56px; }
+#choix-rep #c-offre { background: #E9E9EC; color: #161618; }
+#choix-rep #c-offre .ic { background: rgba(0,0,0,.08); color: #161618; }
+#choix-rep #c-offre[aria-pressed="true"] .ic { background: #161618; color: #E9E9EC; }
+#choix-rep #c-offre[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--card), 0 0 0 5px #E9E9EC; }
+#choix-rep button b { font-family: var(--display); font-weight: 650; font-size: 17px; }
+.sortie { background: var(--accent-pale); border: 0; border-radius: 18px; }
+.rappel { border: 0; border-radius: 18px; }
+.rappel .rp-b { border-radius: 999px; }
+.rappel .rp-t b { font-family: var(--display); font-size: 17px; }
+details.sous > summary .n { background: var(--accent-pale); color: var(--ink); }
+details.sous[open] > summary .n { background: var(--ink); color: var(--bg); }
+.champ input, .champ select, .champ textarea, .offre input, .duo input { background: var(--accent-pale); border: 0; border-radius: 12px; }
+.pied { border-top-color: var(--line); }
+@media (max-width: 459px) { #choix-rep { grid-template-columns: 1fr !important; } #choix-rep button b { font-size: 17px !important; } }
+.noir h1 { font-size: 23px !important; }
+@media (max-width: 559px) { .noir .pcard { padding-bottom: 70px; } .noir h1 { font-size: 21px !important; } }
+/* bouton « Faites des économies » : vert du style 23 */
+.total .chip.eco { background: linear-gradient(135deg, #15803D, #22A75A) !important; color: #FFFFFF !important; }
+.total .chip.eco::before, .total .chip.eco::after { color: #FFFFFF !important; }
+/* mat : aucune ombre ni lueur, vert sobre */
+#choix-rep #c-acc { background: #1F8F4E; box-shadow: none; }
+.rappel .rp-b { background: #1F8F4E; border-color: #1F8F4E; }
+.total .chip.gagne { color: #4ADE80; }
+.total .chip.eco::before { color: #4ADE80; }
+.dossiers .d-ic, .calcul::before { background-color: var(--chip); }
+.noir .villa .v-mont { stroke: #0E0E0F; }
+
+
+/* Prix impossible : j'ajuste moi-même ou l'architecte ajuste (Wanja, 2026-10-31) */
+.verdict.deux, .verdict.arch { display: grid; gap: 10px; background: var(--card); border: 1px solid var(--line); color: var(--ink); }
+.verdict.deux > span, .verdict.arch > span { color: var(--muted); font-size: 13.5px; }
+.verdict.deux .rangee, .verdict.arch .rangee { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.verdict .btn.b23 { background: linear-gradient(135deg, #15803D, #22A75A) !important; color: #fff !important; border: 0 !important; }
+@media (max-width: 380px) { .verdict.deux .rangee, .verdict.arch .rangee { grid-template-columns: 1fr; } }
+
+/* Choix sélectionné : il s'illumine et s'avance, les autres s'estompent (Wanja, 2026-10-31) */
+.choix button, #choix-rep button { transition: transform .22s ease, opacity .22s ease, filter .22s ease, box-shadow .22s ease, background-color .22s ease; position: relative; }
+.choix:not(#choix-rep) button[aria-pressed="true"] { transform: scale(1.05); z-index: 1; background: rgba(138, 180, 248, .16) !important; border-color: #8AB4F8 !important; box-shadow: 0 0 0 1px #8AB4F8, 0 10px 30px rgba(138, 180, 248, .30) !important; }
+.choix:not(#choix-rep) button[aria-pressed="true"] b { color: #B8D0FB; }
+.choix:not(#choix-rep) button[aria-pressed="true"] .ic { background: #8AB4F8 !important; color: #161618 !important; }
+#choix-rep button[aria-pressed="true"] { transform: scale(1.04); z-index: 1; }
+#choix-rep #c-acc[aria-pressed="true"] { box-shadow: 0 0 0 2px #22A75A, 0 10px 30px rgba(34, 167, 90, .35) !important; }
+#choix-rep #c-offre[aria-pressed="true"] { box-shadow: 0 0 0 2px #E9E9EC, 0 10px 30px rgba(233, 233, 236, .22) !important; }
+.choix:has(> button[aria-pressed="true"]) > button:not([aria-pressed="true"]),
+#choix-rep:has(> button[aria-pressed="true"]) > button:not([aria-pressed="true"]) { opacity: .4; filter: saturate(.3); transform: scale(.96); }
+.choix:has(> button[aria-pressed="true"]) > button:not([aria-pressed="true"]):hover,
+#choix-rep:has(> button[aria-pressed="true"]) > button:not([aria-pressed="true"]):hover { opacity: .75; }
+@media (prefers-reduced-motion: reduce) { .choix button, #choix-rep button { transition: none; } }
+
+/* Tout ce qui est choisi est en bleu, sans halo (Wanja, 2026-10-31 14:29) */
+:root { --choisi: #8AB4F8; --sur-choisi: #0E1726; }
+.seg button[aria-pressed="true"], .avantage .seg button[aria-pressed="true"], #m-constr-bloc.court .seg button[aria-pressed="true"],
+.pil[aria-pressed="true"], .eco-opt[aria-pressed="true"] { background: var(--choisi) !important; color: var(--sur-choisi) !important; border-color: var(--choisi) !important; box-shadow: none !important; }
+.seg button[aria-pressed="true"] *, .pil[aria-pressed="true"] *, .eco-opt[aria-pressed="true"] * { color: var(--sur-choisi) !important; }
+.switch input:checked + span { background: var(--choisi) !important; }
+.choix:not(#choix-rep) button[aria-pressed="true"] { background: var(--choisi) !important; border-color: var(--choisi) !important; box-shadow: none !important; }
+.choix:not(#choix-rep) button[aria-pressed="true"], .choix:not(#choix-rep) button[aria-pressed="true"] * { color: var(--sur-choisi) !important; }
+.choix:not(#choix-rep) button[aria-pressed="true"] .ic { background: var(--sur-choisi) !important; color: var(--choisi) !important; }
+#choix-rep #c-acc[aria-pressed="true"] { box-shadow: 0 0 0 2px #22A75A !important; }
+#choix-rep #c-offre[aria-pressed="true"] { box-shadow: 0 0 0 2px #E9E9EC !important; }
+.champ:has(> #p-toit) { grid-column: 1 / -1; } #p-toit { width: 100%; } #p-toit button { flex: 1 1 0; min-width: 0; padding-inline: 8px; gap: 5px; white-space: nowrap; }
+/* Titres en bleu pour bien lire les choix (Wanja, 2026-10-31) */
+:root { --titre: #8AB4F8; --titre-pale: rgba(138, 180, 248, .16); }
+main h2 { color: var(--titre); }
+main h2 .n { background: var(--titre-pale) !important; color: var(--titre) !important; }
+details.sous > summary .t, details.plus > summary { color: var(--titre); }
+details.sous > summary .n { background: var(--titre-pale) !important; color: var(--titre) !important; }
+details.sous[open] > summary .n { background: var(--titre) !important; color: #161618 !important; }
+details.sous[open] { border-color: rgba(138, 180, 248, .35); }
+</style>
+</head>
+<body>
+
+
+<!-- sans JavaScript (aperçu WhatsApp sur iPhone) : seule la version sans calcul s'affiche ; Excel la place entre les marqueurs -->
+<noscript><style>#sans-js ~ header.band, #sans-js ~ div.total, #sans-js ~ main, #sans-js ~ footer, .chrome { display: none !important; }</style></noscript>
+<div id="sans-js"><!--STATIQUE--><div class="sans-js">Ouvrez cette page dans un navigateur (Chrome, Firefox, Safari…) : l'aperçu de WhatsApp ne fait pas les calculs. Touchez « Partager » ou « Ouvrir avec », puis choisissez Chrome.</div><!--FINSTATIQUE--></div>
+<!-- la page s'utilise dans un vrai navigateur (Chrome, Firefox, Safari, Edge…) ; dans un aperçu intégré, elle tente de s'ouvrir seule dans Chrome, sinon cet écran explique comment faire -->
+<div class="chrome" id="chrome" hidden role="dialog" aria-modal="true" aria-labelledby="chrome-t"><div class="chrome-in">
+  <svg viewBox="0 0 48 48" width="56" height="56" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#DB4437"/><path d="M24 2a22 22 0 0 1 19 11H24a11 11 0 0 0-9.5 5.5L5 13A22 22 0 0 1 24 2z" fill="#DB4437"/><path d="M43 13a22 22 0 0 1-19 33l9.5-16.5A11 11 0 0 0 33.5 18.5 11 11 0 0 0 24 13z" fill="#FFCD40"/><path d="M24 46A22 22 0 0 1 5 13l9.5 16.5A11 11 0 0 0 33.5 29.5z" fill="#0F9D58"/><circle cx="24" cy="24" r="9" fill="#fff"/><circle cx="24" cy="24" r="7" fill="#4285F4"/></svg>
+  <h2 id="chrome-t">Ouvrez cette page dans votre navigateur</h2>
+  <p id="chrome-txt">L'aperçu intégré ne suffit pas : ouvrez la page dans Chrome, Firefox ou un navigateur semblable.</p>
+  <a class="btn" id="chrome-ouvrir" href="#" hidden>Ouvrir dans Chrome</a>
+  <ol class="chrome-etapes" id="chrome-etapes"></ol>
+  <a class="btn sec" id="chrome-store" href="https://www.google.com/chrome/" target="_blank" rel="noopener">Pas de navigateur ? Installer Google Chrome</a>
+</div></div>
+
+<header class="band">
+  <div class="wrap"><div class="tete">
+    <div class="salut"><div class="s-txt"><span class="s-h" id="s-h">Bonjour</span><b class="s-n" id="s-n"></b>
+      <div class="ident"><span class="nom" id="h-nom"></span><span class="titre" id="h-titre"></span></div></div>
+      <span class="logo avatar"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V11l4-3v13M9 21V6l6-3v18M15 21V10h4v11"/><path d="M12 9v2M12 14v2M17 13v1M17 16v1"/></svg></span></div>
+    <div class="noir">
+    <div class="pcard"><svg class="villa" viewBox="0 0 320 170" aria-hidden="true" preserveAspectRatio="xMaxYMax meet">
+  <defs>
+    <linearGradient id="vg-vitre" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD58A" stop-opacity=".8"/><stop offset="1" stop-color="#F5A64B" stop-opacity=".4"/></linearGradient>
+    <linearGradient id="vg-eau" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5FB7F0" stop-opacity=".1"/><stop offset="1" stop-color="#5FB7F0" stop-opacity=".5"/></linearGradient>
+  </defs>
+  <path class="v-sol" d="M0 160 L320 150"/>
+  <path class="v-f1" d="M70 150 L160 156 L160 108 L70 113 Z"/>
+  <path class="v-f2" d="M160 156 L320 148 L320 114 L160 108 Z"/>
+  <path class="v-vit" d="M172 151.4 L300 145.0 L300 117.7 L172 113.0 Z"/>
+  <path class="v-mont" d="M204 149.8 V114.2 M236 148.2 V115.3 M268 146.6 V116.5"/>
+  <path class="v-f1b" d="M100 111 L196 108 L196 70 L100 80 Z"/>
+  <path class="v-f2b" d="M196 108 L320 112 L320 78 L196 70 Z"/>
+  <path class="v-vit" d="M112 105.6 L186 103.3 L186 78.0 L112 85.8 Z"/>
+  <path class="v-mont" d="M137 104.8 V83.1 M162 104.1 V80.5"/>
+  <path class="v-vit2" d="M216 102.6 L266 104.3 L266 82.5 L216 79.3 Z"/>
+  <path class="v-dal" d="M62 113.4 L160 108 L320 114 M90 81.0 L196 70 L320 78"/>
+  <path class="v-eau" d="M20 163 L132 167 L176 161 L70 158 Z"/>
+  <path class="v-tr" d="M40 156 V112"/>
+  <ellipse class="v-ar" cx="40" cy="103" rx="12" ry="19"/>
+  <path class="v-tr" d="M298 150 C301 122 297 98 305 72"/>
+  <path class="v-pal" d="M305 72 C292 64 281 66 273 74 M305 72 C301 60 292 52 282 52 M305 72 C311 62 319 60 329 62 M305 72 C317 72 325 80 327 88 M305 72 C305 62 311 54 319 50"/>
+</svg>
+      <div class="pc-ey"><span class="pc-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></span><span class="eyebrow" id="h-eyebrow"></span></div>
+      <h1 id="h-titre1"></h1>
+      <span class="sub" id="h-sub"></span>
+    </div>
+    <div class="annonce" id="merci">
+      <svg class="planche" viewBox="0 0 600 60" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+        <defs>
+          <pattern id="pl-fin" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M10 0H0V10" fill="none" class="pl-g1"/></pattern>
+          <pattern id="pl-gros" width="50" height="50" patternUnits="userSpaceOnUse"><rect width="50" height="50" fill="url(#pl-fin)"/><path d="M50 0H0V50" fill="none" class="pl-g2"/></pattern>
+        </defs>
+        <rect width="600" height="60" fill="url(#pl-gros)"/>
+        <svg class="plan" x="10" y="4" width="120" height="52" viewBox="0 0 170 110" preserveAspectRatio="xMidYMid meet">
+          <path class="p-trait t1" pathLength="100" d="M10 10H160V100H10Z"/>
+          <path class="p-trait t2" pathLength="100" d="M70 10V100M70 55H160"/>
+          <path class="p-trait t3" pathLength="100" d="M110 55V100M10 60H40"/>
+          <path class="p-trait t4 p-fin" pathLength="100" d="M40 60A30 30 0 0 1 70 30"/>
+          <text class="p-txt t6" x="22" y="40">Séjour</text>
+        </svg>
+        <svg class="plan" x="440" y="2" width="170" height="56" viewBox="0 0 170 110" preserveAspectRatio="xMidYMid meet">
+      <path class="p-trait t1" pathLength="100" d="M8 100H162"/>
+      <path class="p-trait t2" pathLength="100" d="M34 100V58H118V100"/>
+      <path class="p-trait t3" pathLength="100" d="M26 60L76 28L126 60"/>
+      <path class="p-trait t4 p-fin" pathLength="100" d="M68 100V78H84V100M44 66H58V78H44ZM94 66H108V78H94Z"/>
+      <path class="p-trait t5 p-fin" pathLength="100" d="M34 16V22M118 16V22M34 19H118"/>
+      <text class="p-txt t6" x="66" y="15">12,00 m</text>
+      <path class="p-trait t6 p-fin" pathLength="100" d="M134 100V58M131 100H137M131 58H137"/>
+      <g class="p-crayon"><path d="M150 92l10-10 4 4-10 10-5 1z"/></g>
+    </svg>
+      </svg>
+      <div class="defile"><div class="piste" id="merci-texte"></div></div>
+      <span class="sign" id="merci-sign" hidden></span>
+    </div>
+    </div>
+  </div></div>
+</header>
+
+<div class="total"><div class="wrap"><div class="t-card">
+  <div class="t-g"><span class="t-ic" aria-hidden="true">$</span><div><div class="lbl">Total à payer</div><div class="big num" id="t-total">0 $</div></div></div>
+  <div class="info"><button type="button" class="chip eco" id="t-eco" aria-expanded="false" hidden>Faites des économies</button><span class="chip num gagne" id="t-gain" hidden></span><span class="chip num" id="t-pct"></span><span class="num" id="t-cout"></span><span class="num" id="t-delai"></span></div>
+  <div class="eco-pan" id="eco" hidden></div>
+</div></div></div>
+
+<main><div class="wrap">
+
+
+
+  <!-- INTERFACE 1 : le projet (choix libre) -->
+  <section class="card" id="c-projet" hidden>
+    <h2><span class="n" data-etape></span>Votre projet<span class="h-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg></span></h2>
+    <div class="champ"><span class="lbl-seg">Terrain : longueur × largeur (m)</span>
+      <div class="duo"><input id="p-long" type="number" min="0" step="0.5" inputmode="decimal" aria-label="Longueur du terrain (m)"><span class="fois">×</span><input id="p-larg" type="number" min="0" step="0.5" inputmode="decimal" aria-label="Largeur du terrain (m)"></div>
+    </div>
+    <div class="champ"><span class="lbl-seg">Part de la parcelle à bâtir</span>
+      <div class="seg petit" id="p-emp" role="group" aria-label="Part de la parcelle à bâtir"><button type="button" data-v="90">Toute</button><button type="button" data-v="75">75 %</button><button type="button" data-v="60">60 %</button><button type="button" data-v="50">50 %</button><button type="button" data-v="40">40 %</button></div>
+    </div>
+    <div class="champ"><label for="p-type">Type de construction</label><select id="p-type"></select></div>
+    <div class="champ" id="p-autre-bloc" hidden><label for="p-autre">Précisez le type de construction</label><input id="p-autre" type="text" placeholder="Ex. : clinique, hôtel"></div>
+    <div class="champs deux">
+      <div class="champ"><label for="p-et">Étages</label><div class="pas"><button type="button" data-pas="-1" aria-label="Un étage de moins">−</button><input id="p-et" type="number" min="0" max="30" step="1" inputmode="numeric"><button type="button" data-pas="1" aria-label="Un étage de plus">+</button></div></div>
+      <div class="champ"><span class="lbl-seg">Sous-sol</span><div class="seg" id="p-ss" role="group" aria-label="Sous-sol"><button type="button" data-v="0">Non</button><button type="button" data-v="1">Oui</button></div></div>
+      <div class="champ"><span class="lbl-seg">Couverture</span><div class="seg ico" id="p-toit" role="group" aria-label="Couverture"><button type="button" data-v="Toiture"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 10 10 3l8 7M5 9v8h10V9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Toit</button><button type="button" data-v="Terrasse"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 5v2M17 5v2M5 7v10h10V7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Terrasse</button></div></div>
+    </div>
+    <div class="champ"><span class="lbl-seg">Complexité du projet</span>
+      <div class="seg" id="p-cplx" role="group" aria-label="Complexité"><button type="button" data-v="Simple">Simple</button><button type="button" data-v="Moyen">Moyen</button><button type="button" data-v="Complexe">Complexe</button></div>
+    </div>
+    <p class="note" id="p-cplx-note"></p>
+    <div class="maison num"><svg id="p-maison" viewBox="0 0 120 100" role="img" aria-label="Votre construction"></svg><div class="txt"><span id="p-calc"></span><b id="p-cout"></b></div></div>
+    <details class="plus"><summary>Préciser le projet (facultatif)</summary>
+      <div class="champs">
+        <div class="champ large"><label for="pr-int">Projet</label><input id="pr-int" type="text" placeholder="Construction d'une maison d'habitation"></div>
+        <div class="champ large"><label for="pr-cont">Contenu du projet</label><input id="pr-cont" type="text" placeholder="4 chambres, salon, cuisine, 2 douches"></div>
+        <div class="champ large"><label for="pr-chantier">Adresse du chantier</label><input id="pr-chantier" type="text"></div>
+        <div class="champ large"><label for="p-global">Budget des travaux déjà connu ($)</label><input id="p-global" type="number" min="0" step="100" inputmode="decimal" placeholder="Si vous le connaissez"></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- INTERFACE 2 : rappel du projet de la proposition -->
+  <section class="card" id="c-resume" hidden>
+    <h2><span class="n" data-etape></span>Votre projet<span class="h-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg></span></h2>
+    <p class="resume" id="r-projet"></p>
+    <div class="calcul num"><span id="r-calc"></span><b id="r-cout"></b></div>
+    <p class="note" id="r-note"></p>
+  </section>
+
+  <section class="card" id="c-mission">
+    <h2><span class="n" data-etape></span><span id="m-titre">La mission</span><span class="h-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg></span></h2>
+    <p class="hint" id="m-hint"></p>
+    <div class="choix" id="m-pack" role="group" aria-label="Mission type" hidden></div>
+    <div class="m-det2 dossiers"><span class="d-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7h11M9 12h11M9 17h11"/><path d="M4.5 7h.01M4.5 12h.01M4.5 17h.01" stroke-width="2.8"/></svg></span><span class="lbl-seg">Les dossiers de la mission</span><p class="m-liste" id="m-liste"></p></div>
+    <div class="avantage" id="m-constr-bloc"><span class="av-titre" id="av-titre">Confiez-nous aussi la construction</span>
+      <div class="av-gain num" id="av-gain"></div>
+      <p class="av-etudes" id="av-etudes"></p>
+      <ul class="num" id="av-liste"></ul>
+      <div class="seg" id="m-constr" role="group" aria-label="Construction confiée à l'architecte"><button type="button" data-v="0">Non merci</button><button type="button" data-v="1">Oui, je vous la confie</button></div>
+      <label class="c23box" id="c23-bloc" hidden><input type="checkbox" id="c23"><span><b>Je paie en acompte les 2/3 du gros œuvre</b><small id="c23-txt"></small></span></label>
+      <div class="c23dev" id="c23-dev" hidden><button type="button" class="btn" id="b-dev" aria-pressed="false">Demander le devis du gros œuvre</button>
+        <div class="dev-conf" id="dev-conf" hidden><span>« Je demande le devis du gros œuvre » sera ajouté à votre message.</span><div class="duo"><button type="button" class="btn" id="dev-ok">Accepter</button><button type="button" class="btn sec" id="dev-non">Annuler</button></div></div></div>
+      <div class="cond"><b>Conditions</b><p id="m-constr-note"></p></div>
+    </div>
+  </section>
+
+  <section class="card" id="c-reponse">
+    <h2><span class="n" data-etape></span>Votre réponse<span class="h-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H10l-5 4v-4H4z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke-width="2.6"/></svg></span></h2>
+    <div class="m-det2" id="c-paie">
+    <p class="hint" id="r-hint">Le prix vous convient, ou vous proposez le vôtre ; vous choisissez ensuite comment payer.</p>
+    <div class="choix deux2" id="choix-rep" role="group" aria-label="Votre réponse">
+      <button type="button" id="c-acc" aria-pressed="false"><span class="ic">✓</span><b id="b-acc-t">J'accepte le prix</b><span class="d" id="d-acc">La mission et son prix me conviennent.</span><span class="chev" aria-hidden="true"></span></button>
+      <button type="button" id="c-offre" aria-pressed="false"><span class="ic">$</span><b>Je veux proposer un prix</b><span class="d">Mon budget est plus bas : je vois aussitôt ce qui est possible.</span><span class="chev" aria-hidden="true"></span></button>
+    </div>
+    <div class="bloc-choix" id="b-acc" hidden>
+      <div class="ok-box" id="ok-acc">Merci, le prix vous convient.</div>
+    </div>
+
+    <div class="bloc-choix" id="b-offre" hidden>
+      <p class="hint">Indiquez le montant total que vous proposez, puis touchez « Vérifier ».</p>
+      <div class="offre"><input id="o-montant" type="number" min="0" step="10" inputmode="decimal" placeholder="Montant total proposé ($)"><button class="btn" id="o-verif" type="button">Vérifier</button></div>
+      <div id="o-res" hidden></div>
+    </div>
+
+    <div class="bloc-choix" id="b-aju" hidden>
+      <div class="desc-aju" id="aju-desc" hidden><span>Descente sur le terrain facultative : <b id="aju-desc-m"></b> de moins sans elle.</span><button class="btn sec" type="button" id="aju-desc-b">Retirer la descente</button></div>
+      <p class="hint">Ajustez la mission vous-même : le prix suit.</p>
+      <details class="sous" id="m-det">
+        <summary><span class="n">1</span><span class="t" id="m-det-t">Choisir les détails de la mission</span><span class="g" id="g-det"></span></summary>
+        <div class="corps"><div id="m-phases"></div>
+        <div class="champ" id="m-devis-bloc" hidden><span class="lbl-seg">Devis estimatif des travaux</span>
+          <div class="seg" id="m-devis" role="group" aria-label="Devis estimatif"><button type="button" data-v="">Aucun</button><button type="button" data-v="ETU-DVN">Non détaillé</button><button type="button" data-v="ETU-DVD">Détaillé</button></div>
+        </div>
+        </div>
+      </details>
+      <details class="sous" id="s-docs">
+        <summary><span class="n">2</span><span class="t">Choisir les documents à livrer</span><span class="g" id="g-docs"></span></summary>
+        <div class="corps"><p class="hint">Touchez un document pour le retirer. Les perspectives et les vues en plan peuvent aussi être réduites. Un dossier qui perd un de ses documents de base devient un <b>dossier personnalisé</b>.</p>
+          <div id="docs"></div><button class="btn sec lien" type="button" id="docs-tout" hidden>Tout rétablir</button></div>
+      </details>
+      <details class="sous" id="s-fpc">
+        <summary><span class="n">3</span><span class="t">Redevance FPC</span><span class="g" id="g-fpc"></span></summary>
+        <div class="corps" id="fpc-corps"></div>
+      </details>
+      <details class="sous" id="s-autre">
+        <summary><span class="n">4</span><span class="t">Autre demande</span><span class="g neutre" id="g-autre"></span></summary>
+        <div class="corps"><div class="champ"><label for="a-txt">Votre demande</label><textarea id="a-txt" rows="3" placeholder="Exemple : un autre délai, une variante de plus, un document à ajouter…"></textarea></div>
+          <p class="note" id="a-note" hidden>L'architecte étudiera votre demande et vous confirmera le prix.</p></div>
+      </details>
+    </div>
+    <div class="valide" id="aju-ok-bloc" hidden><button class="btn" type="button" id="aju-ok" aria-pressed="false">Valider la mission et le prix</button><span class="hint" id="aju-ok-t"></span></div>
+    <!-- on discute d'abord du prix (accepté ou proposé) ; ensuite seulement, le mode de paiement sort en dessous -->
+    <div class="sortie" id="c-rep" hidden>
+    <span class="lbl-seg">Comment voulez-vous payer ?</span>
+    <p class="hint" id="p-hint"></p>
+    <div class="choix deux" role="group" aria-label="Mode de paiement">
+      <button type="button" id="p-une" aria-pressed="false"><span class="ic">1</span><b>En une fois</b><span class="d" id="d-une">Toute la mission, à la signature.</span></button>
+      <button type="button" id="p-phase" aria-pressed="false"><span class="ic">≡</span><b>Par dossier</b><span class="d" id="d-phase">Chaque dossier, avant son lancement.</span></button>
+    </div>
+    <div class="bonus" id="bonus" hidden></div>
+    <div class="fin" id="fin" hidden></div>
+    <div class="rappel" id="p-rappel" hidden><div class="rp-t" id="p-rappel-t"></div><button type="button" class="btn rp-b" id="p-envoyer">Envoyer à l'architecte</button></div>
+    </div>
+    </div>
+  </section>
+
+  <section class="card" id="c-envoi" hidden>
+    <h2><span class="n" data-etape></span>Envoyer à l'architecte<span class="h-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></svg></span></h2>
+    <div class="champs" id="cl-champs">
+      <div class="champ large"><label for="cl-nom">Nom ou raison sociale</label><input id="cl-nom" type="text" autocomplete="name"></div>
+      <div class="champ"><label for="cl-tel">Téléphone</label><input id="cl-tel" type="tel" autocomplete="tel"></div>
+      <div class="champ"><label for="cl-rep">Représenté par (facultatif)</label><input id="cl-rep" type="text"></div>
+      <div class="champ large"><label for="cl-adr">Votre adresse</label><input id="cl-adr" type="text" autocomplete="street-address"></div>
+    </div>
+    <div class="champs" id="e-champs">
+      <div class="champ"><label for="e-nom">Votre nom</label><input id="e-nom" type="text"></div>
+      <div class="champ"><label for="e-tel">Votre téléphone</label><input id="e-tel" type="tel"></div>
+    </div>
+    <div class="champ"><label for="e-com">Commentaire (facultatif)</label><textarea id="e-com" rows="3" placeholder="Une question, une précision sur le projet, vos disponibilités…"></textarea></div>
+    <div class="alerte" id="e-bloque" hidden></div>
+    <div class="message" id="e-msg" hidden></div>
+    <p class="pret" id="e-pret"></p>
+    <span class="lbl-seg">Envoyer par</span>
+    <div class="envoi">
+      <a class="btn wa" id="e-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+      <a class="btn sms" id="e-sms" href="#">SMS</a>
+      <a class="btn mail" id="e-mail" href="#">E-mail</a>
+    </div>
+    <button class="btn sec" id="e-copier" type="button">Copier le message</button>
+    <span class="ok-copie" id="e-ok" hidden>Message copié.</span>
+    <button class="btn sec" id="e-orig" type="button">Annuler mes choix</button>
+    <p class="note" id="e-num"></p>
+  </section>
+
+  <section class="card" id="c-recap" hidden>
+    <h2><span class="n" data-etape></span>Récapitulatif<span class="h-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span></h2>
+    <div class="lignes num" id="prix"></div>
+    <span class="lbl-seg" id="lbl-ech">Ce que vous payez</span>
+    <div class="echeance num" id="ech"></div>
+    <p class="note" id="prix-note"></p>
+  </section>
+
+
+</div></main>
+
+<footer><div class="wrap"><div class="pied" id="pied"></div></div></footer>
+<canvas id="feu" hidden></canvas>
+
+<script>
+// Interface 1 (choix libre) : PRESET = réglages de l'architecte écrits par Excel (taux, coûts au m², identité).
+// Interface 2 (proposition) : PROP = la proposition d'honoraires exportée par Excel, ligne par ligne.
+// Page en ligne : le lien envoyé par Excel porte les mêmes données après le # (#p= proposition, #r= réglages), compressées.
+const LIEN = lireLien();
+const PRESET = LIEN.r || /*PRESET*/null/*FIN*/;
+const PROP = LIEN.p || /*PROP*/null/*FINPROP*/;
+document.getElementById("sans-js").remove();
+exigerChrome();
+// Navigateur compatible obligatoire : Chrome, Firefox, Safari, Edge, Samsung Internet, Opera… Les aperçus intégrés (WhatsApp,
+// Facebook, vues web d'applications) sont bloqués : une page en ligne s'ouvre seule dans Chrome (Android : lien intent,
+// iPhone : googlechromes://) ; un fichier reçu ne peut pas être transféré, l'écran dit comment faire.
+// L'aperçu dans un cadre (Claude, Excel) n'est pas bloqué.
+function exigerChrome() {
+  const ua = navigator.userAgent || "";
+  let cadre = false; try { cadre = window.self !== window.top; } catch (e) { cadre = true; }
+  const ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1), android = /Android/.test(ua);
+  const integre = /FBAN|FBAV|FB_IAB|Instagram|WhatsApp|Line\/|MicroMessenger|; wv\)/.test(ua) || (android && /Version\/[\d.]+ Chrome/.test(ua)) || (ios && !/Safari\//.test(ua));
+  if (!integre || cadre) return;
+  const web = /^https?:$/.test(location.protocol), reste = location.href.replace(/^https?:\/\//, "");
+  const lien = !web ? "" : android ? "intent://" + reste + "#Intent;scheme=" + location.protocol.slice(0, -1) + ";package=com.android.chrome;end" : ios ? (location.protocol === "https:" ? "googlechromes://" : "googlechrome://") + reste : "";
+  const el = document.getElementById("chrome"); el.hidden = false; document.documentElement.style.overflow = "hidden";
+  const b = document.getElementById("chrome-ouvrir");
+  if (lien) {
+    b.hidden = false; b.href = lien;
+    document.getElementById("chrome-txt").textContent = "L'aperçu intégré ne suffit pas : la page s'ouvre toute seule dans Chrome ; sinon, touchez le bouton.";
+    let deja = false; try { deja = sessionStorage.getItem("hsm-chrome") === "1"; sessionStorage.setItem("hsm-chrome", "1"); } catch (e) {}
+    if (!deja) setTimeout(() => { location.href = lien; }, 300);
+  }
+  document.getElementById("chrome-etapes").innerHTML = (lien ? [] : ios
+    ? ["Touchez <b>Partager</b> (le carré avec la flèche).", "Choisissez <b>Chrome</b>, <b>Firefox</b> ou <b>Safari</b>.", "La page s'ouvre et fait ses calculs."]
+    : android ? ["Touchez <b>⋮</b> en haut à droite, puis <b>Ouvrir avec</b>.", "Choisissez <b>Chrome</b> ou <b>Firefox</b>, puis <b>Toujours</b>.", "La page s'ouvrira ensuite d'elle-même dans ce navigateur."]
+    : ["Faites un clic droit sur le fichier, puis <b>Ouvrir avec</b>.", "Choisissez <b>Google Chrome</b> ou <b>Firefox</b>."]).map(t => "<li>" + t + "</li>").join("");
+  document.getElementById("chrome-store").href = ios ? "https://apps.apple.com/app/google-chrome/id535886823" : android ? "https://play.google.com/store/apps/details?id=com.android.chrome" : "https://www.google.com/chrome/";
+}
+if (PROP) document.title = "Proposition d'honoraires";
+
+function lireLien() {
+  let h = location.hash.slice(1);
+  try { h = decodeURIComponent(h); } catch (e) {}
+  const m = /^([pr])=(.+)$/.exec(h), o = {};
+  if (m) { try { o[m[1]] = JSON.parse(lzDecompresser(m[2])); } catch (e) {} }
+  return o;
+}
+// Décompression au format lz-string « EncodedURIComponent » (d'après lz-string, licence MIT, pieroxy) ; Excel compresse de la même façon.
+function lzDecompresser(s) {
+  const K = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
+  s = s.replace(/ /g, "+");
+  let val = K.indexOf(s[0]), pos = 32, idx = 1;
+  const lire = n => { let b = 0; for (let p = 1; p < (1 << n); p <<= 1) { if (val & pos) b |= p; pos >>= 1; if (!pos) { pos = 32; val = K.indexOf(s[idx++]); } } return b; };
+  const dict = [0, 1, 2], out = [];
+  let enl = 4, size = 4, nb = 3, t = lire(2);
+  if (t === 2) return "";
+  if (t > 2) return null;
+  let w = String.fromCharCode(lire(t ? 16 : 8));
+  dict[3] = w; out.push(w);
+  for (;;) {
+    if (idx > s.length) return null;
+    let k = lire(nb);
+    if (k === 2) return out.join("");
+    if (k < 2) { dict[size++] = String.fromCharCode(lire(k ? 16 : 8)); k = size - 1; enl--; }
+    if (enl === 0) { enl = 1 << nb; nb++; }
+    let e;
+    if (k > 2 && k < size) e = dict[k]; else if (k === size) e = w + w[0]; else return null;
+    out.push(e);
+    dict[size++] = w + e[0]; enl--; w = e;
+    if (enl === 0) { enl = 1 << nb; nb++; }
+  }
+}
+
+// ---------------------------------------------------------------- base des tâches (même base que la note d'honoraires Excel v3)
+const BASE_TXT = (PRESET && PRESET.base) || `T|ETU|ETU-OUV|Ouverture du dossier|BEC|Forfait|150||5
+Q|ETU-OUV|Administration=5;Définition de la mission=10;Transport des visites et déplacements administratifs=10;Visite du site=10;Collecte et analyse des données=10
+Q|ETU-OUV|Relevés=15;Programme=15;Faisabilité=15;Organisation=5;Remise électronique et archivage=2
+Q|ETU-OUV|Impression des documents=2=2;Transport pour impression : dépôt et retrait=1=1
+C|ETU-OUV|Descente sur terrain (transport, relevé des mesures, présentation du projet par le client)|Qté × PU|1|descente|150|0|Option|0|Frais|Oui
+T|ETU|ETU-DE|Esquisse (DE)|BEC|Lot|8|E|10
+Q|ETU-DE|Plan de masse=12;Vues en plan=30;Coupes=10;Façades=12;Volumétrie et perspectives=14=3;Variantes=10=4
+Q|ETU-DE|Tableau des surfaces=4;Remise électronique (PDF)=3;Impression=3=5;Pliage, assemblage et emballage=1=2;Dépôt et retrait=1=1
+T|ETU|ETU-APS|Avant-projet sommaire (APS)|BEC|Lot|12|E|15
+Q|ETU-APS|Plan de situation et de masse=8;Vues en plan=26;Coupes=10;Façades=12;Plan de toiture=6;Perspectives=12=4
+Q|ETU-APS|Notice descriptive et tableau des surfaces=6;Estimation sommaire=8;Remise électronique (PDF)=4;Impression=5=5;Pliage, assemblage et emballage=2=2;Dépôt et retrait=1=1
+T|ETU|ETU-APD|Avant-projet détaillé (APD)|EC|Lot|15|E|21
+Q|ETU-APD|Plan de masse et abords=6;Plans cotés=20;Coupes cotées=8;Façades=8;Plan de toiture=4;Détails significatifs=7=8;Plans des menuiseries et finitions=5=7
+Q|ETU-APD|Perspectives=4=4;Notice descriptive=5;Avant-métré et estimation=7;Pré-dimensionnement de la structure=10=H;Principes d'électricité et de plomberie=5=H
+Q|ETU-APD|Remise électronique (PDF)=3;Impression=4=5;Pliage, assemblage et emballage=2=2;Dépôt et retrait=2=1
+T|ETU|ETU-PC|Dossier de permis de construire|EC|Lot|5|E|15
+Q|ETU-PC|Formulaire de demande et bordereau des pièces=5;Plan de situation au 1/2000 (voisinage dans un rayon de 200 à 500 m)=6
+Q|ETU-PC|Plan de masse : limites, voirie, reculs, accès et raccordements=10;Plan d'implantation avec fosse septique et puits perdant=6
+Q|ETU-PC|Plans, coupes, façades et toiture au format du permis=14;Plan d'accessibilité des personnes à mobilité réduite=3=3;Plan des fondations et note de stabilité=15=H
+Q|ETU-PC|Notice descriptive et tableau des surfaces=5;Version électronique du dossier=2;Impression en trois exemplaires=6;Pliage, assemblage et emballage=3
+Q|ETU-PC|Dépôt au GUPEC et retrait de la décision=10;Présence au constat des lieux=8;Corrections demandées par le GUPEC=7
+T|ETU|ETU-PE|Projet d'exécution (PE)|EC|Lot|20|E|30
+Q|ETU-PE|Plan d'implantation=4;Plans d'exécution cotés=12;Coupes détaillées=4;Façades détaillées=4;Toiture et étanchéité=4;Escaliers et garde-corps=3
+Q|ETU-PE|Calepinage des sols=2=6;Plans des plafonds=2=6;Locaux particuliers (cuisine, sanitaires)=2=6;Menuiseries et serrurerie=3=7;Détails constructifs=4=8
+Q|ETU-PE|Cahier des prescriptions et finitions=3;Plans de structure (béton armé et fondations)=25=H;Plans d'électricité=10=H;Plans de plomberie et d'assainissement=10=H
+Q|ETU-PE|Remise électronique (PDF)=2;Impression=3=5;Pliage, assemblage et emballage=2=2;Dépôt et retrait=1=1
+T|ETU|ETU-DCE|Dossier de consultation des entreprises (DCE)|C|Lot|10|E|15
+Q|ETU-DCE|Dossier graphique (plans du PE)=8;Cahier des prescriptions techniques=20;Pièces administratives (règlement et modèle de marché)=8;Métré et quantitatifs=22
+Q|ETU-DCE|Cadres de prix (bordereau et devis quantitatif)=10;Additifs et réponses aux questions=7=9;Rapport d'analyse des offres=13=10;Projet de marché mis au point=6=9
+Q|ETU-DCE|Remise électronique (PDF)=2;Impression=2=5;Pliage, assemblage et emballage=1=2;Dépôt et retrait=1=1
+T|ETU|ETU-DVD|Devis estimatif détaillé (métré et prix unitaires)||Lot|10|E|10
+Q|ETU-DVD|Métré détaillé des ouvrages=45;Prix unitaires et sous-détails=30;Devis estimatif et récapitulatif=20;Remise électronique=5
+T|ETU|ETU-DVN|Devis estimatif non détaillé (estimation par ouvrage)||Lot|5|E|5
+Q|ETU-DVN|Quantités principales par ouvrage=50;Estimation par ouvrage et récapitulatif=45;Remise électronique=5
+T|ETU|ETU-PRI|Priorité de délai||Détail|0||0
+C|ETU-PRI|Priorité de délai (délais des études réduits)|% hon.|1|%|15|0|Option|0|Honoraires|Oui
+T|SUI|SUI-CGT|Suivi et contrôle des travaux (CGT)|C|Lot|25|S|0
+Q|SUI-CGT|Préparation du chantier=8;Examen des documents et échantillons=12;Visites et contrôle de conformité=28;Réunions et comptes rendus=16;Coordination et suivi des corrections=12
+Q|SUI-CGT|Suivi financier=12=11;Modifications et gestion documentaire=8;Impression des documents et assemblage=3=2;Transport pour impression : dépôt et retrait=1=1
+T|SUI|SUI-CDT|Réceptions et décomptes (CDT)|C|Lot|5|S|0
+Q|SUI-CDT|Préparation et visites préalables=16;Assistance à la réception=20;Levée des réserves=20;Vérification des décomptes=20=12;Dossier final, remise électronique et clôture=20
+Q|SUI-CDT|Impression des documents et assemblage=3=2;Transport pour impression : dépôt et retrait=1=1`;
+const PART_ETUDES = 70, PART_SUIVI = 30;
+const DEF = {
+  arch: { nom: "WANJA NTALINDWA Vainqueur", titre: "Architecte", cnoa: "CNOA 1255", wa: "", ville: "Kinshasa", pay: "espèces (cash)   ·   Mobile money   ·   Equity-BCDC 033100091877881" },
+  m2: [["Habitation économique",270],["Habitation moyen standing",450],["Habitation haut standing",700],["Immeuble R+n",550],["Commerce ou bureau",500],["Entrepôt ou hangar",270],["Église ou salle polyvalente",400],["École",400]],
+  plancher: [[50000,5],[100000,4.5],[250000,4],[500000,3.5],[1000000,3]], plancher6: 2.5,
+  taux: 5, suivi: 10, k: 1, fpc: 5, fpct: 5, urgence: 0.5, cpct: 30, crem: 70, crem2: 100, cseuil: 600, pc: 1, dv: 1, pcseuil: 600, apct: 5, apct2: 7, aseuil: 70, rmax: 15, rres: 1, cplxm: 500, cplxs: 800, cplxe: 2
+};
+
+function r2(x) { return x >= 0 ? Math.floor(x * 100 + 0.5) / 100 : -Math.floor(-x * 100 + 0.5) / 100; }
+const TASKS = {}, ORDER = [];
+(function parse() {
+  let cur = null;
+  for (const l of BASE_TXT.split("\n")) {
+    const f = l.split("|");
+    if (f[0] === "T") { cur = { grp: f[1], code: f[2], lib: f[3], packs: f[4], mode: f[5], val: +f[6] || 0, key: f[7], delai: +f[8] || 0, comps: [] }; TASKS[f[2]] = cur; ORDER.push(f[2]); }
+    else if (f[0] === "Q") {
+      for (const p of f[2].split(";")) {
+        const x = p.split("="), h = x.length > 2 && x[2] === "H";
+        cur.comps.push({ lib: x[0], mode: "Part", qte: 1, val: +x[1], statut: x.length > 2 && !h ? "Retirable" : "Socle", ordre: x.length > 2 && !h ? +x[2] : 0, nature: cur.code === "ETU-OUV" ? "Frais" : "Honoraires", tech: h, defaut: "Oui" });
+      }
+    } else if (f[0] === "K") {
+      // pièce de la base Excel : K|tâche|code|libellé|mode|qté|unité|valeur|statut|ordre|nature|par défaut|H
+      cur.comps.push({ code: f[2], lib: f[3], mode: f[4], qte: +f[5], unit: f[6], val: +f[7], statut: f[8], ordre: +f[9], nature: f[10], defaut: f[11], tech: f[12] === "H" });
+    } else if (f[0] === "C") {
+      cur.comps.push({ lib: f[2], mode: f[3], qte: +f[4], unit: f[5], val: +f[6], statut: f[8], ordre: +f[9], nature: f[10], tech: false, defaut: f[11] });
+    }
+  }
+  for (const c of ORDER) TASKS[c].comps.forEach((p, k) => p.code = p.code || c + "." + (k + 1));
+})();
+const BASE_MIN = "ETU-APS";
+// l'ouverture du dossier peut être retirée ; elle reste due si l'architecte descend sur le terrain
+const MENTION_OUV = "Vous la payez si l'architecte descend sur le terrain.";
+function sansOuverture() { return MODE === "prop" ? S.sansPhase.has("ETU-OUV") : S.sansOuv; }
+// les trois missions toutes faites (lettre des packs de la base), avec une courte explication pour le client
+// chaque mission est accompagnée d'un devis estimatif : non détaillé pour l'APS, détaillé pour les autres
+const MISSIONS = [
+  ["B", "1", "Esquisse et APS", "Plans, coupes, façades, perspectives, avec un devis estimatif.", "ETU-DVN"],
+  ["E", "2", "Études complètes", "Avant-projet détaillé, permis de construire, plans d'exécution, avec un devis détaillé.", "ETU-DVD"],
+  ["C", "3", "Mission complète", "Les études complètes et le suivi du chantier jusqu'à la réception, avec un devis détaillé.", "ETU-DVD"]];
+// page web seulement : tout document peut être retiré ; perspectives réduites à 2 (10 %), 4 (35 %) ou toutes (100 %) ;
+// vues en plan en deux parts, plan coté (60 %) et plan aménagé (40 %). Un document de base retiré ou réduit : dossier personnalisé.
+const PERSP = [[0, "Aucune"], [0.1, "2 (10 %)"], [0.35, "4 (35 %)"], [1, "Toutes"]];
+const PLAN = { cote: ["Plan coté", 0.6], amen: ["Plan aménagé", 0.4] };
+function genre(lib) { return /perspective/i.test(lib) ? "persp" : /^vues en plan$/i.test(lib) ? "plan" : ""; }
+function fracDe(code) { if (S.persp[code] != null) return S.persp[code]; const o = S.planOff[code]; return o ? 1 - PLAN[o][1] : 1; }
+function texteReduit(code) { const p = S.persp[code]; if (p != null) return p === 0.1 ? "2 perspectives" : "4 perspectives"; const o = S.planOff[code]; return o ? (o === "cote" ? "plan aménagé seulement" : "plan coté seulement") : ""; }
+// pièces d'un dossier, libre ou proposition : code, libellé, statut, nature, étude d'ingénieur
+function piecesDe(code) {
+  if (MODE === "prop") { const t = PROP.taches.find(x => x.code === code); return t ? t.pieces.map(p => ({ code: p.code, lib: p.lib, statut: p.st, nature: p.n === "F" ? "Frais" : "Honoraires", excl: !!p.x })) : []; }
+  return TASKS[code].comps.filter(p => p.defaut !== "Non").map(p => ({ code: p.code, lib: p.lib, statut: p.statut, nature: p.nature, excl: p.tech && techEx() }));
+}
+// documents que le client peut retirer : tous dans un dossier (sauf l'étude d'un ingénieur), seulement la descente dans l'ouverture
+function retirables(code) { return code === "ETU-PRI" ? [] : piecesDe(code).filter(p => !p.excl && (code === "ETU-OUV" ? p.statut === "Option" || p.statut === "Retirable" : true)); }
+function estPerso(code) { return code !== "ETU-OUV" && piecesDe(code).some(p => p.statut === "Socle" && p.nature === "Honoraires" && !p.excl && (S.removed.has(p.code) || fracDe(p.code) < 1)); }
+function libDossier(T) { return T.lib + (estPerso(T.code) ? " personnalisé" : ""); }
+const PHASES = ["ETU-DE", "ETU-APS", "ETU-APD", "ETU-PC", "ETU-PE", "ETU-DCE", "SUI-CGT", "SUI-CDT"];
+const COURT = { "ETU-OUV": "Ouverture du dossier", "ETU-DE": "Esquisse", "ETU-APS": "Avant-projet sommaire (APS)", "ETU-APD": "Avant-projet détaillé (APD)", "ETU-PC": "Dossier de permis de construire", "ETU-PE": "Projet d'exécution", "ETU-DCE": "Dossier de consultation des entreprises", "ETU-DVD": "Devis estimatif détaillé", "ETU-DVN": "Devis estimatif non détaillé", "ETU-PRI": "Priorité de délai", "SUI-CGT": "Suivi des travaux", "SUI-CDT": "Réceptions et décomptes" };
+
+// ---------------------------------------------------------------- état
+const MODE = PROP ? "prop" : "libre";
+const P = Object.assign({}, DEF, PRESET || {}, PROP ? { arch: PROP.arch, fpc: PROP.fpc, cpct: PROP.cpct || DEF.cpct, crem: 100 - (PROP.cpct || DEF.cpct), crem2: PROP.crem2 != null ? PROP.crem2 : DEF.crem2, cseuil: PROP.cseuil || DEF.cseuil, apct: PROP.apct != null ? PROP.apct : DEF.apct, apct2: PROP.apct2 != null ? PROP.apct2 : (PROP.apct != null ? PROP.apct : DEF.apct2), fpct: PROP.fpct || PROP.fpc || DEF.fpct, aseuil: PROP.aseuil || DEF.aseuil, rmax: PROP.rmax != null ? PROP.rmax : DEF.rmax, rres: PROP.rres != null ? PROP.rres : DEF.rres, pc: PROP.pc != null ? PROP.pc : DEF.pc, dv: PROP.dv != null ? PROP.dv : DEF.dv, pcseuil: PROP.pcseuil || DEF.pcseuil } : {});
+P.arch = Object.assign({}, DEF.arch, P.arch || {});
+if (!(P.fpct > 0)) P.fpct = P.fpc > 0 ? P.fpc : DEF.fpct;
+const S = {
+  type: P.type || "Habitation moyen standing", long: 15, larg: 12, emp: 90, et: 1, ss: 0, toit: "Toiture", global: 0, cplx: "Simple",
+  taux: P.taux, suivi: P.suivi, k: P.k,
+  missions: new Set(["ETU-DE", "ETU-APS", "ETU-APD", "ETU-PC", "ETU-PE"]), devis: PROP ? "" : "ETU-DVD", pri: false,
+  removed: new Set(), sansPhase: new Set(), ouverts: new Set(), offre: null, constr: !!(PROP && (PROP.constr || PROP.cdem || PROP.pco)), typeAutre: "",
+  fpc: PROP ? PROP.fpc > 0 : null, anticip: PROP ? (+PROP.anticip || 0) : 0,
+  pay: PROP && +PROP.anticip ? (+PROP.anticip === 2 ? "une" : "phase") : null, rep: null, aju: false, archAju: false, autre: "", persp: {}, planOff: {}, docsOuv: new Set(), detPack: new Set(), sansOuv: false, ajuOk: false, c23: !!(PROP && PROP.c23), eco: false, demDevis: false, devConf: false
+};
+const S0 = { fpc: S.fpc, anticip: S.anticip, pay: S.pay };
+
+function m2Type(t) { if (t === "Autre") t = TYPE_REF; const r = P.m2.find(x => x[0] === t); return r ? r[1] : 0; }
+// type « Autre » : le client écrit le type ; le coût au m² reste celui de l'habitation moyen standing
+const TYPE_REF = "Habitation moyen standing";
+function nomType() { return S.type === "Autre" ? (S.typeAutre.trim() || "Autre construction") : S.type; }
+// complexité d'office : complexe hors résidence ou au-delà de cplxs m², au moins moyen au-delà de cplxm m²
+const CPLX = ["Simple", "Moyen", "Complexe"];
+function estResidence(t) { return /^(Habitation|Immeuble)/i.test(t); }
+function cplxMin() {
+  if (MODE !== "libre") return 0;
+  if (S.type === "Autre" || !estResidence(S.type) || surface() > P.cplxs) return 2;
+  return surface() > P.cplxm || hauteMoyen() ? 1 : 0;
+}
+// résidence à cplxe étages ou plus, ou avec sous-sol : au moins moyenne, sauf pour un avant-projet sommaire seul
+function apsSeul() { return S.missions.size === 1 && S.missions.has("ETU-APS"); }
+function hauteMoyen() { return P.cplxe > 0 && (niveaux() - 1 >= P.cplxe || !!S.ss) && !apsSeul(); }
+function cplxImpose() { return cplxMin() > 0; }
+function cplxEff() { return CPLX[Math.max(CPLX.indexOf(S.cplx), cplxMin())]; }
+// redevance FPC : facultative ; écartée par défaut quand l'architecte ne construit pas
+function fpcActif() { return S.fpc === null ? S.constr : S.fpc; }
+function tauxFpc() { return fpcActif() ? P.fpct : 0; }
+function niveaux() { return Math.max(0, Math.floor(+S.et || 0)) + 1; }
+// niveaux de plancher : rez-de-chaussée et étages, plus le sous-sol
+function nivTotal() { return niveaux() + (S.ss ? 1 : 0); }
+function nivTexte() { return (S.ss ? "Sous-sol + " : "") + (niveaux() > 1 ? "R+" + (niveaux() - 1) : (S.ss ? "rez-de-chaussée" : "Plain-pied")); }
+function terrain() { return r2((+S.long || 0) * (+S.larg || 0)); }
+// emprise : part de la parcelle bâtie (toute la parcelle = 90 % de sa surface) ; surface de plancher = emprise × niveaux (rez-de-chaussée + étages)
+function emprise() { return r2(terrain() * (+S.emp || 90) / 100); }
+function surface() { return r2(emprise() * nivTotal()); }
+function coutLibre() { return S.global > 0 ? r2(S.global) : r2(surface() * m2Type(S.type)); }
+// construction confiée à l'architecte : études ramenées à cpct % pour un projet de moins de cseuil m²
+function surfaceProjet() { return MODE === "prop" ? (+PROP.surf || 0) : surface(); }
+function constrPossible() { const s = surfaceProjet(); return s > 0 && s < P.cseuil && remiseConstr() > 0; }
+// remise fixe sur les études (crem %) quand le client confie aussi la construction ; fixée par Excel dans une proposition
+// avec l'acompte des 2/3 du devis du gros œuvre (comme dans le devis automatisé), la remise passe à crem2 % (100 %)
+function remiseConstr() { if (S.c23 && S.constr) return Math.min(100, Math.max(0, +P.crem2 || 0)); return PROP ? r2(100 - (+P.cpct || 100)) : Math.min(100, Math.max(0, +P.crem || 0)); }
+function cpct() { return 100 - remiseConstr(); }
+function facteurConstr() { return S.constr && constrPossible() ? cpct() / 100 : 1; }
+// construction confiée : dossier de permis et devis estimatif offerts pour un projet de moins de pcseuil m² (ils redeviennent dus si la construction n'est pas confiée)
+const DEVIS = ["ETU-DVN", "ETU-DVD"];
+function permisPossible() { const s = surfaceProjet(); return !!(P.pc || P.dv) && s > 0 && s < P.pcseuil; }
+function permisOffert() { return S.constr && permisPossible(); }
+function constrUtile() { return constrPossible() || permisPossible(); }
+function tacheOfferte(code) { return permisOffert() && ((code === "ETU-PC" && !!P.pc) || (DEVIS.includes(code) && !!P.dv)); }
+// pièces d'honoraires offertes mises à 0 ; po garde le montant affiché d'avant l'offre
+function offrirPermis(T) {
+  if (!tacheOfferte(T.code)) return;
+  for (const c of T.comps) if (c.nature === "Honoraires" && c.line > 0) { c.po = c.line; c.mont = 0; c.line = 0; }
+}
+// paiement à la signature (au moins aseuil % ou la totalité), proposé quand le client trouve le tarif trop cher :
+// études baissées de apct %, jamais sous le taux minimum ; pas de cumul avec la construction confiée
+function anticipPossible() { return (P.apct > 0 || P.apct2 > 0) && facteurConstr() === 1; }
+// rabais : apct % pour au moins aseuil % payés à la signature, apct2 % pour la totalité
+function pctA(a) { return (a === undefined ? S.anticip : a) === 2 ? P.apct2 : P.apct; }
+function anticipActif() { return S.anticip > 0 && anticipPossible(); }
+function rabaisAnticip(h, m) { if (!anticipActif()) return h; let x = r2(h * (1 - pctA() / 100)); if (m > 0 && x < m) x = Math.min(h, m); return x; }
+// négociation : la baisse du taux est réservée au client qui paie à la signature, et toutes les remises restent sous rmax % des études
+function ratioNego(rt, fa) {
+  if (P.rres && !anticipActif()) return 1;
+  return P.rmax > 0 ? Math.min(1, Math.max(rt, (1 - P.rmax / 100) / fa)) : rt;
+}
+function texteAnticip(a) { return a === 2 ? "la totalité" : "au moins " + P.aseuil + " %"; }
+function techEx() { const c = cplxEff(); return c === "Moyen" || c === "Complexe"; }
+function tauxPlancher(c) { for (const [b, t] of P.plancher) if (c <= b) return t; return P.plancher6; }
+// construction confiée : le devis estimatif est toujours offert (détaillé si le client n'en a pas choisi)
+function devisEff() { return S.devis || (MODE === "libre" && permisOffert() && P.dv ? "ETU-DVD" : ""); }
+function tachesChoisies() { const dv = devisEff(); return ORDER.filter(c => (c === "ETU-OUV" && !S.sansOuv) || S.missions.has(c) || c === dv || (c === "ETU-PRI" && S.pri)); }
+
+// ---------------------------------------------------------------- modèle commun : tâches (rows) et pièces (comps)
+// pièce : code, lib, mont (montant brut du calcul), line (montant affiché, coefficient compris), statut (Socle, Retirable, Option),
+// ordre (ordre de retrait), nature (Honoraires ou Frais), sc (suit le taux des études : baisse jusqu'au taux minimum), excl (étude confiée à un ingénieur)
+function totaux(rows, cout, rt, pd) {
+  for (const T of rows) {
+    T.hon = r2(T.comps.filter(c => c.nature === "Honoraires").reduce((a, c) => a + c.line, 0));
+    T.frais = r2(T.comps.filter(c => c.nature === "Frais").reduce((a, c) => a + c.line, 0));
+  }
+  const hon = r2(rows.reduce((a, T) => a + T.hon, 0)), frais = r2(rows.reduce((a, T) => a + T.frais, 0));
+  const honE = r2(rows.filter(T => T.grp === "ETU").reduce((a, T) => a + T.hon, 0));
+  const fpc = r2(honE * tauxFpc() / 100);
+  const delai = rows.filter(T => T.grp === "ETU").reduce((a, T) => a + T.delai, 0);
+  return { rows, comps: rows.flatMap(T => T.comps), cout, rt, pd: pd || 0, hon, frais, honE, fpc, total: r2(hon + frais + fpc), delai };
+}
+
+// Interface 1 : calcul de la note Excel (Calculer)
+function calcLibre(codes) {
+  const c0 = coutLibre(), h0 = r2(c0 * S.taux / 100 * facteurConstr()), hm = c0 > 0 ? r2(c0 * tauxPlancher(c0) / 100) : 0;
+  const mH = rabaisAnticip(h0, hm), mS = r2(c0 * S.suivi / 100), tx = techEx();
+  const rows = [];
+  for (const code of codes) {
+    const t = TASKS[code];
+    let b = 0;
+    if (t.mode === "Lot") b = t.key === "S" ? mS * t.val / PART_SUIVI : mH * t.val / (code === "ETU-DVD" || code === "ETU-DVN" ? 100 : PART_ETUDES);
+    else if (t.mode === "Forfait") b = t.val;
+    const T = { code, lib: COURT[code], grp: t.grp, delai: Math.round(t.delai * (S.pri ? P.urgence : 1)), bud: r2(b), comps: [] };
+    for (const p of t.comps) {
+      if (p.defaut === "Non" || S.removed.has(p.code)) continue;
+      let v = 0;
+      const fr = fracDe(p.code);
+      if (p.mode === "Part") v = T.bud * p.val * fr / 100;
+      else if (p.mode === "Qté × PU") v = p.qte * p.val;
+      else if (p.mode === "% hon.") v = mH * p.val / 100;
+      else if (p.mode === "Forfait") v = p.qte > 0 ? p.qte * p.val : p.val;
+      const C = { code: p.code, lib: p.lib, task: T, mont: r2(v), statut: p.statut, ordre: p.ordre, nature: p.nature, val: p.val * fr, mode: p.mode,
+                  sc: p.mode === "Part" && t.mode === "Lot" && t.key !== "S", excl: p.tech && tx };
+      if (C.excl) C.mont = 0;
+      T.comps.push(C);
+    }
+    if (T.bud > 0) {
+      const cs = T.comps.filter(c => c.mode === "Part" && !c.excl);
+      const w = cs.reduce((a, c) => a + c.val, 0);
+      if (cs.length && Math.abs(w - 100) < 0.001) {
+        const sp = r2(cs.reduce((a, c) => a + c.mont, 0));
+        let j = cs[0]; for (const c of cs.slice(1)) if (c.mont > j.mont) j = c;
+        const d = r2(T.bud - sp);
+        if (d !== 0 && Math.abs(d) < 0.5) j.mont = r2(j.mont + d);
+      }
+    }
+    T.comps.forEach(c => c.line = c.excl ? 0 : (c.nature === "Frais" ? c.mont : r2(c.mont * S.k)));
+    offrirPermis(T);
+    rows.push(T);
+  }
+  // taux minimum : rapport minimum / taux appliqué, rabais de paiement compris (le rabais ne fait pas descendre le minimum)
+  const pl = tauxPlancher(c0), fa = h0 > 0 ? mH / h0 : 1, te = S.taux * fa;
+  const R = totaux(rows, c0, c0 > 0 ? ratioNego(pl < te ? pl / te : 1, fa) : 1);
+  R.pcVal = valeurPermis(rows);
+  Object.assign(R, { hb: h0, fa, hm, rt0: c0 > 0 && pl < S.taux ? pl / S.taux : 1 });
+  // échéancier par défaut de la note : ouverture et 1re phase, 2e phase, le reste
+  const th = rows.filter(T => T.hon > 0);
+  rows.forEach(T => T.pay = T.code === "ETU-OUV" ? 0 : Math.max(0, Math.min(th.indexOf(T), 2)));
+  return R;
+}
+
+// Interface 2 : la proposition exportée par Excel ; le client retire des phases ou des pièces facultatives
+function calcProp() {
+  // construction et rabais de paiement : rapport entre l'état choisi et celui de la proposition exportée par Excel
+  const cE = PROP.constr ? (+P.cpct || 100) / 100 : 1, faE = +PROP.fa || 1, hb = r2((+PROP.hb || 0) / cE);
+  const faN = anticipActif() && hb > 0 ? rabaisAnticip(hb, +PROP.hm || 0) / hb : 1;
+  const rows = [], f = facteurConstr() * faN / (cE * faE);
+  for (const t of PROP.taches) {
+    if (S.sansPhase.has(t.code)) continue;
+    const T = { code: t.code, lib: t.lib, grp: t.grp, delai: t.delai, pay: t.pay, fixe: t.fixe, comps: [] };
+    for (const p of t.pieces) {
+      if (S.removed.has(p.code)) continue;
+      // dossier de permis offert dans la proposition : on repart du montant d'avant l'offre
+      const fr = fracDe(p.code), pb = r2((p.po > 0 ? p.po : p.b) * fr), pm = r2((p.po > 0 ? (p.pom || p.po) : p.m) * fr);
+      T.comps.push({ code: p.code, lib: p.lib, task: T, mont: p.sc ? r2(pb * f) : pb, line: p.sc ? r2(pm * f) : pm, statut: p.st, ordre: p.o, nature: p.n === "F" ? "Frais" : "Honoraires", sc: !!p.sc, excl: !!p.x, b: pb, m: pm });
+    }
+    // pièces mises à l'échelle : l'écart d'arrondi va à la plus grande, comme le budget de la tâche dans Excel
+    const cs = T.comps.filter(c => c.sc && !c.excl);
+    if (f !== 1 && cs.length > 1) {
+      let j = cs[0]; for (const c of cs.slice(1)) if (c.b > j.b) j = c;
+      const dm = r2(r2(cs.reduce((s, c) => s + c.b, 0) * f) - cs.reduce((s, c) => s + c.mont, 0));
+      const dl = r2(r2(cs.reduce((s, c) => s + c.m, 0) * f) - cs.reduce((s, c) => s + c.line, 0));
+      if (Math.abs(dm) < 0.5) j.mont = r2(j.mont + dm);
+      if (Math.abs(dl) < 0.5) j.line = r2(j.line + dl);
+    }
+    offrirPermis(T);
+    rows.push(T);
+  }
+  const R = totaux(rows, PROP.cout, PROP.rt0 != null ? (PROP.cout > 0 ? ratioNego(Math.min(1, PROP.rt0 / faN), faN) : 1) : PROP.rt, PROP.pd);
+  R.pcVal = valeurPermis(rows);
+  return R;
+}
+function valeurPermis(rows) { return r2(rows.flatMap(T => T.comps).reduce((a, c) => a + (c.po || 0), 0)); }
+const calc = () => MODE === "prop" ? calcProp() : calcLibre(tachesChoisies());
+
+// ---------------------------------------------------------------- négociation (copie du module Excel : MinimumGarde, Reduire, Alternative, CodeVerdict)
+// avec une descente demandée, la note ne descend pas sous (multiplicateur × frais d'une descente) : pd, calculé par Excel
+function minimum(R, g) { let s = 0; for (const c of R.comps) if (c.nature === "Honoraires" && g.get(c)) s += c.sc ? c.mont * R.rt : c.mont; return Math.max(r2(s), R.pd); }
+function candidats(R) {
+  const L = [];
+  R.comps.forEach((c, i) => { if (c.nature === "Honoraires" && (c.statut === "Retirable" || c.statut === "Option") && c.mont > 0) L.push([(c.statut === "Option" ? 0 : 1000) + (c.ordre > 0 ? c.ordre : 999) + (i + 1) / 10000, c]); });
+  return L.sort((a, b) => a[0] - b[0]).map(x => x[1]);
+}
+function garderTout(R) { const g = new Map(); R.comps.forEach(c => g.set(c, true)); return g; }
+function reduire(R, g, o) {
+  if (minimum(R, g) <= o + 0.005) return true;
+  for (const c of candidats(R)) if (g.get(c)) { g.set(c, false); if (minimum(R, g) <= o + 0.005) return true; }
+  return false;
+}
+// missions plus courtes pour une offre trop basse : les premières phases, la plus longue suite d'abord ;
+// l'avant-projet sommaire (APS) reste toujours, et seul il forme la mission de base
+function missionsCourtes(th) {
+  const a = th.findIndex(T => T.code === BASE_MIN), L = [];
+  for (let p = th.length - 2; p >= Math.max(a, 0); p--) L.push(th.slice(0, p + 1));
+  if (a > 0) L.push([th[a]]);
+  return L;
+}
+function alternative(R, o) {
+  const th = R.rows.filter(T => T.hon > 0);
+  for (const ks of missionsCourtes(th)) {
+    const keep = new Set(ks);
+    const g = new Map(); R.comps.forEach(c => g.set(c, c.nature === "Frais" ? true : keep.has(c.task)));
+    if (reduire(R, g, o)) return { taches: ks, g };
+  }
+  return null;
+}
+// descente sur le terrain comprise dans l'ouverture du dossier, encore demandée et facultative
+function descenteOuv(R) { return R.comps.find(c => c.task.code === "ETU-OUV" && c.nature === "Frais" && (c.statut === "Option" || c.statut === "Retirable") && c.mont > 0 && /descente/i.test(c.lib)); }
+function verdict(R, o) {
+  if (o >= R.hon - 0.005) return { v: "ACC" };
+  const g = garderTout(R);
+  if (minimum(R, g) <= o + 0.005) return { v: "MARGE", g };
+  if (reduire(R, g, o)) return { v: "NEGO", g };
+  const a = alternative(R, o);
+  if (a) return { v: "ALT", g: a.g, taches: a.taches };
+  return { v: "BAS" };
+}
+// le montant total proposé ramené aux honoraires (sans les frais ni la redevance FPC)
+function honOffre(R, total) { const re = R.hon > 0 ? R.honE / R.hon : 0; return r2((total - R.frais) / (1 + tauxFpc() / 100 * re)); }
+
+// Proposition au format d'Excel, depuis le calcul de l'interface 1 (sert à l'aperçu ; Excel écrit le même format)
+function exporterProp(R, info) {
+  return Object.assign({ arch: P.arch, fpc: tauxFpc(), fpct: P.fpct, apct2: P.apct2, cout: R.cout, rt: R.rt, rt0: R.rt0, hb: R.hb, fa: R.fa, hm: R.hm, anticip: S.anticip, apct: P.apct, aseuil: P.aseuil, rmax: P.rmax, rres: P.rres, pc: P.pc, dv: P.dv, pcseuil: P.pcseuil, pco: permisOffert() && R.pcVal > 0 ? 1 : 0, cdem: S.constr ? 1 : 0,
+    taches: R.rows.map(T => ({ code: T.code, lib: T.lib, grp: T.grp, delai: T.delai, pay: T.pay, fixe: T.code === "ETU-OUV",
+      pieces: T.comps.map(c => ({ code: c.code, lib: c.lib, m: c.line, b: c.mont, st: c.statut, o: c.ordre, n: c.nature === "Frais" ? "F" : "H", sc: c.sc ? 1 : 0, x: c.excl ? 1 : 0, po: c.po || 0, pom: c.po || 0 })) })) }, info);
+}
+
+// ---------------------------------------------------------------- affichage
+const $ = id => document.getElementById(id);
+const usd = x => (Math.round(x * 100) / 100).toLocaleString("fr-FR", { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + " $";
+const pct = x => (Math.round(x * 100) / 100).toLocaleString("fr-FR", { maximumFractionDigits: 2 }) + "\u00a0%";
+// liste des dossiers en pastilles (le texte reste « A · B · C. » pour la lecture et les tests)
+const pastilles = L => L.map((x, i) => `<span class="dpil">${esc(x)}</span>` + (i < L.length - 1 ? `<span class="sep"> · </span>` : `<span class="sep">.</span>`)).join("");
+const esc = s => String(s).replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+const pluriel = (n, s) => n + " " + s + (n > 1 ? "s" : "");
+
+function echeancier(R) {
+  const m = [0, 0, 0], e = [0, 0, 0], noms = [[], [], []];
+  for (const T of R.rows) { const k = T.pay || 0; if (T.hon + T.frais <= 0) continue; m[k] += T.hon + T.frais; if (T.grp === "ETU") e[k] += T.hon; noms[k].push(T.code === "ETU-OUV" ? "ouverture du dossier" : T.lib); }
+  const ks = [0, 1, 2].filter(k => m[k] > 0), out = []; let cum = 0;
+  ks.forEach((k, i) => {
+    let x = m[k] + (R.honE > 0 ? R.fpc * e[k] / R.honE : 0);
+    x = i < ks.length - 1 ? r2(x) : r2(R.total - cum); cum = r2(cum + x);
+    out.push({ v: x, noms: noms[k] });
+  });
+  // paiement à la signature : tout d'un coup, ou au moins aseuil % au premier paiement (les autres diminuent d'autant)
+  if (S.anticip === 2 && out.length > 1) return [{ v: R.total, noms: out.flatMap(x => x.noms) }];
+  if (S.anticip === 1 && out.length > 1) {
+    const p1 = Math.max(out[0].v, r2(R.total * P.aseuil / 100)), reste = r2(R.total - out[0].v), k = reste > 0 ? (R.total - p1) / reste : 0;
+    let cum = p1; out[0].v = p1;
+    out.slice(1).forEach((x, i, a) => { x.v = i < a.length - 1 ? r2(x.v * k) : r2(R.total - cum); cum = r2(cum + x.v); });
+  }
+  return out;
+}
+
+const montantHtml = (mt, po) => po > 0 && mt <= 0.005 ? `<s>${usd(po)}</s><span class="offert">Offert</span>` : usd(mt);
+function phaseHtml(o) {
+  // o : code, lib, on, fixe, mt, meta, pieces [{code, lib, mt, retirable, excl, ret}], toggle
+  let h = `<div class="phase${o.on ? "" : " off"}${o.fixe ? " fixe" : ""}"><div class="tete">`;
+  h += `<span class="switch"><input type="checkbox" ${o.fixe ? "disabled" : `data-phase="${o.code}"`} ${o.on ? "checked" : ""} aria-label="${esc(o.lib)}"><span></span></span>`;
+  const ouvert = S.ouverts.has(o.code), avec = o.pieces && o.pieces.length;
+  const voir = avec ? `<button class="voir" type="button" data-voir="${o.code}" aria-expanded="${ouvert}">${ouvert ? "Voir moins" : "Voir plus"}<span class="chev">${ouvert ? "▴" : "▾"}</span></button>` : "";
+  h += `<span class="lib">${esc(o.lib)}${o.on && estPerso(o.code) ? '<span class="perso">personnalisé</span>' : ""}</span><span class="mt num">${montantHtml(o.mt, o.po)}</span><span class="meta">${esc(o.meta)}${o.meta && voir ? " · " : ""}${voir}</span></div>`;
+  if (avec) {
+    if (ouvert) {
+      h += `<div class="pieces">`;
+      for (const p of o.pieces) {
+        const droite = p.excl ? `<span class="tag">par un ingénieur</span>` : p.po > 0 && !p.ret && p.mt <= 0.005 ? `<span class="pm">offert</span>` : `<span class="pm num">${p.ret ? "retiré" : usd(p.mt)}</span>`;
+        const red = p.ret ? "" : texteReduit(p.code);
+        h += `<div class="piece${p.ret ? " retire" : ""}"><span class="vide"></span><span class="pl">${esc(p.lib)}${red ? ` <span class="pm">· ${esc(red)}</span>` : ""}</span>${droite}</div>`;
+      }
+      if (o.on && o.code !== "ETU-PRI" && retirables(o.code).length) h += `<button class="voir" type="button" data-aju="${o.code}">Retirer ou réduire des documents →</button>`;
+      h += `</div>`;
+    }
+  }
+  return h + `</div>`;
+}
+
+function render() {
+  const R = calc();
+  // en-tête
+  $("h-nom").textContent = P.arch.nom;
+  $("h-titre").textContent = [P.arch.titre, P.arch.cnoa, P.arch.ville].filter(Boolean).join(" · ");
+  const tt = $("t-total"), nt = usd(R.total);
+  if (tt.textContent !== nt) { if (tt.dataset.ok) { tt.classList.remove("bump"); void tt.offsetWidth; tt.classList.add("bump"); } tt.textContent = nt; tt.dataset.ok = 1; }
+  $("t-pct").textContent = R.cout > 0 ? pct(R.hon / R.cout * 100) + " du coût des travaux" : "coût à indiquer";
+  $("t-cout").textContent = R.cout > 0 ? "Construction estimée : " + usd(R.cout) : "";
+  $("t-delai").textContent = R.delai > 0 ? "Études remises en " + R.delai + " jours" : "";
+  document.querySelectorAll("#m-constr button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === (S.constr ? "1" : "0")));
+  const sp = surfaceProjet();
+  $("m-constr-note").textContent = texteConstr(surfaceProjet()).replace(/^Condition : s/, "S");
+  renderEco();
+  // carte de la construction confiée : ce que le client gagne
+  const G = gainsConstr();
+  $("av-titre").textContent = G.gain > 0 ? (S.constr ? "Bravo, vous gagnez" : "Confiez-nous aussi la construction et gagnez") : "Confiez-nous aussi la construction";
+  $("av-etudes").textContent = G.rem >= 100 ? "Avec la remise de 100 %, vos études sont offertes (au lieu de " + usd(G.etu0) + ")." : G.rem ? "Après la remise de " + G.rem + " %, vous ne payez plus que " + usd(G.etu) + " pour les études (au lieu de " + usd(G.etu0) + ")." : "";
+  $("av-gain").innerHTML = G.gain > 0 ? `<b>${usd(G.gain)}</b><span>${G.rem ? G.rem + " % de remise sur les études" : "soit " + pct(G.pct) + " de remise"}</span>` : "";
+  $("m-constr-bloc").classList.toggle("court", !!S.constr && G.gain > 0);
+  $("m-constr-bloc").classList.toggle("c100", !!S.constr && !!S.c23);
+  $("av-liste").innerHTML = G.L.map(([t, v]) => `<li><span>${esc(t)}</span><span>−${usd(v)}</span></li>`).join("");
+  // gain total affiché en haut : construction confiée et paiement à la signature
+  const gt = gainTotal(R);
+  $("t-gain").hidden = !(gt > 0.005); $("t-gain").textContent = gt > 0.005 ? "Vous gagnez " + usd(gt) : "";
+  let h = "";
+  if (MODE === "libre") {
+    const sync = (id, v) => { if (document.activeElement !== $(id)) $(id).value = v; };
+    sync("p-type", S.type); sync("p-long", S.long || ""); sync("p-larg", S.larg || ""); sync("p-et", S.et); sync("p-global", S.global || "");
+    document.querySelectorAll("#p-emp button").forEach(b => b.setAttribute("aria-pressed", +b.dataset.v === +S.emp));
+    document.querySelectorAll("#p-toit button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === S.toit));
+    document.querySelectorAll("#p-ss button").forEach(b => b.setAttribute("aria-pressed", +b.dataset.v === (S.ss ? 1 : 0)));
+    dessinerMaison();
+    const ci = cplxImpose();
+    document.querySelectorAll("#p-cplx button").forEach(b => { b.setAttribute("aria-pressed", b.dataset.v === cplxEff()); b.disabled = CPLX.indexOf(b.dataset.v) < cplxMin(); });
+    $("p-autre-bloc").hidden = S.type !== "Autre";
+    const pourquoi = S.type === "Autre" || !estResidence(S.type) ? "construction autre qu'une résidence" : cplxMin() === 2 ? "plus de " + P.cplxs + " m²" : surface() > P.cplxm ? "plus de " + P.cplxm + " m²" : S.ss ? "avec sous-sol" : "R+" + P.cplxe + " ou plus";
+    $("p-cplx-note").textContent = ci && cplxEff() === CPLX[cplxMin()]
+      ? "Projet " + (cplxMin() === 2 ? "complexe" : "moyen au moins") + " d'office (" + pourquoi + ") : la structure, l'électricité et la plomberie sont confiées à des ingénieurs agréés, hors de ces honoraires ; l'architecte en assure la coordination."
+      : techEx()
+      ? "Projet moyen ou complexe : la structure, l'électricité et la plomberie sont confiées à des ingénieurs agréés, hors de ces honoraires ; l'architecte en assure la coordination."
+      : "Projet simple : l'architecte établit aussi les plans de structure, d'électricité et de plomberie.";
+    $("p-calc").textContent = S.global > 0 ? "Budget des travaux indiqué" : (surface() > 0 ? nivTexte() + " · " + surface().toLocaleString("fr-FR") + " m² (" + emprise().toLocaleString("fr-FR") + " m² × " + nivTotal() + " niveau" + (nivTotal() > 1 ? "x" : "") + "), à " + usd(m2Type(S.type)) + " par m²" : "Indiquez les dimensions du terrain");
+    $("p-cout").textContent = R.cout > 0 ? usd(R.cout) : "";
+    const pk = ["B", "E", "C"].find(l => { const w = PHASES.filter(c => TASKS[c].packs.includes(l)); return w.length === S.missions.size && w.every(c => S.missions.has(c)); });
+    // vous avez le choix : trois missions toutes faites, chacune avec son prix ; les dossiers se règlent dans « Voir plus »
+    $("m-pack").innerHTML = MISSIONS.map(([l, ic, nom, d, dv]) => {
+      const sv = [S.missions, S.devis]; S.missions = new Set(PHASES.filter(c => TASKS[c].packs.includes(l))); S.devis = dv; const RP = calc(); [S.missions, S.devis] = sv;
+      return `<button type="button" data-v="${l}" aria-pressed="${l === pk}"><span class="ic">${ic}</span><b>${nom}</b><span class="px num">${usd(RP.total)}</span><span class="d">${d}</span></button>`;
+    }).join("");
+    const nd = S.missions.size;
+    $("m-det-t").innerHTML = "Choisir les détails de la mission" + (pk ? "" : ` <span class="mesure">· mission sur mesure</span>`);
+    $("m-liste").innerHTML = pastilles([...(S.sansOuv ? [] : ["ETU-OUV"]), ...PHASES.filter(c => S.missions.has(c)), ...(devisEff() ? [devisEff()] : []), ...(S.pri ? ["ETU-PRI"] : [])].map(c => COURT[c]));
+    document.querySelectorAll("#m-devis button").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === devisEff()));
+
+    const RT = calcLibre(ORDER); // montants de toutes les phases, même non choisies
+    for (const code of ["ETU-OUV", ...PHASES, "ETU-PRI"]) {
+      const T = RT.rows.find(x => x.code === code), t = TASKS[code];
+      const on = (code === "ETU-OUV" && !S.sansOuv) || S.missions.has(code) || (code === "ETU-PRI" && S.pri);
+      const meta = code === "ETU-OUV" ? "Facultative. " + MENTION_OUV : code === "ETU-PRI" ? "Délais des études réduits de moitié" : (t.delai > 0 ? t.delai + " jours" : "Pendant les travaux");
+      const pieces = code === "ETU-PRI" ? [] : t.comps.filter(p => p.defaut !== "Non").map(p => {
+        const C = T.comps.find(c => c.code === p.code), excl = p.tech && techEx();
+        return { code: p.code, lib: p.lib, mt: C ? C.line : 0, po: C && C.po || 0, excl, ret: S.removed.has(p.code) };
+      });
+      h += phaseHtml({ code, lib: COURT[code], on, fixe: false, mt: T.hon + T.frais, po: on ? valeurPermis([T]) : 0, meta, pieces });
+    }
+  } else {
+    $("r-projet").textContent = PROP.projet || "";
+    $("r-calc").textContent = PROP.coutTexte || "Coût de référence des travaux";
+    $("r-cout").textContent = R.cout > 0 ? usd(R.cout) : "";
+    $("r-note").textContent = PROP.taches.some(t => t.pieces.some(p => p.x)) ? "Les études surlignées « par un ingénieur » sont confiées à des ingénieurs agréés et ne sont pas comprises dans ces honoraires ; l'architecte en assure la coordination." : "";
+    for (const t of PROP.taches) {
+      const on = !S.sansPhase.has(t.code);
+      const T = R.rows.find(x => x.code === t.code);
+      const mt = T ? T.hon + T.frais : r2(t.pieces.filter(p => !S.removed.has(p.code)).reduce((a, p) => a + (p.po > 0 ? (p.pom || p.po) : p.m), 0));
+      const meta = t.fixe ? "Facultative. " + MENTION_OUV : (t.delai > 0 ? t.delai + " jours" : (t.grp === "SUI" ? "Pendant les travaux" : ""));
+      const pieces = t.pieces.map(p => { const C = T && T.comps.find(c => c.code === p.code); return { code: p.code, lib: p.lib, mt: C ? C.line : p.m, po: C && C.po || 0, excl: !!p.x, ret: S.removed.has(p.code) }; });
+      h += phaseHtml({ code: t.code, lib: t.lib, on, fixe: false, mt, po: T ? valeurPermis([T]) : 0, meta, pieces });
+    }
+  }
+  $("m-phases").innerHTML = h;
+  // proposition : la liste des dossiers est repliée ; une ligne donne seulement le nom des tâches gardées
+  if (MODE === "prop") {
+    const gardes = PROP.taches.filter(t => !S.sansPhase.has(t.code));
+    $("m-liste").innerHTML = pastilles(gardes.map(t => t.lib));
+    $("m-det-t").textContent = "Choisir les détails de la proposition";
+  }
+  // récapitulatif : un dossier par ligne, redevance, total, puis ce que le client paie
+  let px = "";
+  for (const T of R.rows) {
+    const mt = T.hon + T.frais, po = valeurPermis([T]); if (mt <= 0 && !(po > 0)) continue;
+    const d = docsTexte(T.code);
+    px += `<div class="ligne"><span>${esc(T.lib)}${estPerso(T.code) ? '<span class="perso">personnalisé</span>' : ""}</span><span class="mt">${montantHtml(mt, po)}</span>${d ? `<span class="d">${esc(d)}</span>` : ""}</div>`;
+  }
+  const fa = fpcActif();
+  if (sansOuverture()) px += `<div class="ligne"><span>Ouverture du dossier</span><span class="mt">retirée</span><span class="d">${MENTION_OUV}</span></div>`;
+  px += `<div class="ligne"><span>Redevance FPC (${pct(P.fpct)} des études)</span><span class="mt">${fa ? usd(R.fpc) : "—"}</span><span class="d">${fa ? "Facultative : comprise dans le total." : "Facultative : non comprise dans le total."}</span></div>`;
+  px += `<div class="ligne tot"><span>Total à payer</span><span class="mt">${usd(R.total)}</span></div>`;
+  $("prix").innerHTML = px;
+  $("prix-note").textContent = (MODE === "prop" && PROP.total && Math.abs(PROP.total - R.total) > 0.005 ? "Proposition de départ : " + usd(PROP.total) + ". " : "") + "Chaque dossier est livré après paiement de son échéance. La taxe de bâtisse et les frais du permis de construire restent à la charge du client.";
+  $("lbl-ech").textContent = S.pay === "une" ? "Paiement" : "Échéancier";
+  $("ech").innerHTML = echeanceHtml(R) || `<p class="hint">Choisissez au moins un dossier.</p>`;
+  renderPaie(R);
+  renderRep(R);
+  renderOffre(R);
+  renderMessage(R);
+  $("pied").innerHTML = P.arch.pay ? "<b>Modes de paiement</b> : " + esc(P.arch.pay) : "";
+}
+
+function echeanceHtml(R) {
+  return echeancier(R).map((x, k) => `<div class="e"><span class="pt"></span><span>${k === 0 ? "À la signature" : "Paiement " + (k + 1)}</span><span class="mt">${usd(x.v)}</span><span class="d">${esc(x.noms.join(", "))}</span></div>`).join("");
+}
+// ce qui change dans les documents d'un dossier, pour le récapitulatif et le message
+function docsTexte(code) {
+  const L = [], ret = [];
+  for (const p of retirables(code)) {
+    if (S.removed.has(p.code)) ret.push(p.lib.toLowerCase());
+    else if (texteReduit(p.code)) L.push(texteReduit(p.code));
+  }
+  if (ret.length) L.unshift("sans " + ret.join(", "));
+  return L.join(" ; ");
+}
+// paiement : en une fois (rabais apct2 %) ou par dossier, avec au moins aseuil % à la signature en option (rabais apct %)
+function renderPaie(R) {
+  $("p-une").setAttribute("aria-pressed", S.pay === "une"); $("p-phase").setAttribute("aria-pressed", S.pay === "phase");
+  const ok = anticipPossible(), R0 = sansOption(() => { S.anticip = 0; }), g2 = ok ? r2(R0.total - sansOption(() => { S.anticip = 2; }).total) : 0, g1 = ok ? r2(R0.total - sansOption(() => { S.anticip = 1; }).total) : 0;
+  $("d-une").textContent = "Toute la mission, à la signature" + (g2 > 0.005 ? " : −" + pct(P.apct2) + " sur les études." : ".");
+  $("d-phase").textContent = "Chaque dossier, avant son lancement.";
+  const bx = $("bonus");
+  bx.hidden = !(g2 > 0.005) || !!S.pay;
+  bx.innerHTML = g2 > 0.005 ? [[2, "tout", g2], [1, P.aseuil + " %", g1]].filter(x => x[2] > 0.005).map(([a, txt, g]) => `<button type="button" class="pil${S.anticip > 0 && S.anticip !== a ? " off" : ""}" data-anticip="${a}" aria-pressed="${S.anticip === a}">${S.anticip === a ? "✓ " : ""}Je paie ${txt} : je gagne ${usd(g)}</button>`).join("") + `<span class="sur">sur les études</span>` : "";
+  const fin = $("fin");
+  fin.hidden = !S.pay; fin.className = "fin s23";
+  if (!ok && S.pay) { fin.className = "fin attente"; fin.textContent = facteurConstr() < 1 ? "Le rabais de paiement ne se cumule pas avec la construction confiée : la remise de " + remiseConstr() + " % sur les études est déjà appliquée." : "Pas de rabais de paiement pour cette mission."; }
+  else if (S.pay === "une") fin.innerHTML = g2 > 0.005 ? `<b class="t23">Bravo, vous gagnez ${usd(g2)}</b><small>Les études baissent de ${pct(P.apct2)}, sans descendre sous le tarif minimum de l'architecte.</small>` : `<b class="t23">Toute la mission à la signature.</b>`;
+  else if (S.pay === "phase") fin.innerHTML = `<label><input type="checkbox" id="a-70" ${S.anticip === 1 ? "checked" : ""}><span><b class="t23">Je paie ${P.aseuil} % à la signature</b><small>${g1 > 0.005 ? "−" + pct(P.apct) + " sur les études : je gagne " + usd(g1) : "Le reste dossier par dossier"}</small></span></label>`;
+}
+// réponse : la mission me convient, je propose un prix, j'ajuste la mission (documents, redevance, autre demande)
+function renderRep(R) {
+  ["acc", "offre"].forEach(c => { $("c-" + c).setAttribute("aria-pressed", String(S.rep === c)); $("b-" + c).hidden = S.rep !== c; });
+  $("b-aju").hidden = !(S.rep === "offre" && S.aju);
+  // le paiement sort quand le prix est accepté, ou l'offre vérifiée (et les ajustements validés) ; récapitulatif et envoi ensuite
+  // le mode de paiement reste masqué tant que la mission et le prix (accepté ou proposé) ne sont pas validés
+  $("aju-ok-bloc").hidden = !(S.rep === "acc" || (S.rep === "offre" && S.offre > 0)) || archAjuste();
+  $("c-rep").hidden = $("aju-ok-bloc").hidden || !S.ajuOk;
+  ["c-recap", "c-envoi"].forEach(id => $(id).hidden = $("c-rep").hidden || !S.pay);
+  if (archAjuste()) { $("c-envoi").hidden = false; $("c-recap").hidden = true; }
+  // rappel de la mission choisie, avec le bouton d'envoi tout près
+  $("p-rappel").hidden = $("c-envoi").hidden;
+  if (!$("p-rappel").hidden) {
+    const pk = document.querySelector("#m-pack button[aria-pressed='true'] b");
+    const nomM = MODE === "prop" ? "la mission proposée" : pk ? "la mission « " + pk.textContent + " »" : "une mission sur mesure";
+    const prix = S.rep === "offre" && S.offre > 0 ? "votre prix : " + usd(S.offre) : usd(R.total);
+    const paie = S.pay === "une" ? "en une fois, à la signature" : S.anticip === 1 ? P.aseuil + " % à la signature, le reste dossier par dossier" : "dossier par dossier";
+    $("p-rappel-t").innerHTML = `<b>Vous avez choisi ${esc(nomM)}</b><span>${esc($("m-liste").textContent.replace(/\.$/, ""))}</span><span class="num">${prix} · ${esc(paie)}</span>`;
+  }
+  $("aju-ok").setAttribute("aria-pressed", String(S.ajuOk));
+  $("aju-ok").textContent = S.ajuOk ? "✓ Mission et prix validés" : "Valider la mission et le prix";
+  $("aju-ok-t").textContent = S.ajuOk ? "Ensuite, choisissez comment payer." : "Le mode de paiement apparaît ensuite.";
+  numeroter();
+  // ce qui se passe à cette étape, selon le choix du client
+  const rab = anticipPossible(), suite = "";
+  $("p-hint").textContent = !S.pay
+    ? (rab ? "Payer à la signature fait baisser le prix des études : −" + pct(P.apct2) + " pour tout, −" + pct(P.apct) + " pour " + P.aseuil + " %." : "Choisissez comment payer.")
+    : S.pay === "une" ? "En une fois : vous payez toute la mission à la signature" + (rab && S.anticip === 2 ? " et les études baissent de " + pct(P.apct2) : "") + "." + suite
+    : S.anticip === 1 && rab ? "Par dossier, avec " + P.aseuil + " % à la signature : les études baissent de " + pct(P.apct) + ", le reste se paie dossier par dossier." + suite
+    : "Par dossier : vous payez chaque dossier avant son lancement." + suite;
+  // 1. documents à livrer, dossier par dossier
+  const mt = new Map(R.comps.map(c => [c.code, c.line]));
+  let h = "", nb = 0;
+  for (const T of R.rows) {
+    const L = retirables(T.code); if (!L.length) continue;
+    const of = tacheOfferte(T.code) && valeurPermis([T]) > 0;
+    // un dossier à la fois : la liste des documents s'ouvre avec « Voir les documents »
+    const ouv = S.docsOuv.has(T.code), nch = L.filter(p => S.removed.has(p.code) || fracDe(p.code) < 1).length;
+    nb += nch;
+    h += `<div class="lot" id="doc-${T.code}"><span class="lib">${esc(T.lib)}${estPerso(T.code) ? '<span class="perso">personnalisé</span>' : ""}</span><span class="mt num">${montantHtml(T.hon + T.frais, valeurPermis([T]))}</span>`;
+    h += `<span class="info">${nch ? pluriel(nch, "document") + " retiré" + (nch > 1 ? "s" : "") + " ou réduit" + (nch > 1 ? "s" : "") + " · " : ""}<button class="voir" type="button" data-docs="${T.code}" aria-expanded="${ouv}">${ouv ? "Fermer" : "Voir les documents"}<span class="chev">${ouv ? "▴" : "▾"}</span></button></span>`;
+    if (!ouv) { h += `</div>`; continue; }
+    if (of) h += `<span class="info">Offert avec la construction : rien à retirer.</span>`;
+    const pills = [];
+    for (const p of L) {
+      const ret = S.removed.has(p.code), g = genre(p.lib), m = mt.get(p.code);
+      if (g === "persp" && !of) {
+        const cur = ret ? 0 : fracDe(p.code);
+        h += `<span class="lbl-seg">${esc(p.lib)}${!ret && m > 0 ? " · " + usd(m) : ""}</span><div class="seg petit" role="group" aria-label="${esc(p.lib)}">${PERSP.map(([f, l]) => `<button type="button" data-persp="${p.code}" data-f="${f}" aria-pressed="${Math.abs(cur - f) < 0.001}">${l}</button>`).join("")}</div>`;
+      } else if (g === "plan" && !of) {
+        h += `<span class="lbl-seg">${esc(p.lib)}${!ret && m > 0 ? " · " + usd(m) : ""}</span><div class="rubs">${Object.entries(PLAN).map(([k, [l, f]]) => `<button type="button" class="rubp" data-plan="${p.code}" data-k="${k}" aria-pressed="${ret || S.planOff[p.code] === k}">${l} (${Math.round(f * 100)} %)</button>`).join("")}</div>`;
+      } else pills.push(`<button type="button" class="rubp" data-pc="${p.code}" aria-pressed="${ret}" ${of ? "disabled" : ""}>${esc(p.lib)}${!ret && m > 0 ? `<span class="num">${usd(m)}</span>` : ""}</button>`);
+    }
+    if (pills.length) h += `<div class="rubs">${pills.join("")}</div>`;
+    h += `</div>`;
+  }
+  $("docs").innerHTML = h || `<p class="hint">Choisissez d'abord les dossiers de la mission.</p>`;
+  $("docs-tout").hidden = !nb;
+  const gd = r2(sansDocs().total - R.total);
+  $("g-docs").textContent = gd > 0.005 ? "− " + usd(gd) : nb ? pluriel(nb, "changement") : "";
+  // 2. redevance FPC
+  const fa = fpcActif(), vf = r2(R.honE * P.fpct / 100);
+  $("fpc-corps").innerHTML = `<div class="opt"><span class="lib">Redevance FPC (${pct(P.fpct)} des études)</span><span class="switch"><input type="checkbox" id="fpc-ok" ${fa ? "checked" : ""} aria-label="Inclure la redevance FPC"><span></span></span><span class="meta">${fa ? "Comprise dans le total : " + usd(R.fpc) + "." : "Non comprise : " + usd(vf) + " de moins."}</span></div>`;
+  $("g-fpc").textContent = fa ? "" : "− " + usd(vf);
+  $("fpc-ok").onchange = e => { S.fpc = e.target.checked; render(); };
+  // 3. autre demande
+  $("g-autre").textContent = S.autre.trim() ? "à l'étude" : "";
+  $("a-note").hidden = !S.autre.trim();
+}
+function sansDocs() { const sv = { removed: S.removed, persp: S.persp, planOff: S.planOff }; S.removed = new Set([...S.removed].filter(c => !estDoc(c))); S.persp = {}; S.planOff = {}; const R = calc(); Object.assign(S, sv); return R; }
+function estDoc(code) { const t = code.replace(/\.\d+$/, ""); return retirables(t).some(p => p.code === code); }
+
+// gain de la construction confiée, à 70 % (sans l'acompte) ou à 100 % (avec l'acompte des 2/3 du devis du gros œuvre)
+function gainC(c23) { const a = S.c23; S.c23 = c23; const g = gainsConstr().gain; S.c23 = a; return g; }
+let CONSTR_CACHE = false;
+function renderEco() {
+  const ok = constrPossible(), g70 = ok ? gainC(false) : 0, g100 = ok ? gainC(true) : 0;
+  // sans offre de construction (projet trop grand), le paiement à la signature reste une économie
+  const gP = !(g70 > 0.005) && anticipPossible() ? r2(sansOption(() => { S.anticip = 0; }).total - sansOption(() => { S.anticip = 2; }).total) : 0;
+  $("t-eco").hidden = !(g70 > 0.005 || gP > 0.005); if ($("t-eco").hidden) S.eco = false;
+  $("t-eco").setAttribute("aria-expanded", S.eco); $("t-eco").textContent = "Faites des économies";
+  $("eco").hidden = !S.eco;
+  const m2 = P.cseuil.toLocaleString("fr-FR");
+  // seul le 70 % montre le détail des études ; le 100 % garde son titre et sa condition
+  if (S.eco && !(g70 > 0.005)) $("eco").innerHTML = `<div class="eco-g"><button type="button" class="eco-opt" data-eco="paie" aria-pressed="${S.anticip === 2}"><b>Payez toute la mission à la signature : −${pct(P.apct2)} sur les études</b><small>Vous gagnez ${usd(gP)}.</small></button>`
+    + `<p class="cond-eco">Condition : régler toute la mission en une fois, à la signature.</p></div>`;
+  else if (S.eco) $("eco").innerHTML = `<div class="eco-g"><button type="button" class="eco-opt" data-eco="70" aria-pressed="${S.constr && !S.c23}"><b>Construisez avec nous : −${P.crem} % sur les études</b><small>Vous gagnez ${usd(g70)}, dossier de permis et devis estimatif offerts.</small></button>`
+    + `<p class="cond-eco">Condition : nous confier la construction, pour un projet de moins de ${m2} m².</p></div>`
+    + `<div class="eco-g"><button type="button" class="eco-opt" data-eco="100" aria-pressed="${S.constr && S.c23}"><b>Jusqu'à −${P.crem2} % : vos études offertes</b></button>`
+    + `<p class="cond-eco">Condition : nous confier la construction et payer en acompte les 2/3 du devis du gros œuvre, comme inscrit dans le devis.</p></div>`;
+  // la carte construction double « Faites des économies » : elle n'apparaît qu'une fois la construction choisie
+  $("m-constr-bloc").hidden = CONSTR_CACHE || (!S.constr && !$("t-eco").hidden);
+  // juste avant l'envoi : rappel qu'il reste des économies possibles
+  const reste = r2(g100 - (S.constr ? (S.c23 ? g100 : g70) : 0));
+  const cb = $("c23-bloc"); cb.hidden = !(S.constr && ok);
+  $("c23").checked = !!S.c23;
+  // à 100 %, le client peut demander le devis du gros œuvre pour calculer son acompte des 2/3
+  if (!(S.constr && S.c23)) { S.demDevis = false; S.devConf = false; }
+  $("dev-conf").hidden = !S.devConf; $("b-dev").hidden = S.devConf;
+  $("c23-dev").hidden = cb.hidden || !S.c23;
+  $("b-dev").setAttribute("aria-pressed", S.demDevis);
+  $("b-dev").textContent = S.demDevis ? "✓ Demande de devis ajoutée" : "Demander le devis du gros œuvre";
+
+  $("c23-txt").textContent = S.c23 ? "" : "Remise de " + P.crem2 + " % au lieu de " + P.crem + " %" + (g100 - g70 > 0.005 ? " : " + usd(r2(g100 - g70)) + " de plus." : ".");
+}
+
+// ce que le client gagne : calcul sans l'option, avec le même choix pour la redevance FPC
+function sansOption(f, fpc) {
+  const sv = { constr: S.constr, anticip: S.anticip, fpc: S.fpc, devis: S.devis };
+  S.fpc = fpc != null ? fpc : fpcActif(); f(); const R = calc();
+  Object.assign(S, sv); return R;
+}
+function gainsConstr() {
+  // même mission des deux côtés : le devis offert avec la construction est compté à son prix sans elle
+  let d1 = ""; { const a = S.constr; S.constr = true; d1 = devisEff(); S.constr = a; }
+  // FPC comptée comme si la construction était confiée (elle s'active alors d'office), pour un gain identique avant et après le choix
+  const fc = S.fpc === null ? true : S.fpc;
+  const R0 = sansOption(() => { S.constr = false; S.devis = d1; }, fc), R1 = sansOption(() => { S.constr = true; S.devis = d1; }, fc);
+  const gain = r2(R0.total - R1.total), L = [];
+  if (gain <= 0.005) return { gain: 0, pct: 0, L };
+  // pièces offertes comptées à leur prix sans la construction ; le reste de l'écart vient des études à cpct %
+  const off = code => R1.rows.some(T => (T.code === code || (code === "DV" && DEVIS.includes(T.code))) && valeurPermis([T]) > 0)
+    ? r2(R0.rows.filter(T => T.code === code || (code === "DV" && DEVIS.includes(T.code))).reduce((a, T) => a + T.hon, 0)) : 0;
+  const pc = off("ETU-PC"), dv = off("DV"), et = r2(R0.hon - R1.hon - pc - dv), fp = r2(R0.fpc - R1.fpc);
+  if (et > 0.005) L.push(["Remise de " + remiseConstr() + " % sur les études", et]);
+  if (pc > 0.005) L.push(["Dossier de permis de construire offert", pc]);
+  if (dv > 0.005) L.push(["Devis estimatif des travaux offert", dv]);
+  if (fp > 0.005) L.push(["Redevance FPC allégée", fp]);
+  return { gain, pct: R0.total > 0 ? gain / R0.total * 100 : 0, rem: et > 0.005 ? remiseConstr() : 0, etu: r2(R1.honE), etu0: r2(R0.honE - pc - dv), L };
+}
+function gainTotal(R) { const d = devisEff(); const R0 = sansOption(() => { S.constr = false; S.anticip = 0; S.devis = d; }); return r2(R0.total - R.total); }
+
+// conditions de la construction confiée : remise de crem % sur les études sous cseuil m², permis et devis offerts sous pcseuil m²
+function texteConstr(sp) {
+  const et = constrPossible(), pc = permisPossible(), vs = sp > 0 ? " (votre projet : " + sp.toLocaleString("fr-FR") + " m²)" : "";
+  if (!et && !pc) return "Avantages réservés aux projets de moins de " + Math.max(P.cseuil, (P.pc || P.dv) ? P.pcseuil : 0) + " m²" + vs + ".";
+  const off = pc ? [P.pc ? "le dossier de permis" : "", P.dv ? "le devis estimatif" : ""].filter(Boolean) : [], L = [];
+  if (et) L.push("la remise de " + remiseConstr() + " % sur les études est annulée");
+  if (off.length) L.push(off.join(" et ") + (off.length > 1 ? " deviennent dus" : " devient dû"));
+  const c23 = et && S.constr && S.c23 ? " La remise de " + remiseConstr() + " % suppose l'acompte des 2/3 du devis du gros œuvre ; sans cet acompte, elle revient à " + P.crem + " %." : "";
+  return "Condition : si la construction n'est finalement pas confiée à l'architecte, " + L.join(" et ") + "." + c23;
+}
+
+function renderOffre(R) {
+  const box = $("o-res");
+  if (!(S.offre > 0)) { box.hidden = true; return; }
+  const V = verdict(R, honOffre(R, S.offre));
+  let h = "";
+  // tarif jugé trop cher : l'architecte propose d'abord le paiement à la signature
+  if (V.v !== "ACC" && S.anticip === 0 && anticipPossible()) {
+    const old = S.anticip; S.anticip = 1; const R1 = calc(); S.anticip = 2; const R2 = calc(); S.anticip = old;
+    // seulement si l'offre est dans la fourchette du rabais (au moins le total avec le plus grand rabais)
+    if (R1.total < R.total - 0.005 && S.offre >= R2.total - 0.005) h += `<div class="verdict s23 mini"><b>Payez à la signature et ayez une réduction</b><span>Jusqu'à ${usd(r2(R.total - R2.total))} de moins.</span><div class="rangee"><button class="btn" type="button" data-anticip="2" title="${usd(R2.total)} au total">Tout (−${pct(P.apct2)})</button><button class="btn sec" type="button" data-anticip="1" title="${usd(R1.total)} au total">${P.aseuil} % (−${pct(P.apct)})</button></div></div>`;
+  }
+  if (V.v === "ACC") h += `<div class="verdict ok"><b>Votre offre couvre la proposition.</b><span>Envoyez-la à l'architecte pour lancer les études.</span></div>`;
+  else if (V.v === "MARGE") h += `<div class="verdict ok"><b>Offre recevable sans rien retirer.</b><span>L'architecte peut l'accepter pour toute la mission choisie : ${usd(S.offre)} au total.</span></div>`;
+  else if (V.v === "NEGO") {
+    const ret = R.comps.filter(c => c.nature === "Honoraires" && !V.g.get(c));
+    h += `<div class="verdict nego"><b>Possible en retirant ${pluriel(ret.length, "pièce facultative")} :</b><ul>${ret.map(c => `<li>${esc(c.task.lib)} : ${esc(c.lib)}</li>`).join("")}</ul><button class="btn sec" type="button" id="o-appl">Retirer ces pièces</button></div>`;
+    box.dataset.ret = ret.map(c => c.code).join(";");
+  } else if (V.v === "ALT") {
+    h += `<div class="verdict nego"><b>Trop bas pour toute la mission.</b><span>Avec ce montant, l'architecte peut faire : ${esc(V.taches.map(T => T.lib).join(", "))}.</span><button class="btn sec" type="button" id="o-alt">Choisir cette mission</button></div>`;
+    box.dataset.alt = V.taches.map(T => T.code).join(";");
+  } else h += `<div class="verdict bas"><b>Montant trop bas pour cette mission.</b><span>L'avant-projet sommaire seul est la mission de base : réduisez la mission ou proposez un autre montant.</span></div>`;
+  const desc = descenteOuv(R);
+  // descente facultative et « Ajuster la mission » côte à côte
+  const bas = V.v === "ALT" || V.v === "BAS" || V.v === "NEGO";
+  // la descente facultative se retire dans « Ajuster la mission »
+  const ad = $("aju-desc"); ad.hidden = !desc; if (desc) $("aju-desc-m").textContent = usd(desc.mont);
+  if (!bas) S.archAju = false;
+  if (bas && S.archAju) h += `<div class="verdict arch"><b>✓ L'architecte ajustera la mission à votre prix : ${usd(S.offre)}.</b><span>Il vous répondra avec ce qu'il peut faire pour ce montant.</span><div class="rangee"><button class="btn b23" type="button" id="o-env">Envoyer à l'architecte</button><button class="btn sec" type="button" id="o-aju">J'ajuste plutôt moi-même</button></div></div>`;
+  else if (bas && !S.aju) h += `<div class="verdict deux"><b>Prix impossible pour cette mission. Que voulez-vous faire ?</b><div class="rangee"><button class="btn sec" type="button" id="o-aju">J'ajuste moi-même</button><button class="btn b23" type="button" id="o-arch">L'architecte ajuste</button></div><span>Vous retirez vous-même des dossiers ou des documents, ou vous envoyez votre prix et l'architecte ajuste la mission.</span></div>`;
+  box.innerHTML = h; box.hidden = false;
+  const oh = $("o-arch"); if (oh) oh.onclick = () => { S.archAju = true; S.aju = false; S.ajuOk = false; render(); $("o-res").scrollIntoView({ behavior: "smooth", block: "nearest" }); };
+  const oe = $("o-env"); if (oe) oe.onclick = () => $("p-envoyer").onclick();
+  const oa = $("o-aju"); if (oa) oa.onclick = () => { S.archAju = false; S.aju = true; S.ajuOk = false; render(); $("m-det").open = true; $("b-aju").scrollIntoView({ behavior: "smooth", block: "start" }); };
+  if (S.feu && V.v !== "BAS") feu();
+  S.feu = false;
+  box.querySelectorAll("[data-anticip]").forEach(b => b.onclick = () => { choisirPaie(+b.dataset.anticip); feu(); });
+  $("aju-desc-b").onclick = () => { if (desc) { S.removed.add(desc.code); render(); } };
+  const a = $("o-appl"); if (a) a.onclick = () => { box.dataset.ret.split(";").forEach(c => S.removed.add(c)); render(); };
+  const b = $("o-alt"); if (b) b.onclick = () => {
+    const keep = box.dataset.alt.split(";");
+    if (MODE === "prop") PROP.taches.forEach(t => { if (!t.fixe && !keep.includes(t.code)) S.sansPhase.add(t.code); });
+    else { S.missions = new Set(keep.filter(c => PHASES.includes(c))); S.devis = ""; S.pri = false; }
+    render();
+  };
+}
+
+const v = id => $(id).value.trim().replace(/[|\n]/g, " / ");
+const nomClient = () => MODE === "libre" ? v("cl-nom") : v("e-nom");
+const telClient = () => MODE === "libre" ? v("cl-tel") : v("e-tel");
+function codeExcel(R) {
+  const tel = telClient(), nom = nomClient();
+  let f;
+  if (MODE === "prop") f = ["HSP1", "num=" + (PROP.num || ""), "client=" + nom, "tel=" + tel, "x=" + [...S.sansPhase].join(";"), "c=" + (S.constr && constrUtile() ? 1 : 0), "c23=" + (S.constr && S.c23 && constrPossible() ? 1 : 0), "dg=" + (S.demDevis ? 1 : 0), "a=" + S.anticip, "fpc=" + (fpcActif() ? 1 : 0), "r=" + [...S.removed].join(";"), ...extraCode(), "total=" + R.total];
+  else f = ["HSM1", "client=" + nom, "tel=" + tel, "adr=" + v("cl-adr"), "rep=" + v("cl-rep"), "intitule=" + v("pr-int"), "contenu=" + v("pr-cont"), "chantier=" + v("pr-chantier"),
+    "terrain=" + (+S.long || 0) + "x" + (+S.larg || 0), "emp=" + S.emp, "type=" + nomType().replace(/[|\n]/g, " / "), "s=" + surface(), "niv=" + nivTexte(), "et=" + (niveaux() - 1), "ss=" + (S.ss ? 1 : 0), "toit=" + S.toit, "global=" + (S.global || 0), "cplx=" + cplxEff(),
+    "m=" + PHASES.filter(c => S.missions.has(c)).concat(devisEff() ? [devisEff()] : []).join(";"), "pri=" + (S.pri ? 1 : 0), "ouv=" + (S.sansOuv ? 0 : 1), "c=" + (S.constr && constrUtile() ? 1 : 0), "c23=" + (S.constr && S.c23 && constrPossible() ? 1 : 0), "dg=" + (S.demDevis ? 1 : 0), "a=" + S.anticip, "fpc=" + (fpcActif() ? 1 : 0), "r=" + [...S.removed].join(";"), ...extraCode(), "total=" + R.total];
+  if (S.rep === "offre" && S.offre > 0) f.push("offre=" + honOffre(R, S.offre), "offre_totale=" + S.offre);
+  return f.join("|").replace(/\n/g, " ");
+}
+function ajuste() { return S.rep === "offre" && !!S.aju; }
+// prix impossible : le client envoie son prix et laisse l'architecte ajuster la mission (Wanja, 2026-10-31)
+function archAjuste() { return S.rep === "offre" && S.offre > 0 && !!S.archAju; }
+// page web seulement : documents réduits (code:part), dossiers personnalisés, paiement et réponse
+function extraCode() {
+  const f = [...Object.keys(S.persp), ...Object.keys(S.planOff)].filter(c => !S.removed.has(c)).map(c => c + ":" + r2(fracDe(c)));
+  const perso = calc().rows.filter(T => estPerso(T.code)).map(T => T.code);
+  return ["f=" + f.join(";"), "perso=" + perso.join(";"), "paie=" + (S.pay === "une" ? "U" : S.pay === "phase" ? "D" : ""), "reponse=" + (S.rep || "").toUpperCase(), "aju=" + (archAjuste() ? 2 : ajuste() ? 1 : 0), "autre=" + (ajuste() && S.autre.trim() ? 1 : 0)];
+}
+function texteMessage(R) {
+  const nom = nomClient();
+  const L = ["Bonjour Architecte,", ""];
+  if (MODE === "prop") {
+    L.push((nom ? nom + " : " : "") + "voici ma réponse à votre proposition d'honoraires" + (PROP.num ? " " + PROP.num : "") + ".");
+    if (S.sansPhase.size) L.push("Phases retirées : " + PROP.taches.filter(t => S.sansPhase.has(t.code)).map(t => t.lib).join(", ") + ".");
+  } else {
+    L.push((nom ? nom + " : " : "") + "voici la mission que je souhaite vous confier.");
+    if (v("pr-int")) L.push("Projet : " + v("pr-int") + (v("pr-chantier") ? ", " + v("pr-chantier") : "") + ".");
+    L.push(nomType() + ", terrain de " + (+S.long || 0) + " × " + (+S.larg || 0) + " m (" + (+S.emp === 90 ? "toute la parcelle" : "emprise " + S.emp + " %") + "), " + nivTexte() + " (" + nivTotal() + " niveau" + (nivTotal() > 1 ? "x" : "") + ", " + S.toit.toLowerCase() + ") soit " + surface().toLocaleString("fr-FR") + " m², complexité " + cplxEff().toLowerCase() + ".");
+    L.push("Mission : " + R.rows.filter(T => T.code !== "ETU-OUV").map(libDossier).join(", ") + ".");
+  }
+  const offerts = R.rows.filter(T => valeurPermis([T]) > 0).map(T => T.code === "ETU-PC" ? "dossier de permis offert" : "devis offert");
+  if (facteurConstr() < 1 || offerts.length) L.push("Je vous confie aussi la construction (" + [facteurConstr() < 1 ? "remise de " + remiseConstr() + " % sur les études" : "", ...offerts].filter(Boolean).join(", ") + ").");
+  if (S.constr && S.c23 && constrPossible()) { L.push("Je paie les 2/3 du devis du gros œuvre en acompte."); if (S.demDevis) L.push("Je demande le devis du gros œuvre."); }
+  if (S.anticip > 0) L.push("Je paie " + texteAnticip(S.anticip) + " à la signature" + (anticipActif() ? " (études à " + pct(100 - pctA()) + ")" : "") + ".");
+  else if (S.pay === "phase") L.push("Je paie dossier par dossier.");
+  if (S.rep === "acc") L.push(MODE === "prop" ? "La proposition me convient." : "La mission me convient.");
+  for (const T of R.rows) { const d = docsTexte(T.code); if (d) L.push(libDossier(T) + " : " + d + "."); }
+  if (sansOuverture()) L.push("Sans ouverture du dossier : je la paierai si l'architecte descend sur le terrain.");
+  if (!fpcActif()) L.push("Redevance FPC non comprise.");
+  L.push("Total : " + usd(R.total) + ".");
+  if (ajuste() && S.autre.trim()) L.push("Autre demande : " + S.autre.trim());
+  const com = $("e-com").value.trim(); if (com) L.push("Commentaire : " + com);
+  if (S.rep === "offre" && S.offre > 0) L.push("Mon offre : " + usd(S.offre) + "." + (archAjuste() ? " Ce prix ne couvre pas toute la mission : je vous laisse l'ajuster à ce montant." : ""));
+  const tel = telClient(); if (tel) L.push("Mon téléphone : " + tel);
+  L.push("", "Code : " + codeExcel(R));
+  return L.join("\n");
+}
+function renderMessage(R) {
+  const t = texteMessage(R);
+  $("e-msg").textContent = t;
+  const wa = (P.arch.wa || "").replace(/\D/g, "");
+  $("e-wa").href = "https://wa.me/" + wa + "?text=" + encodeURIComponent(t);
+  const tel = (P.arch.tel || P.arch.wa || "").replace(/\D/g, ""), mail = P.arch.mail || "";
+  $("e-sms").href = "sms:" + (tel ? "+" + tel : "") + "?&body=" + encodeURIComponent(t);
+  $("e-mail").href = "mailto:" + mail + "?subject=" + encodeURIComponent(MODE === "prop" ? "Réponse à la proposition d'honoraires" + (PROP.num ? " " + PROP.num : "") : "Mission d'architecte : " + (nomClient() || "nouveau client")) + "&body=" + encodeURIComponent(t);
+  // envoi possible une fois le paiement et la réponse choisis
+  const bl = archAjuste() ? "" : !S.rep ? "Choisissez votre réponse : vous acceptez le prix, ou vous proposez le vôtre." : S.rep === "offre" && !(S.offre > 0) ? "Indiquez votre prix, puis touchez « Vérifier »." : !S.ajuOk ? "Validez la mission et le prix." : !S.pay ? "Choisissez le mode de paiement." : "";
+  $("e-pret").textContent = bl ? "" : "Votre message est prêt : votre choix et le code pour l'architecte partent avec l'envoi." + (S.demDevis ? " Il comprend votre demande de devis du gros œuvre." : "");
+  $("e-bloque").hidden = !bl; $("e-bloque").textContent = bl;
+  ["e-wa", "e-sms", "e-mail"].forEach(id => $(id).setAttribute("aria-disabled", bl ? "true" : "false"));
+  $("e-copier").disabled = !!bl;
+  $("e-num").textContent = [wa ? "WhatsApp : +" + wa : "", tel && tel !== wa ? "SMS : +" + tel : "", mail ? "E-mail : " + mail : ""].filter(Boolean).join("  ·  ") || "Les coordonnées de l'architecte seront ajoutées par Honoraire automatisé.";
+}
+
+// maison dessinée : largeur selon la part de la parcelle, un étage par niveau (6 au plus), toit ou terrasse
+function dessinerMaison() {
+  const n = Math.min(niveaux(), 6), hN = 16, w = Math.round(44 + 52 * ((+S.emp || 90) - 40) / 50), x = Math.round((120 - w) / 2);
+  const toit = S.toit === "Terrasse" ? 6 : 22, H = toit + n * hN + 8, y0 = H - 6;
+  let g = `<rect class="m-parc" x="4" y="${y0 - n * hN - toit + 2}" width="112" height="${n * hN + toit - 2}" rx="3"/>`;
+  for (let i = 0; i < n; i++) {
+    const y = y0 - (i + 1) * hN;
+    g += `<rect class="m-mur" x="${x}" y="${y}" width="${w}" height="${hN}"/>`;
+    const nf = Math.max(2, Math.floor(w / 22));
+    for (let k = 0; k < nf; k++) {
+      const fx = x + (k + 0.5) * w / nf - 4;
+      if (i === 0 && k === Math.floor(nf / 2)) g += `<rect class="m-porte" x="${fx}" y="${y + 5}" width="8" height="${hN - 5}" rx="1"/>`;
+      else g += `<rect class="m-fen" x="${fx}" y="${y + 4}" width="8" height="7" rx="1"/>`;
+    }
+  }
+  const yt = y0 - n * hN;
+  g += S.toit === "Terrasse"
+    ? `<rect class="m-toit" x="${x - 3}" y="${yt - 5}" width="${w + 6}" height="5"/>`
+    : `<path class="m-toit" d="M${x - 6} ${yt} L60 ${yt - toit + 3} L${x + w + 6} ${yt} Z"/>`;
+  g += `<line class="m-sol" x1="2" y1="${y0}" x2="118" y2="${y0}"/>`;
+  if (S.ss) g += `<rect class="m-ss" x="${x}" y="${y0 + 1}" width="${w}" height="${hN - 3}"/>`;
+  const svg = $("p-maison"); svg.setAttribute("viewBox", `0 0 120 ${H + (S.ss ? hN : 0)}`); svg.innerHTML = g;
+}
+
+// feux d'artifice : quelques gerbes de couleur, deux secondes (rien si l'appareil demande moins d'animations)
+function feu() {
+  if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const cv = $("feu"), dpr = window.devicePixelRatio || 1, W = innerWidth, H = innerHeight;
+  cv.hidden = false; cv.width = W * dpr; cv.height = H * dpr;
+  const g = cv.getContext("2d"); g.scale(dpr, dpr);
+  const couleurs = ["#F59E0B", "#22C55E", "#3B82F6", "#EF4444", "#A855F7", "#FACC15"], parts = [];
+  for (let k = 0; k < 5; k++) {
+    const x = W * (0.15 + 0.7 * Math.random()), y = H * (0.18 + 0.35 * Math.random()), c = couleurs[k % couleurs.length], t0 = k * 180;
+    for (let i = 0; i < 60; i++) { const a = Math.PI * 2 * i / 60, v = 2 + Math.random() * 3.2; parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, c, t0 }); }
+  }
+  const debut = performance.now();
+  (function pas(now) {
+    const t = now - debut; g.clearRect(0, 0, W, H);
+    for (const p of parts) {
+      const u = (t - p.t0) / 16; if (u < 0) continue;
+      const vie = 1 - u / 80; if (vie <= 0) continue;
+      g.globalAlpha = vie; g.fillStyle = p.c;
+      g.beginPath(); g.arc(p.x + p.vx * u, p.y + p.vy * u + 0.03 * u * u, 3.2, 0, Math.PI * 2); g.fill();
+    }
+    if (t < 2200) requestAnimationFrame(pas); else { g.clearRect(0, 0, W, H); cv.hidden = true; }
+  })(debut);
+}
+
+// ---------------------------------------------------------------- événements
+// message d'accueil écrit lettre par lettre (affiché d'un coup si l'appareil demande moins d'animations)
+function ecrireMerci(txt, titre) {
+  // bande d'annonce défilante : titre en gras, message, signature ; deux copies pour une boucle sans à-coup
+  const p = $("merci-texte"), sg = $("merci-sign").textContent;
+  const T = titre && txt.startsWith(titre) ? titre : "", B = txt.slice(T.length).trim();
+  const un = (cache) => `<span class="a-u"${cache ? ' aria-hidden="true"' : ""}><b>${esc(T)}</b> ${esc(B)} <i>${esc(sg)}</i><span class="a-sep" aria-hidden="true"></span></span>`;
+  p.innerHTML = un(false) + un(true);
+  requestAnimationFrame(() => { const w = p.firstElementChild ? p.firstElementChild.offsetWidth : 0; if (w) p.style.setProperty("--dur", Math.max(16, Math.round(w / 45)) + "s"); });
+}
+function numeroter() { document.querySelectorAll("[data-etape]").forEach((el, i, all) => { const vis = [...all].filter(x => !x.closest("section").hidden); el.textContent = vis.indexOf(el) + 1; }); }
+function init() {
+  const libre = MODE === "libre";
+  $("c-projet").hidden = !libre; $("e-champs").hidden = libre; $("c-resume").hidden = libre; $("m-pack").hidden = !libre; $("m-det").open = false; $("c-mission").classList.toggle("prop", !libre);
+  $("m-det").ontoggle = () => { S.ouvMis = $("m-det").open; render(); }; $("m-devis-bloc").hidden = !libre; CONSTR_CACHE = !libre && !constrUtile() && !PROP.constr && !PROP.pco; $("m-constr-bloc").hidden = CONSTR_CACHE; $("cl-champs").hidden = !libre; 
+  numeroter();
+  const sign = "— " + [P.arch.nom, P.arch.titre].filter(Boolean).join(", ");
+  const hh = new Date().getHours();
+  $("s-h").textContent = hh < 12 ? "Bonjour" : hh < 18 ? "Bon après-midi" : "Bonsoir";
+  $("s-n").textContent = (libre ? "Bienvenue" : (PROP.client || "Bienvenue")) + " !";
+  $("merci-sign").textContent = sign;
+  const bienv = "Bienvenue dans votre page premium" + (!libre && PROP.client ? ", " + PROP.client : "") + ".";
+  ecrireMerci(bienv + " " + (libre
+    ? "Merci d'avoir choisi notre cabinet pour votre projet : nous tenons à le mener avec vous jusqu'au bout, de l'esquisse au chantier. Choisissez ci-dessous ce que vous voulez nous confier."
+    : "Merci de votre confiance. Nous tenons à poursuivre ce projet avec vous : ajustez la proposition à votre budget, nous trouverons ensemble la bonne formule."), bienv);
+  if (libre) {
+    $("h-eyebrow").textContent = "Honoraire sur mesure";
+    $("h-titre1").textContent = "Choisissez la mission à confier à l'architecte";
+    $("h-sub").textContent = "Décrivez votre projet, choisissez les phases : le prix se calcule tout de suite.";
+    $("m-titre").textContent = "Votre mission : vous avez le choix";
+    $("m-hint").innerHTML = "<b>Vous avez le choix.</b> Prenez une mission toute faite, puis dites si le prix vous convient. Pour composer la vôtre, proposez votre prix : « Ajuster la mission » permet d'ajouter ou de retirer des dossiers et des documents.";
+    $("p-type").innerHTML = P.m2.map(([n, v]) => `<option value="${esc(n)}">${esc(n)} (${v} $/m²)</option>`).join("") + `<option value="Autre">Autre, à préciser (${m2Type(TYPE_REF)} $/m²)</option>`;
+  } else {
+    $("h-eyebrow").textContent = "Proposition d'honoraires" + (PROP.num ? " · " + PROP.num : "");
+    // le nom du client est dans la salutation : la carte noire donne l'objet de la proposition
+    $("h-titre1").textContent = PROP.intitule || PROP.client || "Votre proposition";
+    $("h-sub").textContent = [PROP.intitule ? "Pour " + (PROP.client || "vous") : "", PROP.date ? "établie le " + PROP.date + (PROP.validite ? ", valable " + PROP.validite + " jours" : "") : ""].filter(Boolean).join(" · ");
+    $("m-titre").textContent = "La mission proposée";
+    $("m-hint").innerHTML = "<b>Vous avez le choix.</b> Le prix vous convient, ou vous proposez le vôtre : « Ajuster la mission » permet ensuite de retirer des dossiers ou des documents.";
+    $("d-acc").textContent = "La proposition et son prix me conviennent.";
+    $("e-nom").value = PROP.client || "";
+  }
+  $("p-type").onchange = e => { S.type = e.target.value; render(); };
+  $("p-autre").oninput = e => { S.typeAutre = e.target.value; renderMessage(calc()); };
+  $("p-long").oninput = e => { S.long = +e.target.value || 0; render(); };
+  $("p-larg").oninput = e => { S.larg = +e.target.value || 0; render(); };
+  $("p-emp").onclick = e => { const b = e.target.closest("button"); if (b) { S.emp = +b.dataset.v; render(); } };
+  ["cl-nom", "cl-tel", "cl-adr", "cl-rep", "pr-int", "pr-cont", "pr-chantier"].forEach(id => $(id).oninput = () => renderMessage(calc()));
+  $("p-et").oninput = e => { S.et = Math.max(0, Math.floor(+e.target.value || 0)); render(); };
+  $("p-ss").onclick = e => { const b = e.target.closest("button"); if (b) { S.ss = +b.dataset.v; render(); } };
+  $("p-toit").onclick = e => { const b = e.target.closest("button"); if (b) { S.toit = b.dataset.v; render(); } };
+  document.querySelectorAll("[data-pas]").forEach(b => b.onclick = () => { S.et = Math.max(0, Math.min(30, (+S.et || 0) + +b.dataset.pas)); $("p-et").value = S.et; render(); });
+  $("p-global").oninput = e => { S.global = +e.target.value || 0; render(); };
+  $("p-cplx").onclick = e => { const b = e.target.closest("button"); if (b) { S.cplx = b.dataset.v; render(); } };
+  $("m-pack").onclick = e => { const b = e.target.closest("button"); if (b) { const M = MISSIONS.find(x => x[0] === b.dataset.v); S.missions = new Set(PHASES.filter(c => TASKS[c].packs.includes(M[0]))); S.devis = M[4]; render(); } };
+  // valider la mission : la réponse (prix accepté ou proposé), puis le paiement et l'envoi apparaissent
+  // valider les ajustements : le mode de paiement apparaît ensuite
+  $("aju-ok").onclick = () => { const neuf = !S.ajuOk; S.ajuOk = true; render(); if (neuf) $("c-rep").scrollIntoView({ behavior: "smooth", block: "nearest" }); };
+  $("t-eco").onclick = () => { S.eco = !S.eco; render(); };
+  $("eco").onclick = e => { const b = e.target.closest("[data-eco]"); if (!b) return;
+    if (b.dataset.eco === "paie") { const avant = gainTotal(calc()); S.eco = false; choisirPaie(2); if (gainTotal(calc()) > avant) feu(); return; }
+    const avant = gainTotal(calc()); S.constr = true; S.c23 = b.dataset.eco === "100"; S.eco = false; render(); if (gainTotal(calc()) > avant) feu(); $("m-constr-bloc").scrollIntoView({ behavior: "smooth", block: "center" }); };
+  // la demande de devis passe par Accepter / Annuler avant d'aller dans le message
+  $("b-dev").onclick = () => { if (S.demDevis) { S.demDevis = false; render(); } else { S.devConf = true; render(); } };
+  $("dev-non").onclick = () => { S.devConf = false; render(); };
+  $("dev-ok").onclick = () => { S.devConf = false; S.demDevis = true; render(); { const m = $("e-pret"); m.closest("section").scrollIntoView({ behavior: "smooth", block: "start" }); m.classList.remove("flash"); void m.offsetWidth; m.classList.add("flash"); } };
+  $("c23").onchange = e => { S.c23 = e.target.checked; render(); if (S.c23) feu(); };
+  $("m-constr").onclick = e => { const b = e.target.closest("button"); if (b) { const avant = S.constr; S.constr = b.dataset.v === "1"; render(); if (S.constr && !avant && gainsConstr().gain > 0) feu(); } };
+  $("e-com").oninput = () => renderMessage(calc());
+  $("m-devis").onclick = e => { const b = e.target.closest("button"); if (b) { S.devis = b.dataset.v; render(); } };
+  $("m-phases").onchange = e => {
+    const x = e.target, c = x.dataset.phase;
+    if (c) {
+      if (MODE === "prop") { x.checked ? S.sansPhase.delete(c) : S.sansPhase.add(c); }
+      else if (c === "ETU-PRI") S.pri = x.checked; else if (c === "ETU-OUV") S.sansOuv = !x.checked; else x.checked ? S.missions.add(c) : S.missions.delete(c);
+    }
+    render();
+  };
+  $("m-phases").onclick = e => {
+    const b = e.target.closest("[data-voir]"); if (b) { const c = b.dataset.voir; S.ouverts.has(c) ? S.ouverts.delete(c) : S.ouverts.add(c); render(); return; }
+    // lien vers « Ajuster la mission » (sous « Je veux proposer un prix »)
+    const a = e.target.closest("[data-aju]"); if (!a) return;
+    S.rep = "offre"; S.aju = true; S.ajuOk = false; S.docsOuv.add(a.dataset.aju); render(); $("s-docs").open = true; const el = $("doc-" + a.dataset.aju) || $("s-docs"); el.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+  // paiement
+  $("p-une").onclick = () => choisirPaie(2);
+  $("p-envoyer").onclick = () => { const t = document.querySelector(".total"), y = $("c-envoi").getBoundingClientRect().top + scrollY - (t ? t.offsetHeight : 0) - 10; scrollTo({ top: y, behavior: "smooth" }); const b = $("e-wa"); setTimeout(() => b && b.focus({ preventScroll: true }), 450); };
+  $("p-phase").onclick = () => choisirPaie(S.pay === "phase" ? S.anticip : 0);
+  $("bonus").onclick = e => { const b = e.target.closest("[data-anticip]"); if (b) { choisirPaie(+b.dataset.anticip); feu(); } };
+  $("fin").onchange = e => { if (e.target.id === "a-70") { choisirPaie(e.target.checked ? 1 : 0); if (e.target.checked) feu(); } };
+  // réponse
+  ["acc", "offre"].forEach(c => $("c-" + c).onclick = () => { if (S.rep !== c) { S.ajuOk = false; S.archAju = false; } S.rep = c; render(); $("b-" + c).scrollIntoView({ behavior: "smooth", block: "nearest" }); if (c === "offre") $("o-montant").focus({ preventScroll: true }); });
+  $("docs").onclick = e => {
+    const x = e.target.closest("button"); if (!x || x.disabled) return;
+    if (x.dataset.docs) { const c = x.dataset.docs; S.docsOuv.has(c) ? S.docsOuv.delete(c) : S.docsOuv.add(c); }
+    else if (x.dataset.pc) { const c = x.dataset.pc; S.removed.has(c) ? S.removed.delete(c) : S.removed.add(c); }
+    else if (x.dataset.persp) { const c = x.dataset.persp, f = +x.dataset.f; delete S.persp[c]; if (f === 0) S.removed.add(c); else { S.removed.delete(c); if (f < 1) S.persp[c] = f; } }
+    else if (x.dataset.plan) {
+      // garder les deux parts, une seule, ou aucune (la vue en plan est alors retirée)
+      const c = x.dataset.plan, k = x.dataset.k, garde = new Set(S.removed.has(c) ? [] : Object.keys(PLAN).filter(p => p !== S.planOff[c]));
+      garde.has(k) ? garde.delete(k) : garde.add(k);
+      delete S.planOff[c];
+      if (!garde.size) S.removed.add(c); else { S.removed.delete(c); if (garde.size === 1) S.planOff[c] = Object.keys(PLAN).find(p => !garde.has(p)); }
+    } else return;
+    render();
+  };
+  $("docs-tout").onclick = () => { S.removed = new Set([...S.removed].filter(c => !estDoc(c))); S.persp = {}; S.planOff = {}; render(); };
+  $("a-txt").oninput = e => { S.autre = e.target.value; $("g-autre").textContent = S.autre.trim() ? "à l'étude" : ""; $("a-note").hidden = !S.autre.trim(); renderMessage(calc()); };
+  $("e-orig").onclick = () => {
+    Object.assign(S, { removed: new Set(), sansPhase: new Set(), persp: {}, planOff: {}, rep: null, aju: false, archAju: false, ajuOk: false, autre: "", offre: null, sansOuv: false }, S0);
+    $("a-txt").value = ""; $("o-montant").value = ""; $("e-com").value = ""; render();
+  };
+  $("o-verif").onclick = () => { S.offre = +$("o-montant").value || null; S.ajuOk = false; S.archAju = false; S.feu = true; render(); };
+  $("o-montant").onkeydown = e => { if (e.key === "Enter") $("o-verif").click(); };
+  $("e-nom").oninput = () => renderMessage(calc());
+  $("e-tel").oninput = () => renderMessage(calc());
+  $("e-copier").onclick = () => copier(texteMessage(calc()), $("e-msg"), $("e-ok"));
+  render();
+}
+// mode de paiement : 2 = tout à la signature (en une fois), 1 = au moins aseuil % à la signature, 0 = dossier par dossier
+function choisirPaie(a) { const neuf = !S.pay; S.anticip = a; S.pay = a === 2 ? "une" : "phase"; render(); if (neuf) $("p-rappel").scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+function copier(t, el, ok) {
+  const fin = () => { ok.hidden = false; setTimeout(() => ok.hidden = true, 2500); };
+  const sel = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+  try { navigator.clipboard.writeText(t).then(fin, sel); } catch (e) { sel(); }
+}
+init();
+</script>
+
+</body>
+</html>
