@@ -816,6 +816,23 @@ details.sous > summary .t, details.plus > summary { color: var(--titre); }
 details.sous > summary .n { background: var(--titre-pale) !important; color: var(--titre) !important; }
 details.sous[open] > summary .n { background: var(--titre) !important; color: #161618 !important; }
 details.sous[open] { border-color: rgba(138, 180, 248, .35); }
+/* logo wn. architecture (animation : le point d'abord, puis les lettres qui se posent) */
+.wnl{display:inline-flex;flex-direction:column;align-items:flex-start;white-space:nowrap;line-height:1;color:var(--wnl-c,#F2F0E8);font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;text-decoration:none}
+.wnl .wl-wn{font-weight:700;letter-spacing:-.12em}
+.wnl .wl-wn b,.wnl .wl-mot b{font-weight:inherit;display:inline-block}
+.wnl .wl-p{font-style:normal;color:var(--wnl-p,#BAB2A2);margin-left:.06em;display:inline-block}
+.wnl .wl-ar{display:block;font-size:.22em;font-weight:400;letter-spacing:.32em;margin-top:.5em;padding-left:.05em}
+.wnl.go .wl-p{animation:wnl-point 1.2s cubic-bezier(.5,0,.2,1) both}
+.wnl.go .wl-n{animation:wnl-sort .55s .9s cubic-bezier(.2,.7,.2,1) both}
+.wnl.go .wl-w{animation:wnl-sort .55s 1.02s cubic-bezier(.2,.7,.2,1) both}
+.wnl.go .wl-mot b{animation:wnl-pose .42s cubic-bezier(.3,0,.3,1) both;animation-delay:calc(1.35s + var(--i) * .07s)}
+@keyframes wnl-point{0%{opacity:0;transform:translateX(-1.1em) scale(0)}30%{opacity:1;transform:translateX(-1.1em) scale(1.6)}55%{transform:translateX(-1.1em) scale(1)}100%{opacity:1;transform:none}}
+@keyframes wnl-sort{from{opacity:0;transform:translateX(.5em)}to{opacity:1;transform:none}}
+@keyframes wnl-pose{0%{opacity:0;transform:translateY(-1.2em)}70%{opacity:1;transform:translateY(.05em)}100%{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.wnl.go *{animation:none!important}}
+.wnl .wl-p,.wnl b{background:none;padding:0;border-radius:0}
+.salut .wnl.cl{font-size:30px;flex:none;align-self:flex-start;margin-top:6px;--wnl-c:#E9E9EC}
+@media (max-width:539px){.salut .wnl.cl{font-size:24px}}
 </style>
 </head>
 <body>
@@ -838,7 +855,7 @@ details.sous[open] { border-color: rgba(138, 180, 248, .35); }
   <div class="wrap"><div class="tete">
     <div class="salut"><div class="s-txt"><span class="s-h" id="s-h">Bonjour</span><b class="s-n" id="s-n"></b>
       <div class="ident"><span class="nom" id="h-nom"></span><span class="titre" id="h-titre"></span></div></div>
-      <span class="logo avatar"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V11l4-3v13M9 21V6l6-3v18M15 21V10h4v11"/><path d="M12 9v2M12 14v2M17 13v1M17 16v1"/></svg></span></div>
+      <span class="wnl go cl" role="img" aria-label="wn. architecture"><span class="wl-wn" aria-hidden="true"><b class="wl-w">w</b><b class="wl-n">n</b><i class="wl-p">.</i></span><span class="wl-ar" aria-hidden="true"><span class="wl-mot"><b style="--i:0">A</b><b style="--i:1">R</b><b style="--i:2">C</b><b style="--i:3">H</b><b style="--i:4">I</b><b style="--i:5">T</b><b style="--i:6">E</b><b style="--i:7">C</b><b style="--i:8">T</b><b style="--i:9">U</b><b style="--i:10">R</b><b style="--i:11">E</b></span></span></span></div>
     <div class="noir">
     <div class="pcard"><svg class="villa" viewBox="0 0 320 170" aria-hidden="true" preserveAspectRatio="xMaxYMax meet">
   <defs>

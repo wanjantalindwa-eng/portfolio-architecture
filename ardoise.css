@@ -49,3 +49,21 @@ dialog::backdrop{backdrop-filter:none;background:#0b0b0ce6}
 #toast.on{opacity:1}
 @media(max-width:1200px){.espacegrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:760px){.espace{padding:45px 0 40px}.espacegrid{grid-template-columns:1fr}.ecarte{padding:20px}.header nav .navlink.ec{display:none}}
+/* logo wn. architecture (animation : le point d'abord, puis les lettres qui se posent) */
+.wnl{display:inline-flex;flex-direction:column;align-items:flex-start;white-space:nowrap;line-height:1;color:var(--wnl-c,#F2F0E8);font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;text-decoration:none}
+.wnl .wl-wn{font-weight:700;letter-spacing:-.12em}
+.wnl .wl-wn b,.wnl .wl-mot b{font-weight:inherit;display:inline-block}
+.wnl .wl-p{font-style:normal;color:var(--wnl-p,#BAB2A2);margin-left:.06em;display:inline-block}
+.wnl .wl-ar{display:block;font-size:.22em;font-weight:400;letter-spacing:.32em;margin-top:.5em;padding-left:.05em}
+.wnl.go .wl-p{animation:wnl-point 1.2s cubic-bezier(.5,0,.2,1) both}
+.wnl.go .wl-n{animation:wnl-sort .55s .9s cubic-bezier(.2,.7,.2,1) both}
+.wnl.go .wl-w{animation:wnl-sort .55s 1.02s cubic-bezier(.2,.7,.2,1) both}
+.wnl.go .wl-mot b{animation:wnl-pose .42s cubic-bezier(.3,0,.3,1) both;animation-delay:calc(1.35s + var(--i) * .07s)}
+@keyframes wnl-point{0%{opacity:0;transform:translateX(-1.1em) scale(0)}30%{opacity:1;transform:translateX(-1.1em) scale(1.6)}55%{transform:translateX(-1.1em) scale(1)}100%{opacity:1;transform:none}}
+@keyframes wnl-sort{from{opacity:0;transform:translateX(.5em)}to{opacity:1;transform:none}}
+@keyframes wnl-pose{0%{opacity:0;transform:translateY(-1.2em)}70%{opacity:1;transform:translateY(.05em)}100%{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.wnl.go *{animation:none!important}}
+.wnl .wl-p,.wnl b{background:none;padding:0;border-radius:0}
+.brand .wnl{font-size:40px;letter-spacing:0;font-weight:400}
+footer .brand .wnl{font-size:30px}
+@media(max-width:760px){.brand .wnl{font-size:32px}footer .brand .wnl{font-size:26px}}
