@@ -833,6 +833,51 @@ details.sous[open] { border-color: rgba(138, 180, 248, .35); }
 .wnl .wl-p,.wnl b{background:none;padding:0;border-radius:0}
 .salut .wnl.cl{font-size:30px;flex:none;align-self:flex-start;margin-top:6px;--wnl-c:#E9E9EC}
 @media (max-width:539px){.salut .wnl.cl{font-size:24px}}
+
+/* espace architecte (lien …&a=1) et PDF de la note */
+#c-archi .ar-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+#c-archi .ar-btns .btn { text-decoration: none; text-align: center; }
+#c-archi .ar-btns .btn[aria-disabled="true"] { opacity: .45; pointer-events: none; }
+#c-archi .ar-num { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13.5px; color: var(--muted); }
+#c-archi .ar-num b { color: var(--ink); }
+@media (max-width: 420px) { #c-archi .ar-btns { grid-template-columns: 1fr; } }
+#impr { position: fixed; inset: 0; z-index: 80; overflow: auto; background: var(--bg); padding: 20px max(16px, env(safe-area-inset-right, 0px)) 40px max(16px, env(safe-area-inset-left, 0px)); }
+body.fa-ouverte { overflow: hidden; }
+.fa-barre-outils { max-width: 794px; margin: 0 auto 16px; display: flex; flex-direction: column; gap: 10px; }
+.fa-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.fa-aide { font-size: 12.5px; line-height: 1.5; color: var(--muted); margin: 0; }
+.fa-feuille { max-width: 794px; margin: 0 auto; background: #fff; color: #1F2126; font: 13px Arial, Helvetica, sans-serif; padding: 0 34px 30px; border-radius: 2px; }
+.fa-feuille p { margin: 0 0 5px; }
+.fa-tete { display: flex; align-items: center; gap: 18px; background: #161618; margin: 0 -34px 18px; padding: 18px 34px; flex-wrap: wrap; }
+.fa-logo { font-size: 40px; --wnl-c: #F2F0E8; color: #F2F0E8; }
+.fa-id { margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; font-size: 11px; color: #B8B6AE; text-align: right; }
+.fa-id b { color: #F2F0E8; font-size: 13px; letter-spacing: .02em; }
+.fa-date { text-align: right; color: #5A5F69; font-size: 12px; }
+.fa-titre { font-size: 22px; font-weight: 700; margin: 6px 0 4px; color: #1F2126; letter-spacing: .02em; }
+.fa-barre { display: block; width: 120px; height: 3px; background: #15803D; margin-bottom: 12px; }
+.fa-tab { width: 100%; border-collapse: collapse; margin: 14px 0 4px; font-size: 12.5px; }
+.fa-tab td { padding: 7px 10px; color: #1F2126; vertical-align: top; }
+.fa-tab .m { text-align: right; white-space: nowrap; }
+.fa-tab .fa-th td { background: #161618; color: #fff; font-weight: 700; font-size: 11.5px; }
+.fa-tab .fa-l1 td { background: #F6F6F7; } .fa-tab .fa-l2 td { background: #E4E4E7; } .fa-tab .fa-fort td { font-weight: 700; }
+.fa-tab small { display: block; color: #787C84; font-size: 10.5px; margin-top: 2px; }
+.fa-arrete { margin-top: 12px !important; font-size: 12px; }
+.fa-cond { margin-top: 12px !important; font-size: 12px; line-height: 1.55; }
+.fa-sign { display: flex; flex-direction: column; align-items: flex-end; margin-top: 26px; font-size: 12px; }
+.fa-qrn { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; margin-top: 10px; font-size: 9px; color: #787C84; }
+.fa-qrn svg { width: 96px; height: 96px; display: block; }
+.fa-pied { border-top: 1.5px solid #E4E4E7; margin-top: 18px; padding-top: 6px; text-align: center; font-size: 10px; color: #787C84; }
+@media (max-width: 600px) { .fa-feuille { padding: 0 16px 20px; } .fa-tete { margin: 0 -16px 14px; padding: 14px 16px; } .fa-logo { font-size: 30px; } .fa-id { margin-left: 0; align-items: flex-start; text-align: left; } }
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body.fa-ouverte > *:not(#impr) { display: none !important; }
+  :root, html, body.fa-ouverte { background: #fff !important; color-scheme: light !important; overflow: visible; }
+  #impr { position: static; padding: 0; background: #fff; overflow: visible; }
+  .fa-barre-outils { display: none !important; }
+  .fa-feuille { max-width: none; padding: 0; border-radius: 0; }
+  .fa-tete { margin: 0 0 18px; padding: 16px 18px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .fa-tab td, .fa-barre { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
 </style>
 </head>
 <body>
@@ -1069,6 +1114,30 @@ details.sous[open] { border-color: rgba(138, 180, 248, .35); }
     <p class="note" id="e-num"></p>
   </section>
 
+  <section class="card" id="c-archi" hidden>
+    <h2><span class="n" data-etape></span>Espace architecte<span class="h-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 4-9 4-9-4z"/><path d="M7 9.5V15c0 1.5 2.2 3 5 3s5-1.5 5-3V9.5"/></svg></span></h2>
+    <p class="hint" id="ar-hint"></p>
+    <div id="ar-champs"></div>
+    <div class="ar-num num" id="ar-num"></div>
+    <div class="alerte" id="ar-bloque" hidden></div>
+    <span class="lbl-seg">1. Le client</span>
+    <div class="ar-btns">
+      <a class="btn wa" id="ar-wa" href="#" target="_blank" rel="noopener">Envoyer au client</a>
+      <button class="btn sec" id="ar-lien" type="button">Copier le lien</button>
+    </div>
+    <details class="plus"><summary>Voir le message du client</summary><div class="message" id="ar-msg"></div></details>
+    <span class="ok-copie" id="ar-ok" hidden>Lien copié.</span>
+    <span class="lbl-seg">2. Le PDF</span>
+    <div class="ar-btns"><button class="btn sec" id="ar-pdf" type="button">PDF de la note</button></div>
+    <span class="lbl-seg">3. Excel</span>
+    <div class="ar-btns">
+      <a class="btn sec" id="ar-xl" href="#" target="_blank" rel="noopener">Enregistrer dans Excel</a>
+      <button class="btn sec" id="ar-code" type="button">Copier le code</button>
+    </div>
+    <span class="ok-copie" id="ar-okc" hidden>Code copié.</span>
+    <p class="note" id="ar-note">Le code part sur votre propre WhatsApp. Sur le PC, copiez-le puis « Code du client » dans Excel : la note est créée ou mise à jour avec ce numéro.</p>
+  </section>
+
   <section class="card" id="c-recap" hidden>
     <h2><span class="n" data-etape></span>Récapitulatif<span class="h-ic"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span></h2>
     <div class="lignes num" id="prix"></div>
@@ -1120,11 +1189,17 @@ function exigerChrome() {
 }
 if (PROP) document.title = "Proposition d'honoraires";
 
+// p = proposition, r = réglages, s = état de la page (choix de l'architecte), c = client {nom, tel} : JSON compressés ;
+// a=1 = espace architecte (créer, ajuster, envoyer, PDF, Excel). Les autres paramètres sont gardés tels quels.
 function lireLien() {
   let h = location.hash.slice(1);
   try { h = decodeURIComponent(h); } catch (e) {}
-  const m = /^([pr])=(.+)$/.exec(h), o = {};
-  if (m) { try { o[m[1]] = JSON.parse(lzDecompresser(m[2])); } catch (e) {} }
+  const o = { brut: {} };
+  for (const x of h.split("&")) {
+    const m = /^([a-z]+)=(.*)$/.exec(x); if (!m) continue;
+    if (/^[prsc]$/.test(m[1])) { o.brut[m[1]] = m[2]; try { o[m[1]] = JSON.parse(lzDecompresser(m[2])); } catch (e) {} }
+    else o[m[1]] = m[2];
+  }
   return o;
 }
 // Décompression au format lz-string « EncodedURIComponent » (d'après lz-string, licence MIT, pieroxy) ; Excel compresse de la même façon.
@@ -1268,6 +1343,32 @@ const S = {
   pay: PROP && +PROP.anticip ? (+PROP.anticip === 2 ? "une" : "phase") : null, rep: null, aju: false, archAju: false, autre: "", persp: {}, planOff: {}, docsOuv: new Set(), detPack: new Set(), sansOuv: false, ajuOk: false, c23: !!(PROP && PROP.c23), eco: false, demDevis: false, devConf: false
 };
 const S0 = { fpc: S.fpc, anticip: S.anticip, pay: S.pay };
+const ARCHI = LIEN.a === "1";
+// numéro de la note : celui de la proposition, celui gardé dans le lien, ou un nouveau (même forme qu'Excel)
+function numNouveau() { const d = new Date(), z = x => String(x).padStart(2, "0"); return "HN-" + z(d.getMonth() + 1) + z(d.getDate()) + "-" + z(d.getHours()) + z(d.getMinutes()); }
+const NUMA = PROP ? (PROP.num || "") : (LIEN.s && LIEN.s.num) || (ARCHI ? numNouveau() : "");
+const ETAT_CLES = ["type", "typeAutre", "long", "larg", "emp", "et", "ss", "toit", "global", "cplx", "devis", "pri", "sansOuv", "constr", "c23", "fpc", "anticip", "pay", "demDevis"];
+const ETAT_CHAMPS = ["cl-nom", "cl-tel", "cl-adr", "cl-rep", "pr-int", "pr-cont", "pr-chantier", "e-nom", "e-tel"];
+// ce que l'architecte a réglé : le client le retrouve en ouvrant le lien (sa réponse et son prix restent à lui)
+function etatPage() {
+  const o = { num: NUMA };
+  ETAT_CLES.forEach(k => o[k] = S[k]);
+  ["missions", "removed", "sansPhase"].forEach(k => o[k] = [...S[k]]);
+  if (Object.keys(S.persp).length) o.persp = S.persp;
+  if (Object.keys(S.planOff).length) o.planOff = S.planOff;
+  const c = {}; ETAT_CHAMPS.forEach(id => { const x = $(id); if (x && x.value.trim()) c[id] = x.value.trim(); }); o.t = c;
+  return o;
+}
+let ETAT0 = null;
+function appliquerEtat(o, sansChamps) {
+  if (!o || typeof o !== "object") return;
+  ETAT_CLES.forEach(k => { if (o[k] !== undefined) S[k] = o[k]; });
+  ["missions", "removed", "sansPhase"].forEach(k => { if (Array.isArray(o[k])) S[k] = new Set(o[k]); });
+  S.persp = Object.assign({}, o.persp || {}); S.planOff = Object.assign({}, o.planOff || {});
+  Object.assign(S0, { fpc: S.fpc, anticip: S.anticip, pay: S.pay });
+  if (!sansChamps && o.t) for (const id in o.t) { const x = $(id); if (x) x.value = String(o.t[id]); }
+  ETAT0 = o;
+}
 
 function m2Type(t) { if (t === "Autre") t = TYPE_REF; const r = P.m2.find(x => x[0] === t); return r ? r[1] : 0; }
 // type « Autre » : le client écrit le type ; le coût au m² reste celui de l'habitation moyen standing
@@ -1685,6 +1786,7 @@ function renderRep(R) {
   ["c-recap", "c-envoi"].forEach(id => $(id).hidden = $("c-rep").hidden || !S.pay);
   if (archAjuste()) { $("c-envoi").hidden = false; $("c-recap").hidden = true; }
   // rappel de la mission choisie, avec le bouton d'envoi tout près
+  if (ARCHI) $("c-envoi").hidden = true;
   $("p-rappel").hidden = $("c-envoi").hidden;
   if (!$("p-rappel").hidden) {
     const pk = document.querySelector("#m-pack button[aria-pressed='true'] b");
@@ -1870,10 +1972,11 @@ function codeExcel(R) {
   const tel = telClient(), nom = nomClient();
   let f;
   if (MODE === "prop") f = ["HSP1", "num=" + (PROP.num || ""), "client=" + nom, "tel=" + tel, "x=" + [...S.sansPhase].join(";"), "c=" + (S.constr && constrUtile() ? 1 : 0), "c23=" + (S.constr && S.c23 && constrPossible() ? 1 : 0), "dg=" + (S.demDevis ? 1 : 0), "a=" + S.anticip, "fpc=" + (fpcActif() ? 1 : 0), "r=" + [...S.removed].join(";"), ...extraCode(), "total=" + R.total];
-  else f = ["HSM1", "client=" + nom, "tel=" + tel, "adr=" + v("cl-adr"), "rep=" + v("cl-rep"), "intitule=" + v("pr-int"), "contenu=" + v("pr-cont"), "chantier=" + v("pr-chantier"),
+  else f = ["HSM1", ...(NUMA ? ["num=" + NUMA] : []), "client=" + nom, "tel=" + tel, "adr=" + v("cl-adr"), "rep=" + v("cl-rep"), "intitule=" + v("pr-int"), "contenu=" + v("pr-cont"), "chantier=" + v("pr-chantier"),
     "terrain=" + (+S.long || 0) + "x" + (+S.larg || 0), "emp=" + S.emp, "type=" + nomType().replace(/[|\n]/g, " / "), "s=" + surface(), "niv=" + nivTexte(), "et=" + (niveaux() - 1), "ss=" + (S.ss ? 1 : 0), "toit=" + S.toit, "global=" + (S.global || 0), "cplx=" + cplxEff(),
     "m=" + PHASES.filter(c => S.missions.has(c)).concat(devisEff() ? [devisEff()] : []).join(";"), "pri=" + (S.pri ? 1 : 0), "ouv=" + (S.sansOuv ? 0 : 1), "c=" + (S.constr && constrUtile() ? 1 : 0), "c23=" + (S.constr && S.c23 && constrPossible() ? 1 : 0), "dg=" + (S.demDevis ? 1 : 0), "a=" + S.anticip, "fpc=" + (fpcActif() ? 1 : 0), "r=" + [...S.removed].join(";"), ...extraCode(), "total=" + R.total];
   if (S.rep === "offre" && S.offre > 0) f.push("offre=" + honOffre(R, S.offre), "offre_totale=" + S.offre);
+  if (ARCHI) f.push("ar=1");
   return f.join("|").replace(/\n/g, " ");
 }
 function ajuste() { return S.rep === "offre" && !!S.aju; }
@@ -1929,6 +2032,7 @@ function renderMessage(R) {
   ["e-wa", "e-sms", "e-mail"].forEach(id => $(id).setAttribute("aria-disabled", bl ? "true" : "false"));
   $("e-copier").disabled = !!bl;
   $("e-num").textContent = [wa ? "WhatsApp : +" + wa : "", tel && tel !== wa ? "SMS : +" + tel : "", mail ? "E-mail : " + mail : ""].filter(Boolean).join("  ·  ") || "Les coordonnées de l'architecte seront ajoutées par Honoraire automatisé.";
+  if (ARCHI) renderArchi(R);
 }
 
 // maison dessinée : largeur selon la part de la parcelle, un étage par niveau (6 au plus), toit ou terrasse
@@ -2089,6 +2193,7 @@ function init() {
   $("a-txt").oninput = e => { S.autre = e.target.value; $("g-autre").textContent = S.autre.trim() ? "à l'étude" : ""; $("a-note").hidden = !S.autre.trim(); renderMessage(calc()); };
   $("e-orig").onclick = () => {
     Object.assign(S, { removed: new Set(), sansPhase: new Set(), persp: {}, planOff: {}, rep: null, aju: false, archAju: false, ajuOk: false, autre: "", offre: null, sansOuv: false }, S0);
+    if (ETAT0) appliquerEtat(ETAT0, true);
     $("a-txt").value = ""; $("o-montant").value = ""; $("e-com").value = ""; render();
   };
   $("o-verif").onclick = () => { S.offre = +$("o-montant").value || null; S.ajuOk = false; S.archAju = false; S.feu = true; render(); };
@@ -2096,7 +2201,209 @@ function init() {
   $("e-nom").oninput = () => renderMessage(calc());
   $("e-tel").oninput = () => renderMessage(calc());
   $("e-copier").onclick = () => copier(texteMessage(calc()), $("e-msg"), $("e-ok"));
+  if (LIEN.s) appliquerEtat(LIEN.s);
+  if (LIEN.c && typeof LIEN.c === "object") {
+    const [a, b] = MODE === "libre" ? ["cl-nom", "cl-tel"] : ["e-nom", "e-tel"];
+    if (LIEN.c.nom && !$(a).value) $(a).value = String(LIEN.c.nom);
+    if (LIEN.c.tel && !$(b).value) $(b).value = String(LIEN.c.tel);
+  }
+  if (ARCHI) modeArchi();
   render();
+}
+
+// ---------------------------------------------------------------- espace architecte (lien …&a=1, ouvert depuis le Suivi)
+// L'architecte règle la note comme le client la verrait, puis : 1. l'envoie au client (lien de discussion avec ses réglages),
+// 2. en fait le PDF (impression du navigateur), 3. l'enregistre dans Excel (code HSM1/HSP1 avec le numéro, sur son WhatsApp).
+/* ------------------------------------------------------------ QR (octets UTF-8, correction M, versions 1 à 10) */
+const QRM={1:[16,10,1,16,0,0],2:[28,16,1,28,0,0],3:[44,26,1,44,0,0],4:[64,18,2,32,0,0],5:[86,24,2,43,0,0],6:[108,16,4,27,0,0],7:[124,18,4,31,0,0],8:[154,22,2,38,2,39],9:[182,22,3,36,2,37],10:[216,26,4,43,1,44]};
+const QRA={1:[],2:[6,18],3:[6,22],4:[6,26],5:[6,30],6:[6,34],7:[6,22,38],8:[6,24,42],9:[6,26,46],10:[6,28,50]};
+function qrMatrice(texte){
+ const EXP=new Array(512).fill(0),LOG=new Array(256).fill(0);let x=1;
+ for(let i=0;i<255;i++){EXP[i]=x;LOG[x]=i;x<<=1;if(x&256)x^=0x11D}for(let i=255;i<512;i++)EXP[i]=EXP[i-255];
+ const gm=(a,b)=>a&&b?EXP[LOG[a]+LOG[b]]:0;
+ const rs=(data,n)=>{let g=[1];for(let i=0;i<n;i++){const ng=new Array(g.length+1).fill(0);g.forEach((c,j)=>{ng[j]^=c;ng[j+1]^=gm(c,EXP[i])});g=ng}
+  const r=data.concat(new Array(n).fill(0));for(let i=0;i<data.length;i++){const c=r[i];if(c)for(let j=1;j<g.length;j++)r[i+j]^=gm(g[j],c)}return r.slice(data.length)};
+ const b=[...new TextEncoder().encode(texte)];let v=1,cap,cc;
+ for(;v<=10;v++){cap=QRM[v][0];cc=v<10?8:16;if(4+cc+8*b.length<=cap*8)break}
+ if(v>10)return null;
+ const bits=[];const put=(val,n)=>{for(let i=n-1;i>=0;i--)bits.push((val>>i)&1)};
+ put(4,4);put(b.length,cc);b.forEach(c=>put(c,8));put(0,Math.min(4,cap*8-bits.length));while(bits.length%8)bits.push(0);
+ const data=[];for(let i=0;i<bits.length;i+=8)data.push(parseInt(bits.slice(i,i+8).join(""),2));
+ for(let k=0;data.length<cap;k++)data.push(k%2?0x11:0xEC);
+ const [,ecn,b1,d1,b2,d2]=QRM[v];const bl=[];let p=0;
+ for(let i=0;i<b1;i++){bl.push(data.slice(p,p+d1));p+=d1}for(let i=0;i<b2;i++){bl.push(data.slice(p,p+d2));p+=d2}
+ const ec=bl.map(x=>rs(x,ecn));const out=[];const mx=Math.max(...bl.map(x=>x.length));
+ for(let i=0;i<mx;i++)bl.forEach(x=>{if(i<x.length)out.push(x[i])});for(let i=0;i<ecn;i++)ec.forEach(e=>out.push(e[i]));
+ const N=17+4*v;const mod=[...Array(N)].map(()=>new Array(N).fill(0)),fn=[...Array(N)].map(()=>new Array(N).fill(false));
+ const sf=(r,c,val)=>{mod[r][c]=val;fn[r][c]=true};
+ for(const [r0,c0] of [[0,0],[0,N-7],[N-7,0]])for(let r=-1;r<8;r++)for(let c=-1;c<8;c++){const rr=r0+r,c2=c0+c;
+  if(rr>=0&&rr<N&&c2>=0&&c2<N){const on=r>=0&&r<=6&&c>=0&&c<=6&&(r===0||r===6||c===0||c===6||(r>=2&&r<=4&&c>=2&&c<=4));sf(rr,c2,on?1:0)}}
+ for(let i=8;i<N-8;i++){sf(6,i,i%2?0:1);sf(i,6,i%2?0:1)}
+ const A=QRA[v];for(const r of A)for(const c of A){if((r===A[0]&&c===A[0])||(r===A[0]&&c===A[A.length-1])||(r===A[A.length-1]&&c===A[0]))continue;
+  for(let dr=-2;dr<3;dr++)for(let dc=-2;dc<3;dc++)sf(r+dr,c+dc,Math.max(Math.abs(dr),Math.abs(dc))!==1?1:0)}
+ sf(N-8,8,1);
+ for(let i=0;i<9;i++){if(!fn[8][i])sf(8,i,0);if(!fn[i][8])sf(i,8,0)}
+ for(let i=0;i<8;i++){if(!fn[8][N-1-i])sf(8,N-1-i,0);if(!fn[N-1-i][8])sf(N-1-i,8,0)}
+ if(v>=7)for(let i=0;i<6;i++)for(let j=0;j<3;j++){sf(i,N-11+j,0);sf(N-11+j,i,0)}
+ const ab=[];out.forEach(c=>{for(let i=7;i>=0;i--)ab.push((c>>i)&1)});
+ let k=0,col=N-1,up=true;
+ while(col>0){if(col===6)col--;for(let t=0;t<N;t++){const r=up?N-1-t:t;for(const c2 of [col,col-1])if(!fn[r][c2]){mod[r][c2]=k<ab.length?ab[k]:0;k++}}up=!up;col-=2}
+ const MK=[(r,c)=>(r+c)%2===0,(r,c)=>r%2===0,(r,c)=>c%3===0,(r,c)=>(r+c)%3===0,(r,c)=>(Math.floor(r/2)+Math.floor(c/3))%2===0,(r,c)=>(r*c)%2+(r*c)%3===0,(r,c)=>((r*c)%2+(r*c)%3)%2===0,(r,c)=>((r+c)%2+(r*c)%3)%2===0];
+ const fmt=m=>{const d=m;let y=d<<10;for(let i=14;i>9;i--)if((y>>i)&1)y^=0x537<<(i-10);return((d<<10)|y)^0x5412};
+ const ver=v2=>{let y=v2<<12;for(let i=17;i>11;i--)if((y>>i)&1)y^=0x1F25<<(i-12);return(v2<<12)|y};
+ const app=m=>{const g=mod.map(r=>r.slice());for(let r=0;r<N;r++)for(let c=0;c<N;c++)if(!fn[r][c]&&MK[m](r,c))g[r][c]^=1;
+  const f=fmt(m);
+  for(let i=0;i<15;i++){const bit=(f>>i)&1;if(i<6)g[i][8]=bit;else if(i<8)g[i+1][8]=bit;if(i<8)g[8][N-1-i]=bit;else g[N-15+i][8]=bit}
+  for(let i=8;i<15;i++){const bit=(f>>i)&1;let c=14-i;if(c>=6)c++;g[8][c]=bit}
+  g[N-8][8]=1;
+  if(v>=7){const vb=ver(v);for(let i=0;i<18;i++){const bit=(vb>>i)&1,a=Math.floor(i/3),b3=i%3+N-11;g[a][b3]=bit;g[b3][a]=bit}}
+  return g};
+ const pen=g=>{let p=0;const T=g[0].map((_,c)=>g.map(r=>r[c]));
+  for(const rows of [g,T])for(const row of rows){let run=1;for(let i=1;i<N;i++){if(row[i]===row[i-1])run++;else{if(run>=5)p+=run-2;run=1}}if(run>=5)p+=run-2;
+   const s=row.join("");p+=40*((s.match(/10111010000/g)||[]).length+(s.match(/00001011101/g)||[]).length)}
+  for(let r=0;r<N-1;r++)for(let c=0;c<N-1;c++)if(g[r][c]===g[r][c+1]&&g[r][c]===g[r+1][c]&&g[r][c]===g[r+1][c+1])p+=3;
+  const dark=g.reduce((a,r)=>a+r.reduce((x,y)=>x+y,0),0);return p+10*Math.floor(Math.abs(dark*20-N*N*10)/(N*N))};
+ let best=0,bp=Infinity;for(let m=0;m<8;m++){const q=pen(app(m));if(q<bp){bp=q;best=m}}
+ return app(best);
+}
+function qrSvg(texte,fond,encre,marge){const g=qrMatrice(texte);if(!g)return"";const N=g.length,q=marge??2;let d="";
+ g.forEach((r,y)=>r.forEach((c,x)=>{if(c)d+=`M${x+q} ${y+q}h1v1h-1z`}));
+ return`<svg viewBox="0 0 ${N+2*q} ${N+2*q}" shape-rendering="crispEdges" aria-hidden="true"><rect width="100%" height="100%" fill="${fond||"#fff"}"/><path d="${d}" fill="${encre||"#000"}"/></svg>`}
+
+/* compression lz-string « EncodedURIComponent » (d'après lz-string, licence MIT, pieroxy) : même format qu'Excel (LzLien) */
+function lzCompresser(s){
+ const K="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$";
+ if(s==null)return"";
+ const dict=new Map(),cree=new Set(),out=[];
+ let w="",enl=2,taille=3,nb=2,val=0,pos=0;
+ const ecrire=(v,n)=>{for(let i=0;i<n;i++){val=(val<<1)|(v&1);if(pos===5){pos=0;out.push(K[val]);val=0}else pos++;v>>=1}};
+ const zeros=n=>{for(let i=0;i<n;i++){val=val<<1;if(pos===5){pos=0;out.push(K[val]);val=0}else pos++}};
+ const sortir=()=>{
+  if(cree.has(w)){const c=w.charCodeAt(0);
+   if(c<256){zeros(nb);ecrire(c,8)}else{ecrire(1,1);zeros(nb-1);ecrire(c,16)}
+   if(--enl===0){enl=1<<nb;nb++}cree.delete(w)}
+  else ecrire(dict.get(w),nb);
+  if(--enl===0){enl=1<<nb;nb++}};
+ for(const c of s.split("")){
+  if(!dict.has(c)){dict.set(c,taille++);cree.add(c)}
+  const wc=w+c;
+  if(dict.has(wc))w=wc;else{sortir();dict.set(wc,taille++);w=c}}
+ if(w!=="")sortir();
+ ecrire(2,nb);
+ for(;;){val=val<<1;if(pos===5){out.push(K[val]);break}pos++}
+ return out.join("");
+}
+
+const UL=["zéro","un","deux","trois","quatre","cinq","six","sept","huit","neuf","dix","onze","douze","treize","quatorze","quinze","seize","dix-sept","dix-huit","dix-neuf"];
+function dizL(n,am){if(n<20)return UL[n];const d=Math.floor(n/10),u=n%10;
+ if(d===7)return u===1?"soixante et onze":"soixante-"+UL[10+u];
+ if(d===8)return u===0?"quatre-vingt"+(am?"":"s"):"quatre-vingt-"+UL[u];
+ if(d===9)return"quatre-vingt-"+UL[10+u];
+ const b=["","","vingt","trente","quarante","cinquante","soixante"][d];return u===1?b+" et un":u>1?b+"-"+UL[u]:b}
+function centL(n,am){const c=Math.floor(n/100),r=n%100;let s="";if(c===1)s="cent";else if(c>1){s=UL[c]+" cent";if(r===0&&!am)s+="s"}
+ if(r>0)s+=(s?" ":"")+dizL(r,am);return s}
+function nbL(n){if(n===0)return"zéro";const md=Math.floor(n/1e9);n-=md*1e9;const mn=Math.floor(n/1e6);n-=mn*1e6;const ms=Math.floor(n/1000),r=n-ms*1000;let s="";
+ if(md>0)s=centL(md,false)+" milliard"+(md>1?"s":"");if(mn>0)s+=" "+centL(mn,false)+" million"+(mn>1?"s":"");
+ if(ms===1)s+=" mille";else if(ms>1)s+=" "+centL(ms,true)+" mille";if(r>0)s+=" "+centL(r,false);return s.trim()}
+function enLettres(x){const t=Math.round(Math.abs(x)*100),e=Math.floor(t/100),c=t-e*100;let s;
+ if(e===0)s="zéro dollar américain";else if(e===1)s="un dollar américain";else{s=nbL(e);if(e>=1e6&&e%1e6===0)s+=" de";s+=" dollars américains"}
+ if(c>0)s+=" et "+nbL(c)+(c===1?" cent":" cents");return s}
+function modeArchi() {
+  document.body.classList.add("archi");
+  $("c-archi").hidden = false;
+  if (MODE === "libre") { $("ar-champs").appendChild($("cl-champs")); $("cl-champs").hidden = false; }
+  else { $("ar-champs").appendChild($("e-champs")); $("e-champs").hidden = false; }
+  $("h-eyebrow").textContent = "Espace architecte · " + (MODE === "prop" ? "ajuster la note " + NUMA : "nouvelle note " + NUMA);
+  $("ar-hint").textContent = MODE === "prop"
+    ? "Retirez des phases, ou touchez « Ajuster les documents ou le prix » pour retirer des documents. Le client reçoit la note telle que vous la laissez."
+    : "Remplissez le client, le projet et la mission : le prix se calcule tout seul. Le client reçoit la page avec vos choix et peut encore les ajuster.";
+  const s = "— " + [P.arch.nom, P.arch.titre].filter(Boolean).join(", ");
+  $("merci-sign").textContent = s;
+  ecrireMerci("Espace architecte. Préparez la note, envoyez-la au client avec sa page de discussion, faites le PDF et enregistrez-la dans Excel.", "Espace architecte.");
+  $("ar-lien").onclick = () => copier(lienClient(), $("ar-msg"), $("ar-ok"));
+  $("ar-code").onclick = () => copier(texteExcel(calc()), $("ar-msg"), $("ar-okc"));
+  $("ar-pdf").onclick = () => ouvrirPdf();
+  // la carte « Votre réponse » sert à l'architecte à fixer le prix, les documents et le paiement
+  const h2 = $("c-reponse").querySelector("h2"), tn = [...h2.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+  if (tn) tn.textContent = "Prix, documents et paiement";
+  $("b-acc-t").textContent = "Garder ce prix"; $("d-acc").textContent = "La mission telle qu'elle est calculée.";
+  $("c-offre").querySelector("b").textContent = "Ajuster les documents ou le prix";
+  $("c-offre").querySelector(".d").textContent = "Retirer des documents, ou viser un montant : la page dit ce qui est possible.";
+  if (MODE === "libre") { $("h-titre1").textContent = "Nouvelle note d'honoraires"; $("h-sub").textContent = "Le client, le projet, la mission : le prix se calcule tout seul."; }
+}
+let PROP_LZ = null;
+function lienClient() {
+  const base = location.href.split("#")[0];
+  let d;
+  if (MODE === "prop") { if (!PROP_LZ) PROP_LZ = LIEN.brut.p || lzCompresser(JSON.stringify(PROP)); d = "p=" + PROP_LZ; }
+  else { const r = LIEN.brut.r || (PRESET ? lzCompresser(JSON.stringify(PRESET)) : ""); d = r ? "r=" + r : ""; }
+  return base + "#" + (d ? d + "&" : "") + "s=" + lzCompresser(JSON.stringify(etatPage()));
+}
+function numeroWa(t) { let d = String(t || "").replace(/\D/g, ""); if (d.startsWith("00")) d = d.slice(2); if (d.startsWith("0")) d = "243" + d.slice(1); else if (d.length === 9) d = "243" + d; return d; }
+function salutClient() { const h = new Date().getHours(), n = nomClient(); return (h < 18 ? "Bonjour" : "Bonsoir") + (n ? " " + n : "") + ","; }
+function messageClient(R) {
+  const L = [salutClient(), "", "Voici votre note d'honoraires" + (NUMA ? " n° " + NUMA : "") + " : " + usd(R.total) + "."];
+  const proj = MODE === "prop" ? (PROP.intitule || "") : (v("pr-int") || nomType() + ", " + nivTexte());
+  if (proj) L.push("Projet : " + proj + ".");
+  L.push("", "Ouvrez ce lien pour la voir en détail, l'ajuster à votre budget et me répondre :", lienClient(), "", "Je reste disponible pour en parler.", "— " + [P.arch.nom, P.arch.titre].filter(Boolean).join(", "));
+  return L.join("\n");
+}
+function texteExcel(R) { return "Note " + (NUMA || "") + " · " + (nomClient() || "client") + " · " + usd(R.total) + "\nCode : " + codeExcel(R); }
+function renderArchi(R) {
+  const nom = nomClient(), tel = numeroWa(telClient()), wa = numeroWa(P.arch.wa);
+  $("ar-num").innerHTML = `<span>Note <b>${esc(NUMA || "—")}</b></span><span>Total <b>${usd(R.total)}</b></span>` + (R.delai > 0 ? `<span>Études en <b>${R.delai} jours</b></span>` : "");
+  const bl = !nom ? "Indiquez le nom du client." : !(R.total > 0) ? "Choisissez au moins une phase de la mission." : "";
+  $("ar-bloque").hidden = !bl; $("ar-bloque").textContent = bl;
+  const m = messageClient(R);
+  $("ar-msg").textContent = m;
+  $("ar-wa").href = "https://wa.me/" + tel + "?text=" + encodeURIComponent(m);
+  $("ar-wa").textContent = tel ? "Envoyer au client" : "Envoyer au client (choisir le contact)";
+  $("ar-xl").href = "https://wa.me/" + wa + "?text=" + encodeURIComponent(texteExcel(R));
+  ["ar-wa", "ar-xl"].forEach(id => $(id).setAttribute("aria-disabled", bl ? "true" : "false"));
+  ["ar-lien", "ar-code", "ar-pdf"].forEach(id => $(id).disabled = !!bl);
+}
+// PDF de la note : feuille A4 à imprimer (« Enregistrer au format PDF »), même présentation que la facture du Suivi
+function htmlNote(R) {
+  const u2 = x => (Math.round(x * 100) / 100).toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " $";
+  const A = P.arch, dl = new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+  const ident = [A.titre, A.cnoa, A.ville].filter(Boolean).join("  ·  "), tels = [A.telv || (A.tel ? "+" + numeroWa(A.tel) : A.wa ? "+" + numeroWa(A.wa) : "")].filter(Boolean).join("");
+  const lettres = `<span class="wl-wn"><b>w</b><b>n</b><i class="wl-p">.</i></span><span class="wl-ar">ARCHITECTURE</span>`;
+  const wa = numeroWa(A.wa), qr = wa && NUMA ? qrSvg(`https://wa.me/${wa}?text=` + encodeURIComponent(`Note ${NUMA} (${u2(R.total)})\nCode : HSN1|num=${NUMA}|t=${(+R.total).toFixed(2)}`), "#fff", "#000", 4) : "";
+  const cli = nomClient(), telc = telClient(), adr = MODE === "libre" ? v("cl-adr") : "";
+  const proj = MODE === "prop" ? [PROP.intitule, PROP.projet].filter(Boolean).join(" : ")
+    : [v("pr-int") || "Construction", nomType() + ", " + nivTexte() + ", " + surface().toLocaleString("fr-FR") + " m²", v("pr-chantier")].filter(Boolean).join(" · ");
+  const lig = (a, b, cls) => `<tr class="${cls || ""}"><td>${a}</td><td class="m">${b}</td></tr>`;
+  const rows = R.rows.filter(T => T.hon + T.frais > 0.005 || valeurPermis([T]) > 0).map((T, i) =>
+    lig(esc(libDossier(T)) + (T.grp === "ETU" && T.delai > 0 ? `<small>${T.delai} jours</small>` : ""), T.hon + T.frais > 0.005 ? u2(T.hon + T.frais) : "Offert", i % 2 ? "" : "fa-l1")).join("");
+  const ech = echeancier(R), paie = ech.length === 1 ? "en une fois, à la signature" : ech.map((x, i) => `paiement ${i + 1} : ${u2(x.v)} (${x.noms.join(", ")})`).join(" ; ");
+  return `<div class="fa-feuille">
+ <div class="fa-tete"><span class="wnl fa-logo">${lettres}</span>
+  <div class="fa-id"><b>${esc((A.nom || "").toUpperCase())}</b><span>${esc(ident)}</span><span>${esc(tels)}</span><span>${esc(A.mail || "")}</span></div></div>
+ <p class="fa-date">${esc(A.ville ? A.ville + ", le " + dl : "Le " + dl)}</p>
+ <div class="fa-titre">NOTE D'HONORAIRES</div><i class="fa-barre"></i>
+ <p><b>N° ${esc(NUMA)}</b></p>
+ <p><b>Client</b> : ${esc(cli)}${telc ? "   ·   " + esc(telc) : ""}${adr ? "   ·   " + esc(adr) : ""}</p>
+ ${proj ? `<p><b>Projet</b> : ${esc(proj)}</p>` : ""}
+ <table class="fa-tab"><tr class="fa-th"><td>Mission</td><td class="m">Montant</td></tr>${rows}</table>
+ <table class="fa-tab"><tr class="fa-th"><td>Total</td><td class="m">Montant</td></tr>
+  ${lig("Honoraires", u2(R.hon), "fa-l1")}${R.frais > 0.005 ? lig("Frais", u2(R.frais)) : ""}${R.fpc > 0.005 ? lig("Redevance FPC (" + tauxFpc() + " %)", u2(R.fpc)) : ""}
+  ${lig("Total de la note d'honoraires", u2(R.total), "fa-fort fa-l2")}</table>
+ <p class="fa-arrete">Arrêtée la présente note d'honoraires à la somme de ${esc(enLettres(R.total))}.</p>
+ <p class="fa-cond"><b>Paiement</b> : ${esc(paie)}.${R.delai > 0 ? `<br><b>Délai des études</b> : ${R.delai} jours après le premier paiement.` : ""}</p>
+ <div class="fa-sign"><b>${esc(A.nom || "")}</b><span>${esc(A.titre || "")}</span></div>
+ ${qr ? `<div class="fa-qrn">${qr}<span>Retrouver cette note</span></div>` : ""}
+ ${A.pay ? `<div class="fa-pied"><b>Modes de paiement</b> : ${esc(A.pay)}</div>` : ""}
+</div>`;
+}
+function ouvrirPdf() {
+  const R = calc();
+  let z = $("impr"); if (!z) { z = document.createElement("div"); z.id = "impr"; document.body.appendChild(z); }
+  z.innerHTML = `<div class="fa-barre-outils"><div class="fa-btns"><button class="btn wa" type="button" data-pdf="imp">Enregistrer en PDF</button><button class="btn sec" type="button" data-pdf="fermer">Fermer</button></div>
+ <p class="fa-aide">Dans la fenêtre qui s'ouvre, choisissez « Enregistrer au format PDF » (sur le téléphone : Partager ou Imprimer, puis PDF). Joignez ensuite le PDF au message du client.</p></div>${htmlNote(R)}`;
+  z.hidden = false; document.body.classList.add("fa-ouverte"); z.scrollTop = 0;
+  z.onclick = e => { const b = e.target.closest("[data-pdf]"); if (!b) return;
+    if (b.dataset.pdf === "imp") { const t = document.title; document.title = "Note " + NUMA + " - " + nomClient(); try { window.print(); } catch (x) {} setTimeout(() => document.title = t, 1500); }
+    else { z.hidden = true; z.innerHTML = ""; document.body.classList.remove("fa-ouverte"); } };
 }
 // mode de paiement : 2 = tout à la signature (en une fois), 1 = au moins aseuil % à la signature, 0 = dossier par dossier
 function choisirPaie(a) { const neuf = !S.pay; S.anticip = a; S.pay = a === 2 ? "une" : "phase"; render(); if (neuf) $("p-rappel").scrollIntoView({ behavior: "smooth", block: "nearest" }); }
